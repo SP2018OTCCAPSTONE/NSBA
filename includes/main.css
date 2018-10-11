@@ -1,0 +1,37 @@
+body {
+    /* background-image: url("tiger.jpg"); */
+}
+
+.current {
+    font-weight: bold;
+}
+
+.container {
+    height: 100vh;
+}
+
+hr {
+    width: 100%;
+    height: 10px;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.grafik {
+    width: 100%;
+    height: auto;
+    margin-top: 100px;
+}
+
+.logo-box {
+    width: 100%;
+}
+
+.navbar {
+    margin-bottom: 30px;
+}
