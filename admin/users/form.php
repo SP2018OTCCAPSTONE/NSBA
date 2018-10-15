@@ -65,5 +65,5 @@
   </div>
 
   <input type="submit" value="Save" />
-  <a href="/Capstone_Seed/admin/users<?php if (isset($user->userId)) { echo '/show.php?userId=' . $user->userId; } ?>">Cancel</a>
+  <a href="/NSBA/admin/users<?php if (isset($user->userId)) { echo '/show.php?userId=' . $user->userId; } ?>">Cancel</a>
 </form>

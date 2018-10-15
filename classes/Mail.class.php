@@ -45,7 +45,7 @@ class Mail
 
     $mail->SMTPDebug = 4; // PROVIDES HIGH LEVEL OF CONNECTION ERROR DEBUGGING
 
-    $mail->From = 'justinkmangan@gmail.com';
+    $mail->From = 'justinkmangan@gmail.com';// Change to client's email
 
     $mail->isHTML(true);
 

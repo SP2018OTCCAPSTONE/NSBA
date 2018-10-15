@@ -13,19 +13,19 @@
         <div class="container">
             <nav role="navigation">
                 <ul>
-                <li><a href="/Capstone_Seed">Home</a></li> <!-- this needs fixed -->
+                <li><a href="/NSBA">Home</a></li> <!-- this needs fixed -->
 
                 <?php if (Auth::getInstance()->isLoggedIn()): ?>
 
                     <?php if (Auth::getInstance()->isAdmin()): ?>
-                    <li><a href="/Capstone_Seed/admin/users">Admin</a></li>
+                    <li><a href="/NSBA/admin/users">Admin</a></li>
                     <?php endif; ?>
-                    <li><a href="/Capstone_Seed/profile.php">Profile</a></li>
-                    <li><a href="/Capstone_Seed/logout.php">Logout</a></li>
+                    <li><a href="/NSBA/profile.php">Profile</a></li>
+                    <li><a href="/NSBA/logout.php">Logout</a></li>
 
                 <?php else: ?>
 
-                    <li><a href="/Capstone_Seed/login.php">Login</a></li>
+                    <li><a href="/NSBA/login.php">Login</a></li>
 
                 <?php endif; ?>
                 </ul>

@@ -19,37 +19,6 @@ class User
   {
   }
 
-//   /**
-//    * Magic getter - read data from a property that isn't set yet
-//    * 
-//    * @param string $lastName  Property lastName
-//    * @return mixed
-//    */
-//   public function __get($lastName)
-//   {
-//   }
-
-//   /**
-//    * Magic getter - read data from a property that isn't set yet
-//    * 
-//    * @param string $email  Property email
-//    * @return mixed
-//    */
-//   public function __get($email)
-//   {
-//   }
-
-//   /**
-//    * Magic getter - read data from a property that isn't set yet
-//    * 
-//    * @param string $emailSecondary  Property emailSecondary
-//    * @return mixed
-//    */
-//   public function __get($emailSecondary)
-//   {
-//   }
-
-
 
     /**************************************************************************************************
    * Get a page of user records and the previous and next page (if there are any)
@@ -851,7 +820,7 @@ class User
   private function _sendActivationEmail($token)
   {
     // Note hardcoded protocol
-    $url = 'http://'.$_SERVER['HTTP_HOST'].'/Capstone_Seed/activate_account.php?token=' . $token;
+    $url = 'http://'.$_SERVER['HTTP_HOST'].'/NSBA/activate_account.php?token=' . $token;
 
     $body = <<<EOT
 

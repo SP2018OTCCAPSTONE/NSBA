@@ -10,6 +10,6 @@ require_once('includes/init.php');
 Auth::getInstance()->logout();
 
 // Redirect to home page
-Util::redirect('/Capstone_Seed/index.php');
+Util::redirect('/NSBA/index.php');
 
 ?>

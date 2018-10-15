@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $user->delete();
 
   // Redirect to index page
-  Util::redirect('/Capstone_Seed/admin/users');
+  Util::redirect('/NSBA/admin/users');//**************************NSBA************************************************************* */
 }
 
 
@@ -39,7 +39,7 @@ include('../../includes/header.php');
   <p>Are you sure?</p>
 
   <input type="submit" value="Delete" />
-  <a href="/Capstone_Seed/admin/users/delete.php?userId=<?php echo $user->userId; ?>">Cancel</a>
+  <a href="/NSBA/admin/users/delete.php?userId=<?php echo $user->userId; ?>">Cancel</a><!--*************************NSBA-->
 </form>
 
     

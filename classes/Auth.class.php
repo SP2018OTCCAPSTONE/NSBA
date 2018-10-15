@@ -179,7 +179,7 @@ class Auth
         $_SESSION['return_to'] = $url;
       }
 
-      Util::redirect('/Capstone_Seed/login.php'); // 
+      Util::redirect('/NSBA/login.php'); // 
     }
   }
 
@@ -191,7 +191,7 @@ class Auth
   public function requireGuest()
   {
     if ($this->isLoggedIn()) {
-      Util::redirect('/Capstone_Seed/index.php');
+      Util::redirect('/NSBA/index.php');
     }
   }
 
@@ -210,7 +210,7 @@ class Auth
       if ($user->startPasswordReset()) {
 
         // Note hardcoded protocol
-        $url = 'http://'.$_SERVER['HTTP_HOST'].'/Capstone_Seed/reset_password.php?token=' . $user->password_reset_token;// *****TROUBLE
+        $url = 'http://'.$_SERVER['HTTP_HOST'].'/NSBA/reset_password.php?token=' . $user->password_reset_token;// *****TROUBLE
 
         $body = <<<EOT
 

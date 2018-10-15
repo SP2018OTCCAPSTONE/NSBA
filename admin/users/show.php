@@ -39,7 +39,7 @@ include('../../includes/header.php');
 
 <h1>User</h1>
 
-<p><a href="/Capstone_Seed/admin/users">&laquo; back to list of users</a></p>
+<p><a href="/NSBA/admin/users">&laquo; back to list of users</a></p>
 
 <dl>
   <dt>Name</dt>
@@ -54,12 +54,12 @@ include('../../includes/header.php');
 
 <ul>
     
-  <li><a href="/Capstone_Seed/admin/users/edit.php?userId=<?php echo $user->userId; ?>">Edit</a></li>
+  <li><a href="/NSBA/admin/users/edit.php?userId=<?php echo $user->userId; ?>">Edit</a></li>
   <li>
     <?php if ($user->userId == Auth::getInstance()->getCurrentUser()->userId): ?>
       Delete
     <?php else: ?>
-      <a href="/Capstone_Seed/admin/users/delete.php?userId=<?php echo $user->userId; ?>">Delete</a>
+      <a href="/NSBA/admin/users/delete.php?userId=<?php echo $user->userId; ?>">Delete</a>
     <?php endif; ?>
   </li>
 </ul>

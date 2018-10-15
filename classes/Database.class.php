@@ -32,15 +32,12 @@ class Database
         $dsn = "mysql:host=$host;port=$port;dbname=$database;charset=utf8";
         static::$_db = new PDO($dsn, $username, $password);
 
-        // // OG CODE
-        // $dsn = 'mysql:host=' . Config::DB_HOST . ';host=' . Config::DB_PORT . ';dbname=' . Config::DB_NAME . ';charset=utf8';
-        // static::$_db = new PDO($dsn, Config::DB_USER, Config::DB_PASS);
-
         // Raise exceptions when a database exception occurs
         static::$_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     return static::$_db;
   }
+  // ************************************** THESE ARE UNUSED ******************************************************
     // Might have to call these like Database::getOne()??
     // Connects to the database and returns a specific mySQL query as array
     public static function getOne($query, array $binds = [], $db) {

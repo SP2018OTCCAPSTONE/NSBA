@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $url = $_SESSION['return_to'];
             unset($_SESSION['return_to']);
         } else {
-            $url = '/Capstone_Seed/index.php';
+            $url = '/NSBA/index.php';
         }
 
         Util::redirect($url);

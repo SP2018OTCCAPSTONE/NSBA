@@ -18,8 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if (empty($user->errors)) {
     // Redirect to signup success page
-    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/Capstone_Seed/signup_success.php'); // NEEDS WORK
-    //header('Location: http://localhost/Capstone_Seed/signup_success.php');
+    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/NSBA/signup_success.php'); 
     exit;
   }
 }

@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user->resetPassword()) {
 
       // Redirect to success page
-      Util::redirect('/Capstone_Seed/reset_password_success.php');
+      Util::redirect('/NSBA/reset_password_success.php');
     }
   }
 

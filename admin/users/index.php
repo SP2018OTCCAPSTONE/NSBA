@@ -26,7 +26,7 @@ include('../../includes/header.php');
 
 <h1>Users</h1>
 
-<p><a href="/Capstone_Seed/admin/users/new.php">Add a new user</a></p>
+<p><a href="/NSBA/admin/users/new.php">Add a new user</a></p>
 
 <table>
   <thead>
@@ -39,7 +39,7 @@ include('../../includes/header.php');
     <?php foreach ($data['users'] as $user): ?>
     <?php $name = $user['lastName'].', '.$user['firstName']; ?>
     <tr>
-        <td><a href="/Capstone_Seed/admin/users/show.php?userId=<?php echo $user['userId']; ?>"><?php echo htmlspecialchars($name); ?></a></td>
+        <td><a href="/NSBA/admin/users/show.php?userId=<?php echo $user['userId']; ?>"><?php echo htmlspecialchars($name); ?></a></td>
         <td><?php echo htmlspecialchars($user['email']); ?></td>
       </tr>
     <?php endforeach; ?>
@@ -52,14 +52,14 @@ include('../../includes/header.php');
     <?php if ($data['previous'] === null): ?>
       Previous
     <?php else: ?>
-      <a href="/Capstone_Seed/admin/users/?page=<?php echo $data['previous']; ?>">Previous</a>
+      <a href="/NSBA/admin/users/?page=<?php echo $data['previous']; ?>">Previous</a>
     <?php endif; ?>
   </li>
   <li>
     <?php if ($data['next'] === null): ?>
       Next
     <?php else: ?>
-      <a href="/Capstone_Seed/admin/users/?page=<?php echo $data['next']; ?>">Next</a>
+      <a href="/NSBA/admin/users/?page=<?php echo $data['next']; ?>">Next</a>
     <?php endif; ?>
   </li>
 </ul>

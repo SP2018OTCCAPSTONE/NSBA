@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($user->save($_POST)) {
 
     // Redirect to show page
-    Util::redirect('/Capstone_Seed/admin/users/show.php?userId=' . $user->userId);
+    Util::redirect('/NSBA/admin/users/show.php?userId=' . $user->userId);
   }
 }
 
