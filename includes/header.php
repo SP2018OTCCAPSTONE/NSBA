@@ -11,9 +11,9 @@
 </head>
     <body>
         <div class="container">
-            <nav role="navigation">
+            <div id = "nav" class ="shadow" role="navigation">
                 <ul>
-                <li><a href="/NSBA">Home</a></li> <!-- this needs fixed -->
+                <li class ="current"><a href="/NSBA">Home</a></li> <!-- this needs fixed -->
 
                 <?php if (Auth::getInstance()->isLoggedIn()): ?>
 
@@ -29,4 +29,4 @@
 
                 <?php endif; ?>
                 </ul>
-            </nav>    
+            </div>    
