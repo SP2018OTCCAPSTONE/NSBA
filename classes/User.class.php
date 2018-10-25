@@ -687,7 +687,7 @@ class User
         }
     //}
    
-    // // COMMENTED FOR TESTING
+    // // COMMENTED FOR TESTING******************************************************************************************************************
     // // emailSecondary (this will be optional)
     // //
     // //if($this->email != ''){
