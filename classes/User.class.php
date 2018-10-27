@@ -673,7 +673,7 @@ class User
     // 
     // lastName *ADD REGEX
     // 
-    if ($this->firstName == '') {
+    if ($this->lastName == '') {
         $this->errors['lastName'] = 'Please enter a valid name';
       }
 
@@ -714,7 +714,7 @@ class User
 
 
     // // 
-    // // password *ADD REGEX
+    // // password *ADD REGEX // 
     // // 
     // if (strlen($this->password) < 9) {
     //   $this->errors['password'] = 'Please enter a longer password';
