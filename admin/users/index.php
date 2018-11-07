@@ -40,7 +40,7 @@ include('../../includes/header.php');
     <?php $name = $user['lastName'].', '.$user['firstName']; ?>
     <tr>
         <td><a href="/NSBA/admin/users/show.php?userId=<?php echo $user['userId']; ?>"><?php echo htmlspecialchars($name); ?></a></td>
-        <td><?php echo htmlspecialchars($user['email']); ?></td>
+        <td><?php echo htmlspecialchars($user['email1']); ?></td>
       </tr>
     <?php endforeach; ?>
   </tbody>

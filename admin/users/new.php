@@ -13,6 +13,7 @@ Auth::getInstance()->requireLogin();
 // Require the user to be an administrator before they can see this page.
 Auth::getInstance()->requireAdmin();
 
+$current = "new";
 
 $user = new User();
 
