@@ -26,7 +26,7 @@ include('../../includes/header.php');
 
 <h1>Users</h1>
 
-<p><a href="/NSBA/admin/users/new.php">Add a new user</a></p>
+<p><a href="/NSBA/admin/users/new_first.php">Add a new user</a></p>
 
 <table>
   <thead>
@@ -40,7 +40,7 @@ include('../../includes/header.php');
     <?php $name = $user['lastName'].', '.$user['firstName']; ?>
     <tr>
         <td><a href="/NSBA/admin/users/show.php?userId=<?php echo $user['userId']; ?>"><?php echo htmlspecialchars($name); ?></a></td>
-        <td><?php echo htmlspecialchars($user['email1']); ?></td>
+        <td><?php echo isset($user['email1']) ? htmlspecialchars($user['email1']) : '-'; ?></td>
       </tr>
     <?php endforeach; ?>
   </tbody>

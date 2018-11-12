@@ -145,7 +145,7 @@ class Auth
    ****************************************************************************************/
   public function isAdmin()
   {
-    return $this->isLoggedIn() && $this->getCurrentUser()->is_admin;
+    return $this->isLoggedIn() && $this->getCurrentUser()->isAdmin;
   }
 
 
