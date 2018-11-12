@@ -87,7 +87,7 @@ class User
     if ($user !== null) {
 
         // Check the user has been activated
-        if ($user->isActive) {
+        if ($user->isEnabled) {
 
             // Check the hashed password stored in the user record matches the supplied password
             if (Hash::check($password, $user->password)) {
@@ -158,11 +158,23 @@ class User
 
       $db = Database::getInstance();
 
-      $stmt = $db->prepare('SELECT * FROM user WHERE email_1 = :email1 LIMIT 1');
+      $stmt = $db->prepare('SELECT * FROM `user`
+      JOIN user_data 
+      ON `user.user_id` = `user_data.user_id` 
+      JOIN annual_membership 
+      ON `user.user_id` = `annual_membership.user_id` 
+      JOIN member_type 
+      ON `annual_membership.member_type_id` = `member_type.member_type_id` 
+      JOIN invoice 
+      ON `invoice.annual_membership_id` = `annual_membership.annual_membership_id`
+      WHERE email_1 = :email1 LIMIT 1');
+      //('SELECT * FROM user
+      //WHERE email_1 = :email1 LIMIT 1');
       $stmt->execute([':email1' => $email1]);
       $user = $stmt->fetchObject('User');
-
+      var_dump($user);
       if ($user !== false) {
+        
         return $user;
       }
 
@@ -468,8 +480,10 @@ class User
     $this->image = $data['image'];
     $this->memberType = $data['memberType'];
     $this->meals = $data['meals'];
+    $this->amountPaid = $data['amountPaid'];
     $this->notes = $data['notes'];
     $this->referredBy = $data['referredBy'];
+    
 
     // EXPERIMENTS
     //$email1_filled = ! isEmptyString($data['email1']);// true if email1 is not an empty string
@@ -478,7 +492,10 @@ class User
     $is_non = isset($data['memberType']) && $data['memberType'] == '0';
     $is_sub = isset($data['memberType']) && $data['memberType'] == '8';
     
-    
+    //If user is a sub-member get the last parent_membership_id inserted in DB
+    if ($is_sub) {
+      $this->parentMembershipId = getParentMembershipId();
+    }
 
     // If EDITING an existing user, only validate and update the password if a value provided
     if (isset($this->userId) && empty($data['password'])) {
@@ -502,12 +519,31 @@ class User
 
         // Prepare the SQL: Update the existing record if editing, or insert new if adding
         if (isset($this->userId)) {
-
+          //TODO: Add logic for editing parent_id
             // Prepare the SQL
-            $sql = 'UPDATE user 
+            $sql = '
+            BEGIN;
+
+            UPDATE user 
             SET 
             first_name = :firstName, 
-            last_name = :lastName,
+            last_name = :lastName,';
+            // only update password if set
+            if (isset($this->password)) { 
+            $sql .= '
+            password = :password';
+            }
+            $sql .= '
+            is_enabled = :isEnabled, 
+            is_admin = :isAdmin,
+            has_permissions = :hasPermissions
+            board_member = :boardMember,
+            referred_by = :referredBy,
+            notes = :notes
+            WHERE userId = :userId;
+
+            UPDATE user_data
+            SET
             email_1 ='; isEmptyString($data['email1']) ? $sql .= ' DEFAULT, ' : $sql .= ' :email1, ';
             $sql .= '
             email_2 = :email2,
@@ -523,94 +559,141 @@ class User
             website = :website,
             image ='; isEmptyString($data['image']) ? $sql .= ' DEFAULT, ' : $sql .= ':image, ';
             $sql .= '
-            member_type = :memberType,
-            meals = :meals,
-            notes = :notes,
-            referred_by = :referredBy,
-            is_enabled = :isEnabled, 
-            is_admin = :isAdmin,
-            has_permissions = :hasPermissions
-            board_member = :boardMember,
+            WHERE user_id = :userId;
+
+            UPDATE annual_membership
+            SET
+            member_type_id = :memberType,
             is_listed = :isListed';
+            $sql .= ' 
+            WHERE user_id = :userId AND annum = YEAR(CURDATE());
+            
+            SELECT @annual_id := annual_membership_id 
+            FROM annual_membership 
+            WHERE user_id = :userId AND annum = YEAR(CURDATE());
 
-            // only update password if set
-            if (isset($this->password)) { 
-            $sql .= ', password = :password';
-            }
-            $sql .= ' WHERE userId = :userId';
+            UPDATE invoice
+            SET
+            meals = :meals,
+            amount_paid = :amountPaid
+            WHERE annual_membership_id = @annual_id;
+            COMMIT;';
 
 
-
+            //TODO: Logic that keeps non-user from creating an annual membership/invoice
         // If not editing existing user, INSERT new user
         } else {
-            $sql = 'INSERT INTO user (
-            first_name, 
-            last_name,
-            email_1
-            email_2,
-            line_1,
-            line_2,
-            city,
-            state,
-            zip,
-            company,
-            work_phone,
-            cell_phone,
-            fax,
-            website,
-            image,
-            member_type,
-            meals,
-            notes,
-            referred_by,
-            is_enabled, 
-            is_admin,
-            has_permissions,
-            board_member,
-            is_listed,
-            password
+            $sql = 
+            'BEGIN;
+
+            INSERT INTO user (
+              first_name, 
+              last_name,
+              password,
+              is_enabled, 
+              is_admin,
+              has_permissions,
+              board_member,
+              referred_by,
+              notes
             )
             VALUES (
-            :firstName, 
-            :lastName,';
-            isEmptyString($data['email1']) ? $sql .= ' DEFAULT, ' : $sql .= ' :email1, ';
-            $sql .= ' 
-            :email2, 
-            :line1,
-            :line2,
-            :city,
-            :state,
-            :zip,
-            :company,
-            :workphone,
-            :cellphone,
-            :fax,
-            :website,';
-            isEmptyString($data['image']) ? $sql .= ' DEFAULT, ' : $sql .= ' :image, ';
-            $sql .= '
-            :memberType,
-            :meals,
-            :notes,
-            :referredBy,
-            :isEnabled, 
-            :isAdmin,
-            :hasPermissions,
-            :boardMember,
-            :isListed';
-            isEmptyString($data['password']) ? $sql .= ' DEFAULT, ' : $sql .= ' :password, ';
-            $sql .= '
+              :firstName, 
+              :lastName,';
+              isEmptyString($data['password']) ? $sql .= ' DEFAULT, ' : $sql .= ' :password, ';
+              $sql .= 
+              ':isEnabled, 
+              :isAdmin,
+              :hasPermissions,
+              :boardMember,
+              :referredBy,
+              :notes
+            );
+
+            SELECT LAST_INSERT_ID() INTO @id;
+
+            INSERT INTO user_data (
+              user_id,
+              email_1,
+              email_2,
+              line_1,
+              line_2,
+              city,
+              state,
+              zip,
+              company,
+              work_phone,
+              cell_phone,
+              fax,
+              website,
+              image
+            )
+            VALUES (
+              @id,';
+              isEmptyString($data['email1']) ? $sql .= ' DEFAULT, ' : $sql .= ' :email1, ';
+              $sql .=  
+              ':email2, 
+              :line1,
+              :line2,
+              :city,
+              :state,
+              :zip,
+              :company,
+              :workphone,
+              :cellphone,
+              :fax,
+              :website,';
+              isEmptyString($data['image']) ? $sql .= 'DEFAULT' : $sql .= ':image';
+              $sql .=  
+            ');
+
+            INSERT INTO annual_membership (
+              user_id,
+              parent_membership_id,
+              member_type_id,
+              is_listed,
+              annum
             )';
+            if(! $is_non) {
+              $sql .=
+              'VALUES (
+                @id,';
+                $is_sub ? $sql .= ':parentMembershipId, ' : $sql .= 'DEFAULT, ';
+                $sql .=
+                ':memberType,
+                :isListed,
+                YEAR(CURDATE())
+              );
+
+              SELECT LAST_INSERT_ID() INTO @annual_id;
+
+              INSERT INTO invoice (
+                annual_membership_id,
+                meals,
+                amount_paid
+              )
+              VALUES (
+                @annual_id,
+                :meals,';
+                isEmptyString($data['amountPaid']) ? $sql .= ' DEFAULT, ' : $sql .= ' :amountPaid, ';// Need date_paid logic
+                $sql .= 
+              ');';
+            }
+            $sql .=
+            'COMMIT;';
           }
 
         // Bind the parameters
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':firstName', $this->firstName);
         $stmt->bindParam(':lastName', $this->lastName);
-        // if(isset($data['email1']) && (string) $data['email1'] !== '') {
-        //   $stmt->bindParam(':email1', $this->email1);
-        // }
+
+        if(! isEmptyString($data['email1'])) {
+          $stmt->bindParam(':email1', $this->email1);
+        }
+
         $stmt->bindParam(':email1', $this->email1);
-        $stmt->bindParam(':email2', $this->email2);//IF HERE
+        $stmt->bindParam(':email2', $this->email2);
         $stmt->bindParam(':line1', $this->line1);
         $stmt->bindParam(':line2', $this->line2);
         $stmt->bindParam(':city', $this->city);
@@ -621,9 +704,22 @@ class User
         $stmt->bindParam(':cellPhone', $this->cellPhone);
         $stmt->bindParam(':fax', $this->fax);
         $stmt->bindParam(':website', $this->website);
-        $stmt->bindParam(':image', $this->image);//IF HERE
+
+        if(! isEmptyString($data['image'])) {
+          $stmt->bindParam(':image', $this->image);
+        }
+
+        if($is_sub) {
+          $stmt->bindParam(':parentMembershipId', $this->parentMembershipId);
+        }
+
         $stmt->bindParam(':memberType', $this->memberType);
         $stmt->bindParam(':meals', $this->meals);
+
+        if(! isEmptyString($data['amountPaid'])) {
+          $stmt->bindParam(':amountPaid', $this->amountPaid);
+        }
+
         $stmt->bindParam(':notes', $this->notes);
         $stmt->bindParam(':referredBy', $this->referredBy);
         $stmt->bindParam(':isEnabled', $this->isEnabled);
@@ -640,7 +736,7 @@ class User
             //
             $stmt->bindParam(':userId', $this->userId, PDO::PARAM_INT);//************** LOOK AT THIS MORE  */
 
-        // If not editing existing user, and user has entered data into the field, INSERT password, else password will DEFAULT NULL
+        // If CREATING new user, and there is data in the field, INSERT password, else password will DEFAULT NULL
         } else { 
             if( ! isEmptyString($data['password'])) {
               $stmt->bindParam(':password', Hash::make($this->password));
@@ -680,6 +776,32 @@ class User
     return !(isset($str) && (string) $str !== ''); //(strlen(trim($str)) > 0)
   }
 
+
+  /***************************************************************************************************** 
+  * Retrieves the last parent_membership_id inserted from DB
+  *
+  *
+  ******************************************************************************************************/
+  public function getParentMembershipId() {
+    try {
+
+      $db = Database::getInstance();
+      //$parent = (int) $db->query('SELECT COUNT(*) FROM user')->fetchColumn();
+      $parent = (int) $db->query(
+        'SELECT annual_membership_id
+        FROM annual_membership
+        ORDER BY annual_membership_id DESC
+        LIMIT 1;'
+      )->fetchColumn(); 
+      
+    } catch(PDOException $exception) {
+
+      error_log($exception->getMessage());
+      $parent = 0;//NULL?
+    }
+
+    return $parent;
+  }
 
 
   /*************************************************************************************************

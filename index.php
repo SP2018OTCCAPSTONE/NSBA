@@ -21,7 +21,8 @@ include('includes/header.php');
 
 <?php else: ?>
 
-    <p><a href="signup.php">Sign up</a> or <a href="login.php">Log in</a></p>
+    <!--<p><a href="signup.php">Sign up</a> or <a href="login.php">Log in</a></p>-->
+    <p><a href="#">Sign up</a> or <a href="login.php">Log in</a></p>
 
 <?php endif; ?>
 

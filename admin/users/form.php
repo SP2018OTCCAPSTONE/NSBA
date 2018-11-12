@@ -19,8 +19,9 @@
   </div>
 
   <div>
-    <label for="email1">Primary email address</label>
+    <label for="email1">Primary email address </label>
     <input id="email1" name="email1" value="<?php echo htmlspecialchars($user->email1); ?>" />
+    <p>This will be member's username and must be unique</p>
   </div>
 
   <div>
@@ -178,7 +179,7 @@
 
   <div>
     <label for="amountPaid">Amount Paid</label>
-    <input id="amountPaid" name="amountPaid" value="" />
+    <input id="amountPaid" name="amountPaid" value="<?php echo htmlspecialchars($user->amountPaid); ?>" />
   </div>
 
   <div>

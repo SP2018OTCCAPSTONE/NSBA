@@ -45,11 +45,12 @@ include('../../includes/header.php');
   <dt>Name</dt>
   <dd><?php echo htmlspecialchars($user->firstName.' '.$user->lastName); ?></dd>
   <dt>email address</dt>
-  <dd><?php echo htmlspecialchars($user->email); ?></dd>
-  <dt>Active</dt>
-  <dd><?php echo $user->is_active ? '&#10004;' : '&#10008;'; ?></dd>
+  <!-- is_null($user->email), $user->email === NULL are both slower--> 
+  <dd><?php echo isset($user->email1) ? htmlspecialchars($user->email1) : '-'; ?></dd>
+  <dt>Enabled</dt>
+  <dd><?php echo $user->isEnabled ? '&#10004;' : '&#10008;'; ?></dd>
   <dt>Administrator</dt>
-  <dd><?php echo $user->is_admin ? '&#10004;' : '&#10008;'; ?></dd>
+  <dd><?php echo $user->isAdmin ? '&#10004;' : '&#10008;'; ?></dd>
 </dl>
 
 <ul>
