@@ -26,13 +26,13 @@ include('../../includes/header.php');
 
 <h1>Users</h1>
 
-<p><a href="/NSBA/admin/users/new.php">Add a new user</a></p>
+<h2><a href="/NSBA/admin/users/new.php">Add A New User</a></h2>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>email</th>
+      <th>Email</th>
     </tr>
   </thead>
   <tbody>
@@ -48,14 +48,14 @@ include('../../includes/header.php');
 
 
 <ul>
-  <li>
+  <li class = "btn btn-light">
     <?php if ($data['previous'] === null): ?>
       Previous
     <?php else: ?>
       <a href="/NSBA/admin/users/?page=<?php echo $data['previous']; ?>">Previous</a>
     <?php endif; ?>
   </li>
-  <li>
+  <li class = "btn btn-light">
     <?php if ($data['next'] === null): ?>
       Next
     <?php else: ?>

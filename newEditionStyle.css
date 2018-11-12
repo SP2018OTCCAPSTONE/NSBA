@@ -1,0 +1,84 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
+
+/* = RESET STYLES = */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video, a img {
+	margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;
+}
+
+/* = DEFAULT STYLES = */
+body {text-align:center;margin:0;font-family:'Open Sans',arial, sans-serif;font-size:12px;background:#de7408;color:#333;min-width:1000px;}
+/* DEFAULT - LINKS */
+a {text-decoration:none;font-weight:bold;color:#009272;font-size:15px;}
+a:hover {text-decoration:underline;}
+
+.shadow {-webkit-box-shadow:  0px 2px 5px 0px rgba(0, 0, 0, .3);box-shadow:  0px 2px 5px 0px rgba(0, 0, 0, .3);}
+
+/* = PAGE = */
+#page {width:1000px; height: 60vw; padding:15px;margin:15px auto;background:#fff;border-radius:4px;}
+
+/* CONTENT - HEADINGS */
+h1 {font-size:28px;line-height:32px; color:#009272; font-weight: bold; border-bottom:1px dotted #666;}
+h1 span {font-size:25px;color:#c9b193;display:block;}
+h2 {font-size:20px; margin: 1vw; padding:2vw; font-style: italic;}
+h3 {margin:15px 0 5px 0;font-size:15px;}
+h4 {font-size:15px;}
+p{padding: 2vw; font-style: italic; font-size: 15px;}
+dt{margin: 5px 0 0 0; font-weight: bold; font-size: 15px;}
+dd{margin: 5px 0 10px 0; font-size: 15px; }
+dl{margin: 2vw;}
+th{margin: 5px 0 0 0; font-weight: bold; font-size: 15px;}
+td{margin: 5px 0 0 0; font-size: 15px; }
+table{margin-left: 23vw; margin-bottom: 2vw; padding: 3vw;}
+
+/* = NAVIGATION = */
+#nav {margin:0 0 15px 0;padding:0 120px;position:relative;z-index: 50;background:url(images/bg-c2a.png) repeat-x;height:29px;border-bottom:1px solid #6a0000;border-top:1px solid #6a0000;border-radius:4px;}
+#nav ul {padding:0;margin:0;list-style-type:none;}
+#nav ul li {float:left;position: relative;}
+#nav ul li a, #nav ul:hover li.current a {display:block;font-weight:bold;text-transform:uppercase;color:#fff;text-shadow:-1px -1px 0 #6a0000;background:none;border-radius:4px;padding:0px 15px;border:none;margin:2px 10px 0 0;}
+#nav ul li a:hover, #nav ul li.current a, #nav ul:hover li.current:hover a {text-decoration:none;background:#ad1f23;border-top:1px solid #6a0000;border-bottom:1px solid #ffabc3;color:#fff446;}
+/* NAVIGATION - DROP-DOWN */
+#nav ul ul {position:absolute;top:0;left:0;visibility:hidden;width:auto;height:auto;z-index: 50;}
+#nav ul li:hover ul {visibility:visible;}
+#nav ul ul li {float:none;}
+#nav ul ul li a {float:none;}
+
+/* = FORM = */
+form {text-align:left;list-style-type:none; font-size: 15px;}
+/* FORM - LABEL */
+form label {cursor:pointer;float: left;clear: both;margin: 5px 0 0 0; font-weight: bold;}
+/* FORM - INPUT FIELDS */
+form input[type="text"] {border-radius: 3px;}
+form input[type="checkbox"] {width:auto;}
+form input {border: 1px solid #999;float: left;clear: both; width: 40%;}
+form input:focus, form textarea:focus {background: #FF9;}	/* make field background yellow when filling out */
+form textarea {resize:vertical;float: left;clear: both;height: 80px;}
+/* FORM - CAPTCHA */
+form img {float: left;clear: both;}
+form #captcharesult {color:#F00;float: left;clear: both;}
+form a {display: block;float: left;clear: both;}
+/* FORM - SUBMIT BUTTON */
+form input[type="submit"] {margin:10px 0; float: left; width: auto; display:block; }
+
+.btn-light{ font-weight:bold;color:#009272;font-size:15px;}
+
+
+/* = CONTACT INFO = */
+#contact-info {padding:20px;background:#dedede;border-radius:4px;text-shadow:1px 1px 0 #fff;border-top:1px solid #999;}
+
+/* = FOOTER = */
+#footer {padding: 0 15px;margin:0 auto 40px auto;width:1000px;text-shadow:1px 1px 0 #ffb165;}
+#footer #sitemap {float:left;text-align:left;}
+#footer #copyright {float:right;text-align:right;}
+/* FOOTER - LINKS */
+#footer a {color:#333;}
+#footer a:hover {border-bottom:3px solid #fff;text-decoration:none;}
+/* FOOTER - SITEMAP LINKS */
+#footer ul {list-style-type:none;}
+#footer ul li {float:left;margin:0 10px 0 0;}
+
+
+
+
+
+
+

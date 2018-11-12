@@ -39,12 +39,12 @@ include('../../includes/header.php');
 
 <h1>User</h1>
 
-<p><a href="/NSBA/admin/users">&laquo; back to list of users</a></p>
+<h2><a href="/NSBA/admin/users">&laquo; Back To List Of Users</a></h2>
 
 <dl>
   <dt>Name</dt>
   <dd><?php echo htmlspecialchars($user->firstName.' '.$user->lastName); ?></dd>
-  <dt>email address</dt>
+  <dt>Email Address</dt>
   <dd><?php echo htmlspecialchars($user->email); ?></dd>
   <dt>Active</dt>
   <dd><?php echo $user->is_active ? '&#10004;' : '&#10008;'; ?></dd>
@@ -54,8 +54,8 @@ include('../../includes/header.php');
 
 <ul>
     
-  <li><a href="/NSBA/admin/users/edit.php?userId=<?php echo $user->userId; ?>">Edit</a></li>
-  <li>
+  <li class = "btn btn-light"><a href="/NSBA/admin/users/edit.php?userId=<?php echo $user->userId; ?>">Edit</a></li>
+  <li class = "btn btn-light">
     <?php if ($user->userId == Auth::getInstance()->getCurrentUser()->userId): ?>
       Delete
     <?php else: ?>

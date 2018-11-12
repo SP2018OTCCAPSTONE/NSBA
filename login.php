@@ -59,11 +59,11 @@ include('includes/header.php');
   <div>
     <label for="remember_me">
       <input id="remember_me" name="remember_me" type="checkbox" value="1"
-             <?php if ($remember_me): ?>checked="checked"<?php endif; ?>/> remember me
+             <?php if ($remember_me): ?>checked="checked"<?php endif; ?>/> Remember Me
     </label>
   </div>
 
-  <input type="submit" value="Login" />
+  <input class = "btn btn-light"  type="submit" value="Login" />
   <a href="forgot_password.php">I forgot my password</a>
 </form>
 

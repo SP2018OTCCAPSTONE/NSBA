@@ -19,19 +19,19 @@
   </div>
 
   <div>
-    <label for="email">email address</label>
+    <label for="email">Email Address</label>
     <input id="email" name="email" value="<?php echo htmlspecialchars($user->email); ?>" />
   </div>
 
   <div>
-    <label for="emailSecondary">Secondary email address</label>
+    <label for="emailSecondary">Secondary Email Address</label>
     <input id="emailSecondary" name="emailSecondary" value="<?php echo htmlspecialchars($user->emailSecondary); ?>" />
   </div>
 
   <div>
     <label for="password">Password</label>
     <input type="password" id="password" name="password" />
-    <p>Leave blank to keep current password</p>
+    <p style = "padding: 2vw;" >Leave blank to keep current password</p>
   </div>
 
   <?php $is_same_user = $user->userId == Auth::getInstance()->getCurrentUser()->userId; ?>
@@ -40,11 +40,11 @@
     <label for="is_active">
         <?php if ($is_same_user): ?>
             <input type="hidden" name="is_active" value="1" />
-            <input type="checkbox" disabled="disabled" checked="checked" /> active
+            <input type="checkbox" disabled="disabled" checked="checked" /> Active
 
         <?php else: ?>
             <input id="is_active" name="is_active" type="checkbox" value="1"
-                <?php if ($user->is_active): ?>checked="checked"<?php endif; ?>/> active
+                <?php if ($user->is_active): ?>checked="checked"<?php endif; ?>/> Active
 
         <?php endif; ?>
     </label>
@@ -54,16 +54,16 @@
     <label for="is_admin">
         <?php if ($is_same_user): ?>
             <input type="hidden" name="is_admin" value="1" />
-            <input type="checkbox" disabled="disabled" checked="checked" /> administrator
+            <input type="checkbox" disabled="disabled" checked="checked" /> Administrator
 
         <?php else: ?>
             <input id="is_admin" name="is_admin" type="checkbox" value="1"
-                <?php if ($user->is_admin): ?>checked="checked"<?php endif; ?>/> administrator
+                <?php if ($user->is_admin): ?>checked="checked"<?php endif; ?>/> Administrator
 
         <?php endif; ?>
     </label>
   </div>
 
-  <input type="submit" value="Save" />
-  <a href="/NSBA/admin/users<?php if (isset($user->userId)) { echo '/show.php?userId=' . $user->userId; } ?>">Cancel</a>
+  <input type="submit" value="Save" class = "btn btn-light" />
+  <a class = "btn btn-light"  href="/NSBA/admin/users <?php if (isset($user->userId)) { echo '/show.php?userId=' . $user->userId; } ?>">Cancel</a>
 </form>
