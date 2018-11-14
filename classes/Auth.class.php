@@ -75,9 +75,9 @@ class Auth
    * @param string $password  Password
    * @return boolean          true if the new user record was saved successfully, false otherwise
    *********************************************************************************************/
-  public function login($email, $password, $remember_me)
+  public function login($email1, $password, $remember_me)
   {
-    $user = User::authenticate($email, $password);
+    $user = User::authenticate($email1, $password);
 
     if ($user !== null) {
 
@@ -112,10 +112,10 @@ class Auth
   public function getCurrentUser()
   {
     if ($this->_currentUser === null) {
-      if (isset($_SESSION['user_id'])) {
+      if (isset($_SESSION['userId'])) {
 
         // Cache the object so that in a single request the data is loaded from the database only once.
-        $this->_currentUser = User::findByID($_SESSION['user_id']);
+        $this->_currentUser = User::findByID($_SESSION['userId']);
     } else {
 
         // Login from the remember me cookie if set

@@ -16,9 +16,9 @@ $remember_me = isset($_POST['remember_me']);
 // Process the submitted form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $email = $_POST['email'];
+    $email1 = $_POST['email1'];
 
-    if (Auth::getInstance()->login($email, $_POST['password'], $remember_me)) {
+    if (Auth::getInstance()->login($email1, $_POST['password'], $remember_me)) {
 
     // Redirect to home page or intended page, if set
         if (isset($_SESSION['return_to'])) {
@@ -40,15 +40,17 @@ include('includes/header.php');
 ?>
 
 <h1>Login</h1>
+<?php $str = "passwords";
+echo password_hash($str, PASSWORD_DEFAULT); ?>
+<?php if (isset($email1)): ?>
 
-<?php if (isset($email)): ?>
   <p>Invalid login</p>
 <?php endif; ?>
 
 <form method="post">
   <div>
-    <label for="email">Email Address</label>
-    <input id="email" name="email" value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>" />
+    <label for="email1">Email Address</label>
+    <input id="email1" name="email1" value="<?php echo isset($email1) ? htmlspecialchars($email1) : ''; ?>" />
   </div>
 
   <div>

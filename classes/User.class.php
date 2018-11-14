@@ -167,12 +167,12 @@ class User
       ON `annual_membership.member_type_id` = `member_type.member_type_id` 
       JOIN invoice 
       ON `invoice.annual_membership_id` = `annual_membership.annual_membership_id`
-      WHERE email_1 = :email1 LIMIT 1');
+      WHERE email_1 = :email1 LIMIT 1;');
       //('SELECT * FROM user
       //WHERE email_1 = :email1 LIMIT 1');
       $stmt->execute([':email1' => $email1]);
       $user = $stmt->fetchObject('User');
-      var_dump($user);
+      //var_dump($user);
       if ($user !== false) {
         
         return $user;
