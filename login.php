@@ -13,6 +13,10 @@ Auth::getInstance()->requireGuest();
 // Get checked status of the "remember me" checkbox
 $remember_me = isset($_POST['remember_me']);
 
+// <?php $str = "passwords";
+// echo password_hash($str, PASSWORD_DEFAULT);
+//$dbName = Database::getDBname();
+
 // Process the submitted form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -34,16 +38,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 // Set the title, show the page header, then the rest of the HTML
-$page_title = 'Login';
+$current = 'login';
 include('includes/header.php');
 
 ?>
 
 <h1>Login</h1>
-<?php $str = "passwords";
-echo password_hash($str, PASSWORD_DEFAULT); ?>
-<?php if (isset($email1)): ?>
 
+<?php if (isset($email1)): ?> 
   <p>Invalid login</p>
 <?php endif; ?>
 

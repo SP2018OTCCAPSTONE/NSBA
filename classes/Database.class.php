@@ -62,4 +62,8 @@ class Database
         return $results;
     }
 
+    public static function getDBname() {
+        $database = getenv('DB_DATABASE');
+        return $database;
+    }
 }

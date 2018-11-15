@@ -58,7 +58,18 @@ class User
 
       $offset = ($page - 1) * $users_per_page;
 
-      $data['users'] = $db->query("SELECT * FROM user ORDER BY lastName LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      //("SELECT * FROM user ORDER BY last_name LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      $data['users'] = $db->query("SELECT * FROM user u
+      JOIN user_data d
+      ON u.user_id = d.user_id
+      JOIN annual_membership m
+      ON d.user_id = m.user_id
+      JOIN member_type t
+      ON m.member_type_id = t.member_type_id
+      JOIN invoice i
+      ON i.annual_membership_id = m.annual_membership_id
+      ORDER BY last_name
+      LIMIT $users_per_page OFFSET $offset")->fetchAll();
 
     } catch(PDOException $exception) {
 
@@ -85,12 +96,15 @@ class User
     $user = static::findByEmail($email1);
 
     if ($user !== null) {
-
+       var_dump($user);// troubleshooter
+       //$isEnabled = $user->is_enabled;
+       //echo($isEnabled);
         // Check the user has been activated
-        if ($user->isEnabled) {
-
+        if ($user->isEnabled) {// $user->is_enabled
+          var_dump($user);// troubleshooter
             // Check the hashed password stored in the user record matches the supplied password
-            if (Hash::check($password, $user->password)) {
+            //if (Hash::check($password, $user->password)) {
+            if ($password === $user->password) {  
                 return $user;
             }
         }
@@ -109,8 +123,18 @@ class User
     try {
 
       $db = Database::getInstance();
+    //('SELECT * FROM user WHERE user_id = :userId LIMIT 1');
+      $stmt = $db->prepare('SELECT * FROM user u
+      JOIN user_data d
+      ON u.user_id = d.user_id
+      JOIN annual_membership m
+      ON d.user_id = m.user_id
+      JOIN member_type t
+      ON m.member_type_id = t.member_type_id
+      JOIN invoice i
+      ON i.annual_membership_id = m.annual_membership_id
+      WHERE user_id = :userId LIMIT 1;');
 
-      $stmt = $db->prepare('SELECT * FROM user WHERE user_id = :userId LIMIT 1');
       $stmt->execute([':userId' => $userId]);
       $user = $stmt->fetchObject('User');
 
@@ -123,6 +147,12 @@ class User
       error_log($exception->getMessage());
     }
   }
+
+  // JOIN member_type t
+  // ON m.member_type_id = t.member_type_id
+  // JOIN invoice i
+  // ON i.annual_membership_id = m.annual_membership_id
+
 
 
 /*************************************************************************
@@ -158,21 +188,22 @@ class User
 
       $db = Database::getInstance();
 
-      $stmt = $db->prepare('SELECT * FROM `user`
-      JOIN user_data 
-      ON `user.user_id` = `user_data.user_id` 
-      JOIN annual_membership 
-      ON `user.user_id` = `annual_membership.user_id` 
-      JOIN member_type 
-      ON `annual_membership.member_type_id` = `member_type.member_type_id` 
-      JOIN invoice 
-      ON `invoice.annual_membership_id` = `annual_membership.annual_membership_id`
+      $stmt = $db->prepare('SELECT * FROM user u
+      JOIN user_data d
+      ON u.user_id = d.user_id
+      JOIN annual_membership m
+      ON d.user_id = m.user_id
+      JOIN member_type t
+      ON m.member_type_id = t.member_type_id
+      JOIN invoice i
+      ON i.annual_membership_id = m.annual_membership_id
       WHERE email_1 = :email1 LIMIT 1;');
       //('SELECT * FROM user
-      //WHERE email_1 = :email1 LIMIT 1');
+      //WHERE email_1 = :email1 LIMIT 1');// OG
+      //$stmt->bindParam()
       $stmt->execute([':email1' => $email1]);
       $user = $stmt->fetchObject('User');
-      //var_dump($user);
+      //var_dump($user);// troubleshooter
       if ($user !== false) {
         
         return $user;
@@ -183,6 +214,8 @@ class User
       error_log($exception->getMessage());
     }
   }
+
+  
 
   /****************************************************************************************************
    * See if an user record already exists with the specified email address ****WHERE DOES THIS GO??
@@ -265,8 +298,8 @@ class User
 
 
   /*******************************************************************************************************
-   * Signup a new user // 
-   * ************CREATE A FUNCTION FOR ADMIN TO ADD ADDITIONAL DATA TO OTHER TABLES AND "UNFLAG" USER******* 
+   * Signup a new user 
+   * 
    *  
    *
    * @param array $data  POST data

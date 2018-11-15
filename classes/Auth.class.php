@@ -254,7 +254,7 @@ EOT;
   private function _loginUser($user) {
 
     // Store the user ID in the session
-    $_SESSION['user_id'] = $user->userId;
+    $_SESSION['userId'] = $user->userId;
 
     // Regenerate the session ID to prevent session hijacking
     session_regenerate_id();
