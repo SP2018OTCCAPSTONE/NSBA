@@ -211,7 +211,7 @@ var mealAmt = <?php echo $meal; ?>;
     <textarea id="notes" name="notes" value="<?php echo htmlspecialchars($user->notes); ?>"></textarea>
   </div>
 
-  <input type="submit" value="Save" />
-  <a href="/NSBA/admin/users<?php if (isset($user->user_id)) { echo '/show.php?user_id=' . $user->user_id; } ?>">Cancel</a>
+  <input type="submit" value="Save" class = "btn btn-light" />
+  <a class = "btn btn-light" href="/NSBA/admin/users<?php if (isset($user->user_id)) { echo '/show.php?user_id=' . $user->user_id; } ?>">Cancel</a>
 </form>
 <script src="../../includes/utility.js"></script>
