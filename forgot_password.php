@@ -37,7 +37,7 @@ include('includes/header.php');
       <input id="email" name="email" />
     </div>
 
-    <input type="submit" value="Send password reset instructions" />
+    <input class = "btn btn-light" type="submit" value="Send password reset instructions" />
   </form>
   
 <?php endif; ?>

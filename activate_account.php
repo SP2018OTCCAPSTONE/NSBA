@@ -20,7 +20,7 @@ include('includes/header.php');
 
 ?>
 
-<h1>Account activated</h1>
+<h1>Account Activated</h1>
 
 <p>Thank you for activating your account! You can now <a href="login.php">login</a>.</p>
 

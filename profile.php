@@ -23,7 +23,7 @@ include('includes/header.php');
   <dl>
     <dt>Name</dt>
     <dd><?php echo htmlspecialchars($user->first_name); ?></dd>
-    <dt>email address</dt>
+    <dt>Email Address</dt>
     <dd><?php echo htmlspecialchars($user->email_1); ?></dd>
   </dl>
     

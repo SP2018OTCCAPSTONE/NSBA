@@ -22,17 +22,20 @@ $data = User::paginate(isset($_GET['page']) ? $_GET['page'] : 1);
 // Show the page header, then the rest of the HTML
 include('../../includes/header.php');
 
+
 ?>
 
 <h1>Members and Permissioned Users</h1>
 
-<p><a href="/NSBA/admin/users/new_first.php">Add a new user</a></p>
+<p><a href="/NSBA/admin/users/new_first.php">Add A New User</a></p>
+
+<?php include('../../includes/sidebar.php'); ?>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>email</th>
+      <th>Email</th>
     </tr>
   </thead>
   <tbody>
@@ -50,16 +53,16 @@ include('../../includes/header.php');
 <ul>
   <li>
     <?php if ($data['previous'] === null): ?>
-      Previous
+      <!-- Previous -->
     <?php else: ?>
-      <a href="/NSBA/admin/users/?page=<?php echo $data['previous']; ?>">Previous</a>
+      <a class = "btn btn-light" href="/NSBA/admin/users/?page=<?php echo $data['previous']; ?>">Previous</a>
     <?php endif; ?>
   </li>
   <li>
     <?php if ($data['next'] === null): ?>
-      Next
+      <!-- Next -->
     <?php else: ?>
-      <a href="/NSBA/admin/users/?page=<?php echo $data['next']; ?>">Next</a>
+      <a class = "btn btn-light" href="/NSBA/admin/users/?page=<?php echo $data['next']; ?>">Next</a>
     <?php endif; ?>
   </li>
 </ul>

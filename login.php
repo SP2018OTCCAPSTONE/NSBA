@@ -67,7 +67,7 @@ include('includes/header.php');
     </label>
   </div>
 
-  <input type="submit" value="Login" />
+  <input class = "btn btn-light" type="submit" value="Login" />
   <a href="forgot_password.php">I forgot my password</a>
 </form>
 

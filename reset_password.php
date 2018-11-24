@@ -68,7 +68,7 @@ include('includes/header.php');
       <input type="password" id="password_confirmation" name="password_confirmation" />
     </div>
 
-    <input type="submit" value="Reset password" />
+    <input class = "btn btn-light" type="submit" value="Reset password" />
   </form>
 
 <?php else: ?>

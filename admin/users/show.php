@@ -37,12 +37,12 @@ include('../../includes/header.php');
 
 <h1>User</h1>
 
-<p><a href="/NSBA/admin/users">&laquo; back to list of users</a></p>
+<p><a href="/NSBA/admin/users">&laquo; Back To List Of Users</a></p>
 
 <dl>
   <dt>Name</dt>
   <dd><?php echo htmlspecialchars($user->first_name.' '.$user->last_name); ?></dd>
-  <dt>email address</dt>
+  <dt>Email Address</dt>
   <!-- is_null($user->email), $user->email === NULL are both slower--> 
   <dd><?php echo isset($user->email_1) ? htmlspecialchars($user->email_1) : '-'; ?></dd>
   <dt>Enabled</dt>
@@ -53,12 +53,12 @@ include('../../includes/header.php');
 
 <ul>
     
-  <li><a href="/NSBA/admin/users/edit.php?user_id=<?php echo $user->user_id; ?>">Edit</a></li>
+  <li><a class = "btn btn-light" href="/NSBA/admin/users/edit.php?user_id=<?php echo $user->user_id; ?>">Edit</a></li>
   <li>
     <?php if ($user->user_id == Auth::getInstance()->getCurrentUser()->user_id): ?>
       Delete
     <?php else: ?>
-      <a href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>">Delete</a>
+      <a class = "btn btn-light" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>">Delete</a>
     <?php endif; ?>
   </li>
 </ul>

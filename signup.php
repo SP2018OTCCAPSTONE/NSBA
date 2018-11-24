@@ -65,7 +65,7 @@ include('includes/header.php');
     <input type="password" id="password" name="password"/>
   </div>
 
-  <input type="submit" value="Sign Up" />
+  <input class = "btn btn-light" type="submit" value="Sign Up" />
 </form>
 
 <?php include('includes/footer.php'); ?>
