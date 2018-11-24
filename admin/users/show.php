@@ -15,8 +15,8 @@ Auth::getInstance()->requireAdmin();
 
 
 // Get the user
-if (isset($_GET['userId'])) {
-  $user = User::findByID($_GET['userId']);
+if (isset($_GET['user_id'])) {
+  $user = User::findByID($_GET['user_id']);
 }
 
 // Find the user or show a 404 page.
@@ -29,8 +29,6 @@ $user = User::getByIDor404($_GET);
 //   exit;
 // }
 
-// Concat name
-// $name = $user->firstName.' '.$user->lastName;
 
 // Show the page header, then the rest of the HTML
 include('../../includes/header.php');
@@ -43,23 +41,24 @@ include('../../includes/header.php');
 
 <dl>
   <dt>Name</dt>
-  <dd><?php echo htmlspecialchars($user->firstName.' '.$user->lastName); ?></dd>
+  <dd><?php echo htmlspecialchars($user->first_name.' '.$user->last_name); ?></dd>
   <dt>email address</dt>
-  <dd><?php echo htmlspecialchars($user->email); ?></dd>
-  <dt>Active</dt>
-  <dd><?php echo $user->is_active ? '&#10004;' : '&#10008;'; ?></dd>
+  <!-- is_null($user->email), $user->email === NULL are both slower--> 
+  <dd><?php echo isset($user->email_1) ? htmlspecialchars($user->email_1) : '-'; ?></dd>
+  <dt>Enabled</dt>
+  <dd><?php echo $user->is_enabled ? '&#10004;' : '&#10008;'; ?></dd>
   <dt>Administrator</dt>
   <dd><?php echo $user->is_admin ? '&#10004;' : '&#10008;'; ?></dd>
 </dl>
 
 <ul>
     
-  <li><a href="/NSBA/admin/users/edit.php?userId=<?php echo $user->userId; ?>">Edit</a></li>
+  <li><a href="/NSBA/admin/users/edit.php?user_id=<?php echo $user->user_id; ?>">Edit</a></li>
   <li>
-    <?php if ($user->userId == Auth::getInstance()->getCurrentUser()->userId): ?>
+    <?php if ($user->user_id == Auth::getInstance()->getCurrentUser()->user_id): ?>
       Delete
     <?php else: ?>
-      <a href="/NSBA/admin/users/delete.php?userId=<?php echo $user->userId; ?>">Delete</a>
+      <a href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>">Delete</a>
     <?php endif; ?>
   </li>
 </ul>

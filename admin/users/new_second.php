@@ -1,11 +1,13 @@
 <?php
 
 /**
- * User admin - edit a user
+ * User admin - add a new user
  */
 
 // Initialisation
 require_once('../../includes/init.php');
+
+$current = 'new_second';
 
 // Require the user to be logged in before they can see this page.
 Auth::getInstance()->requireLogin();
@@ -13,20 +15,21 @@ Auth::getInstance()->requireLogin();
 // Require the user to be an administrator before they can see this page.
 Auth::getInstance()->requireAdmin();
 
-$current = "edit";
 
-// Find the user or show a 404 page.
-$user = User::getByIDor404($_GET);
-
+$user = new User();
+$type = $_GET['type'];
+$id = $_GET['id'];
 
 // Process the submitted form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+  // LOGIC CODE HERE TO GO TO 2ND/3RD FORMS FOR CORP2/CORP3 ASSOCIATE MEMBERS
   if ($user->save($_POST)) {
-
-    // Redirect to show page
-    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $user->user_id);
-  }
+    if (isset($_POST['memberType']) && $_POST['memberType'] == '7') { 
+    
+        Util::redirect('/NSBA/admin/users/new_third.php?id=' . $id);
+    }
+    Util::redirect('/NSBA/admin/users/show.php?userId=' . $id);
+  } 
 }
 
 
@@ -35,7 +38,7 @@ include('../../includes/header.php');
 
 ?>
 
-<h1>Edit User</h1>
+<h1>Create New User</h1>
 
 <?php include('form.php'); ?>
     

@@ -24,9 +24,9 @@ include('../../includes/header.php');
 
 ?>
 
-<h1>Users</h1>
+<h1>Members and Permissioned Users</h1>
 
-<p><a href="/NSBA/admin/users/new.php">Add a new user</a></p>
+<p><a href="/NSBA/admin/users/new_first.php">Add a new user</a></p>
 
 <table>
   <thead>
@@ -37,10 +37,10 @@ include('../../includes/header.php');
   </thead>
   <tbody>
     <?php foreach ($data['users'] as $user): ?>
-    <?php $name = $user['lastName'].', '.$user['firstName']; ?>
+    <?php $name = $user['last_name'].', '.$user['first_name']; ?>
     <tr>
-        <td><a href="/NSBA/admin/users/show.php?userId=<?php echo $user['userId']; ?>"><?php echo htmlspecialchars($name); ?></a></td>
-        <td><?php echo htmlspecialchars($user['email']); ?></td>
+        <td><a href="/NSBA/admin/users/show.php?user_id=<?php echo $user['user_id']; ?>"><?php echo htmlspecialchars($name); ?></a></td>
+        <td><?php echo isset($user['email_1']) ? htmlspecialchars($user['email_1']) : '-'; ?></td>
       </tr>
     <?php endforeach; ?>
   </tbody>

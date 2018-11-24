@@ -75,9 +75,9 @@ class Auth
    * @param string $password  Password
    * @return boolean          true if the new user record was saved successfully, false otherwise
    *********************************************************************************************/
-  public function login($email, $password, $remember_me)
+  public function login($email1, $password, $remember_me)
   {
-    $user = User::authenticate($email, $password);
+    $user = User::authenticate($email1, $password);
 
     if ($user !== null) {
 
@@ -254,7 +254,7 @@ EOT;
   private function _loginUser($user) {
 
     // Store the user ID in the session
-    $_SESSION['user_id'] = $user->userId;
+    $_SESSION['user_id'] = $user->user_id;
 
     // Regenerate the session ID to prevent session hijacking
     session_regenerate_id();
