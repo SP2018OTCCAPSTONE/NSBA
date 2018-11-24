@@ -535,10 +535,6 @@ class User
     $this->referredBy = $data['referredBy'];
     $this->currentPage = $data['currentPage'];
 
-    // EXPERIMENTS
-    //$email1_filled = ! isEmptyString($data['email1']);// true if email1 is not an empty string
-    //$password_filled = ! isEmptyString($data['password']);
-    //$image_filled = ! isEmptyString($data['image']);
     $is_non = isset($data['memberType']) && $data['memberType'] == '0';
     $is_sub = isset($data['memberType']) && $data['memberType'] == '8';
     
@@ -568,10 +564,13 @@ class User
         $db = Database::getInstance();
 
         // Prepare the SQL: Update the existing record if editing, or insert new if adding
-        if (isset($this->user_id)) {
-          $user_id = $this->user_id;
-          echo($user_id);
+
+        // if (isset($this->user_id)) {
+        if ($this->currentPage == 'edit') {
+          // $user_id = $this->user_id;
+          // echo($user_id);
           //TODO: Add logic for editing parent_id
+          
             // Prepare the SQL
             $sql = '
             BEGIN;
@@ -631,7 +630,7 @@ class User
 
             COMMIT;';
 
-
+            //echo "<script>console.log('I made it this far!');</script>";
             
         // If not editing existing user, INSERT new user
         } else {
@@ -1005,6 +1004,7 @@ class User
   {
     $this->errors = [];
     var_dump($this->currentPage);
+    
 
     if($this->currentPage == 'edit') {
 
