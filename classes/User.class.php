@@ -96,19 +96,16 @@ class User
     $user = static::findByEmail($email1);
 
     if ($user !== null) {
-       var_dump($user);// troubleshooter
-       //$isEnabled = $user->is_enabled;
-       //echo($isEnabled);
-        // Check the user has been activated
-        if ($user->isEnabled) {// $user->is_enabled
-          var_dump($user);// troubleshooter
-            // Check the hashed password stored in the user record matches the supplied password
-            //if (Hash::check($password, $user->password)) {
-            if ($password === $user->password) {  
-                return $user;
-            }
+       //var_dump($user);// troubleshooter
+    
+      // Check the user has been activated
+      if ($user->is_enabled) {
+        // Check the hashed password stored in the user record matches the supplied password
+        if (Hash::check($password, $user->password)) { 
+          return $user;
         }
-    }
+      }
+    } 
   }
 
 
@@ -118,7 +115,7 @@ class User
    * @param string $id  ID
    * @return mixed      User object if found, null otherwise
    ********************************************************************************/
-  public static function findByID($userId)
+  public static function findByID($user_id)
   {
     try {
 
@@ -133,9 +130,9 @@ class User
       ON m.member_type_id = t.member_type_id
       JOIN invoice i
       ON i.annual_membership_id = m.annual_membership_id
-      WHERE user_id = :userId LIMIT 1;');
+      WHERE u.user_id = :user_id LIMIT 1;');
 
-      $stmt->execute([':userId' => $userId]);
+      $stmt->execute([':user_id' => $user_id]);
       $user = $stmt->fetchObject('User');
 
       if ($user !== false) {
@@ -163,8 +160,8 @@ class User
    ************************************************************************/
   public static function getByIDor404($data)
   {
-    if (isset($data['userId'])) {
-      $user = static::findByID($data['userId']);
+    if (isset($data['user_id'])) {
+      $user = static::findByID($data['user_id']);
 
       if ($user !== null) {
         return $user;
@@ -438,7 +435,6 @@ class User
   }
 
    /*****************************************************************************************************
-    * // WILL NEED ANOTHER FUNCTION LIKE THIS FOR BASIC USER*******************************************
    * Activate the user account, nullifying the activation token and setting the is_active flag
    *
    * @param string $token  Activation token
@@ -474,8 +470,8 @@ class User
 
       $db = Database::getInstance();
 
-      $stmt = $db->prepare('DELETE FROM user WHERE user_id = :userId');// WILL NEED TO CASCADE THIS FOR RELATED TABLES
-      $stmt->bindParam(':userId', $this->userId, PDO::PARAM_INT);
+      $stmt = $db->prepare('DELETE FROM user WHERE user_id = :user_id');
+      $stmt->bindParam(':user_id', $this->user_id, PDO::PARAM_INT);
       $stmt->execute();
 
     } catch(PDOException $exception) {
@@ -485,7 +481,27 @@ class User
     }
   }
 
+  /***************************************************************************
+   * Retrieve the member type data to calculate renewal rate/amount due.
+   *
+   * @return $data
+   ****************************************************************************/
+  public function getMemberTypeData()
+  {
+    try {
 
+      $db = Database::getInstance();
+      //('SELECT membership_price, meal_price FROM member_type WHERE member_type_id = :memberType')->fetchAll();
+      $data = $db->query('SELECT * FROM member_type')->fetchAll();
+      
+    } catch(PDOException $exception) {
+
+      // Log the detailed exception
+      error_log($exception->getMessage());
+      //$data['prices'] = [];
+    }
+    return $data;
+  }
 
 /**********************************************************************************************************
    * Update the existing users details based on the data. Data is validated and $this->errors is set if
@@ -506,17 +522,18 @@ class User
     $this->state = $data['state'];
     $this->zip = $data['zip'];
     $this->company = $data['company'];
-    $this->workphone = $data['workphone'];
-    $this->cellphone = $data['cellphone'];
+    $this->workPhone = $data['workPhone'];
+    $this->cellPhone = $data['cellPhone'];
     $this->fax = $data['fax'];
     $this->website = $data['website'];
-    $this->image = $data['image'];
+    //$this->image = $data['image'];
     $this->memberType = $data['memberType'];
     $this->meals = $data['meals'];
+    $this->renewalAmount = $data['renewalAmount'];
     $this->amountPaid = $data['amountPaid'];
     $this->notes = $data['notes'];
     $this->referredBy = $data['referredBy'];
-    
+    $this->currentPage = $data['currentPage'];
 
     // EXPERIMENTS
     //$email1_filled = ! isEmptyString($data['email1']);// true if email1 is not an empty string
@@ -531,7 +548,7 @@ class User
     }
 
     // If EDITING an existing user, only validate and update the password if a value provided
-    if (isset($this->userId) && empty($data['password'])) {
+    if (isset($this->user_id) && empty($data['password'])) {
         unset($this->password);
       } else {
         $this->password = $data['password'];
@@ -551,7 +568,9 @@ class User
         $db = Database::getInstance();
 
         // Prepare the SQL: Update the existing record if editing, or insert new if adding
-        if (isset($this->userId)) {
+        if (isset($this->user_id)) {
+          $user_id = $this->user_id;
+          echo($user_id);
           //TODO: Add logic for editing parent_id
             // Prepare the SQL
             $sql = '
@@ -562,7 +581,7 @@ class User
             first_name = :firstName, 
             last_name = :lastName,';
             // only update password if set
-            if (isset($this->password)) { 
+            if (isset($this->password) && $this->password !== '') { 
             $sql .= '
             password = :password';
             }
@@ -573,11 +592,11 @@ class User
             board_member = :boardMember,
             referred_by = :referredBy,
             notes = :notes
-            WHERE userId = :userId;
+            WHERE user_id = :user_id;
 
             UPDATE user_data
             SET
-            email_1 ='; isEmptyString($data['email1']) ? $sql .= ' DEFAULT, ' : $sql .= ' :email1, ';
+            email_1 = '; $sql .= isset($this->email1) && (string) $this->email1 !== '' ? ':email1' : 'DEFAULT';
             $sql .= '
             email_2 = :email2,
             line_1 = :line1,
@@ -586,34 +605,34 @@ class User
             state = :state,
             zip = :zip,
             company = :company,
-            work_phone = :workphone,
-            cell_phone = :cellphone,
+            work_phone = :workPhone,
+            cell_phone = :cellPhone,
             fax = :fax,
             website = :website,
-            image ='; isEmptyString($data['image']) ? $sql .= ' DEFAULT, ' : $sql .= ':image, ';
+            image = DEFAULT'; // Temporary fix
             $sql .= '
-            WHERE user_id = :userId;
+            WHERE user_id = :user_id;
 
             UPDATE annual_membership
             SET
             member_type_id = :memberType,
-            is_listed = :isListed';
-            $sql .= ' 
-            WHERE user_id = :userId AND annum = YEAR(CURDATE());
+            is_listed = :isListed 
+            WHERE user_id = :user_id AND annum = YEAR(CURDATE());
             
             SELECT @annual_id := annual_membership_id 
             FROM annual_membership 
-            WHERE user_id = :userId AND annum = YEAR(CURDATE());
+            WHERE user_id = :user_id AND annum = YEAR(CURDATE());
 
             UPDATE invoice
             SET
             meals = :meals,
             amount_paid = :amountPaid
             WHERE annual_membership_id = @annual_id;
+
             COMMIT;';
 
 
-            //TODO: Logic that keeps non-user from creating an annual membership/invoice
+            
         // If not editing existing user, INSERT new user
         } else {
             $sql = 
@@ -633,7 +652,7 @@ class User
             VALUES (
               :firstName, 
               :lastName,';
-              isEmptyString($data['password']) ? $sql .= ' DEFAULT, ' : $sql .= ' :password, ';
+              $sql .= isset($data['password']) && (string) $data['password'] !== '' ? ':password,' : 'DEFAULT,';
               $sql .= 
               ':isEnabled, 
               :isAdmin,
@@ -663,7 +682,8 @@ class User
             )
             VALUES (
               @id,';
-              isEmptyString($data['email1']) ? $sql .= ' DEFAULT, ' : $sql .= ' :email1, ';
+              $sql .= isset($data['email1']) && (string) $data['email1'] !== '' ? ':email1,' : 'DEFAULT,';
+              //$sql .= isEmptyString($data['email1']) ? ' DEFAULT, ' : ' :email1, ';
               $sql .=  
               ':email2, 
               :line1,
@@ -672,11 +692,12 @@ class User
               :state,
               :zip,
               :company,
-              :workphone,
-              :cellphone,
+              :workPhone,
+              :cellPhone,
               :fax,
-              :website,';
-              isEmptyString($data['image']) ? $sql .= 'DEFAULT' : $sql .= ':image';
+              :website,
+              DEFAULT';
+              //$sql .= isEmptyString($data['image']) ? 'DEFAULT' : ':image';
               $sql .=  
             ');
 
@@ -686,34 +707,32 @@ class User
               member_type_id,
               is_listed,
               annum
-            )';
-            if(! $is_non) {
+            )
+            VALUES (
+              @id,';
+              $sql .= $is_sub ? ':parentMembershipId,' : 'DEFAULT,';
               $sql .=
-              'VALUES (
-                @id,';
-                $is_sub ? $sql .= ':parentMembershipId, ' : $sql .= 'DEFAULT, ';
-                $sql .=
-                ':memberType,
-                :isListed,
-                YEAR(CURDATE())
-              );
+              ':memberType,
+              :isListed,
+              YEAR(CURDATE())
+            );
 
-              SELECT LAST_INSERT_ID() INTO @annual_id;
+            SELECT LAST_INSERT_ID() INTO @annual_id;
 
-              INSERT INTO invoice (
-                annual_membership_id,
-                meals,
-                amount_paid
-              )
-              VALUES (
-                @annual_id,
-                :meals,';
-                isEmptyString($data['amountPaid']) ? $sql .= ' DEFAULT, ' : $sql .= ' :amountPaid, ';// Need date_paid logic
-                $sql .= 
-              ');';
-            }
-            $sql .=
-            'COMMIT;';
+            INSERT INTO invoice (
+              annual_membership_id,
+              meals,
+              amount_paid
+            )
+            VALUES (
+              @annual_id,
+              :meals,';
+              $sql .= isset($data['amountPaid']) && (string) $data['amountPaid'] !== '' ? ':amountPaid' : 'DEFAULT';// Need date_paid logic
+              $sql .= 
+            ');';
+          //}
+          $sql .=
+          'COMMIT;';
           }
 
         // Bind the parameters
@@ -721,9 +740,9 @@ class User
         $stmt->bindParam(':firstName', $this->firstName);
         $stmt->bindParam(':lastName', $this->lastName);
 
-        if(! isEmptyString($data['email1'])) {
-          $stmt->bindParam(':email1', $this->email1);
-        }
+        // if(isset($data['email1']) &&  (string) $data['email1'] !== '') {
+        //   $stmt->bindParam(':email1', $this->email1);
+        // }
 
         $stmt->bindParam(':email1', $this->email1);
         $stmt->bindParam(':email2', $this->email2);
@@ -738,9 +757,9 @@ class User
         $stmt->bindParam(':fax', $this->fax);
         $stmt->bindParam(':website', $this->website);
 
-        if(! isEmptyString($data['image'])) {
-          $stmt->bindParam(':image', $this->image);
-        }
+        // if(! isEmptyString($data['image'])) {
+        //   $stmt->bindParam(':image', $this->image);
+        // }
 
         if($is_sub) {
           $stmt->bindParam(':parentMembershipId', $this->parentMembershipId);
@@ -749,7 +768,7 @@ class User
         $stmt->bindParam(':memberType', $this->memberType);
         $stmt->bindParam(':meals', $this->meals);
 
-        if(! isEmptyString($data['amountPaid'])) {
+        if(isset($data['amountPaid']) &&  (string) $data['amountPaid'] !== '') {
           $stmt->bindParam(':amountPaid', $this->amountPaid);
         }
 
@@ -761,28 +780,28 @@ class User
         $stmt->bindParam(':boardMember', $this->boardMember);
         $stmt->bindParam(':isListed', $this->isListed);
         //If EDITING an existing user
-        if (isset($this->userId)) {
+        if (isset($this->user_id)) {
             // only update password if set
             if (isset($this->password)) {  
             $stmt->bindParam(':password', Hash::make($this->password));
             }
             //
-            $stmt->bindParam(':userId', $this->userId, PDO::PARAM_INT);//************** LOOK AT THIS MORE  */
+            $stmt->bindParam(':user_id', $this->user_id, PDO::PARAM_INT);//************** LOOK AT THIS MORE  */
 
         // If CREATING new user, and there is data in the field, INSERT password, else password will DEFAULT NULL
         } else { 
-            if( ! isEmptyString($data['password'])) {
-              $stmt->bindParam(':password', Hash::make($this->password));
+            if(isset($data['password']) &&  (string) $data['password'] !== '') {
+              //$stmt->bindParam(':password', Hash::make($this->password));
               //Notice: Only variables should be passed by reference 
-            // $stmt->bindValue(':password', Hash::make($this->password));
+              $stmt->bindValue(':password', Hash::make($this->password));
             }
         }
       
         $stmt->execute();
 
         // Set the ID if a new record
-        if ( ! isset($this->userId)) {
-            $this->userId = $db->lastInsertId();
+        if ( ! isset($this->user_id)) {
+            $this->user_id = $db->lastInsertId();
         }
 
         return true;
@@ -806,7 +825,7 @@ class User
    * 
    ******************************************************************************************************/                                                                                                          
   public function isEmptyString($str) {
-    return !(isset($str) && (string) $str !== ''); //(strlen(trim($str)) > 0)
+    return !isset($str) && (string) $str !== ''; //(strlen(trim($str)) > 0)
   }
 
 
@@ -855,7 +874,7 @@ class User
 
       $stmt = $db->prepare('INSERT INTO remembered_logins (token, user_id, expires_at) VALUES (:token, :userId, :expires_at)');
       $stmt->bindParam(':token', sha1($token));  // store a hash of the token
-      $stmt->bindParam(':userId', $this->userId, PDO::PARAM_INT);
+      $stmt->bindParam(':user_id', $this->user_id, PDO::PARAM_INT);
       $stmt->bindParam(':expires_at', date('Y-m-d H:i:s', $expiry));
       $stmt->execute();
 
@@ -919,7 +938,7 @@ class User
       $stmt = $db->prepare('UPDATE user SET password_reset_token = :token, password_reset_expires_at = :expires_at WHERE userId = :userId');
       $stmt->bindParam(':token', $hashed_token);
       $stmt->bindParam(':expires_at', $expires_at);
-      $stmt->bindParam(':userId', $this->userId, PDO::PARAM_INT);
+      $stmt->bindParam(':user_id', $this->user_id, PDO::PARAM_INT);
       $stmt->execute();
 
       if ($stmt->rowCount() == 1) {
@@ -956,7 +975,7 @@ class User
 
         $stmt = $db->prepare('UPDATE user SET password = :password, password_reset_token = NULL, password_reset_expires_at = NULL WHERE userId = :userId');
         $stmt->bindParam(':password', Hash::make($this->password));
-        $stmt->bindParam(':userId', $this->userId, PDO::PARAM_INT);
+        $stmt->bindParam(':user_id', $this->user_id, PDO::PARAM_INT);
         $stmt->execute();
 
         if ($stmt->rowCount() == 1) {
@@ -985,60 +1004,59 @@ class User
   public function isValid()// TODO: ADD PARAMS FOR VARIABLES TO MAKE VALIDATION EXCEPTIONS FOR SUBMEMBERS ETC
   {
     $this->errors = [];
+    var_dump($this->currentPage);
 
-    // 
-    // firstName *ADD REGEX 
-    // 
-    if ($this->firstName == '') {
-      $this->errors['firstName'] = 'Please enter a valid name';
+    if($this->currentPage == 'edit') {
+
     }
 
-    // 
-    // lastName *ADD REGEX
-    // 
-    if ($this->lastName == '') {
-        $this->errors['lastName'] = 'Please enter a valid name';
+    elseif($this->currentPage == 'new_first') {
+
+      if ($this->firstName == '') {
+        $this->errors['firstName'] = 'Please enter a valid first name';
       }
 
-    // email (this will be user's USERNAME)
-    
+      if ($this->lastName == '') {
+        $this->errors['lastName'] = 'Please enter a valid last name';
+      }
+
+      if (isset($this->email1) && (string) $this->email1 !== '') {
         if (filter_var($this->email1, FILTER_VALIDATE_EMAIL) === false) {
-        $this->errors['email1'] = 'Please enter a valid email address';
+          $this->errors['email1'] = 'Please enter a valid email address';
         }
-   
-    // // COMMENTED FOR TESTING******************************************************************************************************************
-    // // emailSecondary (this will be optional)
-    // //
-    // //if($this->email != ''){
-    //     if (filter_var($this->emailSecondary, FILTER_VALIDATE_EMAIL) === false) {
-    //         $this->errors['emailSecondary'] = 'Please enter a valid email address';
-    //     }
-    //// }
-    if ($this->_emailTaken($this->email1)) {
-    $this->errors['email1'] = 'That email address is already taken';
+      }
+
+      if (isset($this->email2) && (string) $this->email2 !== '') {
+        if (filter_var($this->email2, FILTER_VALIDATE_EMAIL) === false) {
+          $this->errors['email2'] = 'Please enter a valid email address';
+        }
+      }
+
+      // TODO: Validation for phone #s and amount paid   
+
+      if (isset($this->password) && (string) $this->password !== '') {
+
+        $password_error = $this->_validatePassword();
+
+        if ($password_error !== null) {
+        $this->errors['password'] = $password_error;
+        }
+      }
+
     }
 
-    // 
-    // password
-    //
-    $password_error = $this->_validatePassword();
-    if ($password_error !== null) {
-    $this->errors['password'] = $password_error;
+    elseif($this->currentPage == 'new_second') {
+
+    }
+
+    elseif($this->currentPage == 'new_third') {
+
+    }
+
+    else {
+
     }
     
-
-    // if ($this->emailExists($this->email)) {
-    //   $this->errors['email'] = 'That email address is already taken';
-    // }
-
-
-    // // 
-    // // password *ADD REGEX // 
-    // // 
-    // if (strlen($this->password) < 9) {
-    //   $this->errors['password'] = 'Please enter a longer password';
-    // }
-
     return empty($this->errors);
   }
 
@@ -1081,7 +1099,7 @@ class User
 
       if (isset($this->userId)) {  // existing user
 
-        if ($this->userId != $user->userId) {  // different user
+        if ($this->user_id != $user->user_id) {  // different user
           $isTaken = true;
         }
 

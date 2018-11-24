@@ -20,10 +20,10 @@ $remember_me = isset($_POST['remember_me']);
 // Process the submitted form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $email1 = $_POST['email1'];
+    //$email1 = $_POST['email1'];
 
-    if (Auth::getInstance()->login($email1, $_POST['password'], $remember_me)) {
-
+    if (Auth::getInstance()->login($_POST['email1'], $_POST['password'], $remember_me)) {
+      //echo('im logged in!');
     // Redirect to home page or intended page, if set
         if (isset($_SESSION['return_to'])) {
             $url = $_SESSION['return_to'];

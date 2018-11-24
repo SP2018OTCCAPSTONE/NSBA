@@ -22,9 +22,9 @@ include('includes/header.php');
 
   <dl>
     <dt>Name</dt>
-    <dd><?php echo htmlspecialchars($user->firstName); ?></dd>
+    <dd><?php echo htmlspecialchars($user->first_name); ?></dd>
     <dt>email address</dt>
-    <dd><?php echo htmlspecialchars($user->email); ?></dd>
+    <dd><?php echo htmlspecialchars($user->email_1); ?></dd>
   </dl>
     
 <?php include('includes/footer.php'); ?>

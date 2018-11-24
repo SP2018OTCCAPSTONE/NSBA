@@ -112,10 +112,10 @@ class Auth
   public function getCurrentUser()
   {
     if ($this->_currentUser === null) {
-      if (isset($_SESSION['userId'])) {
+      if (isset($_SESSION['user_id'])) {
 
         // Cache the object so that in a single request the data is loaded from the database only once.
-        $this->_currentUser = User::findByID($_SESSION['userId']);
+        $this->_currentUser = User::findByID($_SESSION['user_id']);
     } else {
 
         // Login from the remember me cookie if set
@@ -145,7 +145,7 @@ class Auth
    ****************************************************************************************/
   public function isAdmin()
   {
-    return $this->isLoggedIn() && $this->getCurrentUser()->isAdmin;
+    return $this->isLoggedIn() && $this->getCurrentUser()->is_admin;
   }
 
 
@@ -254,7 +254,7 @@ EOT;
   private function _loginUser($user) {
 
     // Store the user ID in the session
-    $_SESSION['userId'] = $user->userId;
+    $_SESSION['user_id'] = $user->user_id;
 
     // Regenerate the session ID to prevent session hijacking
     session_regenerate_id();
