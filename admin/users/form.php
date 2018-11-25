@@ -107,14 +107,14 @@ var mealAmt = <?php echo $meal; ?>;
 
   <!-- DISABLED - WIP -->
   <!--<form action="" method="POST" enctype="multipart/form-data">-->
-    <div>
+    <div id=imgDiv>
       <label for="image">Image Upload</label>
       <input id="image" name="sub" type="file" disabled="disabled" value="<?php echo htmlspecialchars($user->image); ?>" />
       <input type="submit" value="Upload File" name="image" disabled="disabled">
     </div>
   <!--</form>-->
 
-  <div>
+  <div id="memberTypeDiv">
     <label for="memberType">Membership Type</label>
     <select id="memberType" name="memberType" required="required">
       <option value="" selected disabled hidden>Select a Membership Type</option>
@@ -129,7 +129,7 @@ var mealAmt = <?php echo $meal; ?>;
     </select>
   </div>
 
-  <div>
+  <div id= "mealsDiv">
     <label for="meals">Pre-Paid Meals</label>
     <select id="meals" name="meals" required="required">
       <option value="0">No Pre-Paid Meals</option>
@@ -207,11 +207,13 @@ var mealAmt = <?php echo $meal; ?>;
   </div>
 
   <div>
-    <label for="notes">Notes</label>
+    <label for="notes" id="notes">Notes</label>
     <textarea id="notes" name="notes" value="<?php echo htmlspecialchars($user->notes); ?>"></textarea>
   </div>
 
-  <input type="submit" value="Save" class = "btn btn-light" />
-  <a class = "btn btn-light" href="/NSBA/admin/users<?php if (isset($user->user_id)) { echo '/show.php?user_id=' . $user->user_id; } ?>">Cancel</a>
+  <div>
+    <input type="submit" value="Save" class = "btn btn-light" />
+    <a class = "btn btn-light" id="cancelBtn" href="/NSBA/admin/users<?php if (isset($user->user_id)) { echo '/show.php?user_id=' . $user->user_id; } ?>">Cancel</a>
+  </div>
 </form>
 <script src="../../includes/utility.js"></script>

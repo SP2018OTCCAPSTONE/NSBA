@@ -61,7 +61,7 @@ include('../../includes/header.php');
   </li>
   <li>
     <?php if ($data['next'] === null): ?>
-      <a class = "btn btn-light disabled" href="#">Next</a>
+      <a id = "nextBtn" class = "btn btn-light disabled" href="#">Next</a>
     <?php else: ?>
       <a class = "btn btn-light" href="/NSBA/admin/users/?page=<?php echo $data['next']; ?>">Next</a>
     <?php endif; ?>
