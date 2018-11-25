@@ -40,6 +40,10 @@ class ComposerStaticInita6afd6a7e8470f256c90069808e5f077
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
+        'E' => 
+        array (
+            'EPDOStatement\\' => 14,
+        ),
         'D' => 
         array (
             'Dotenv\\' => 7,
@@ -87,6 +91,10 @@ class ComposerStaticInita6afd6a7e8470f256c90069808e5f077
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'EPDOStatement\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/noahheck/e_pdostatement/src',
         ),
         'Dotenv\\' => 
         array (

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5a53c65553b8789a9692700fe564c71",
+    "content-hash": "993bc35507ef143b02d143b341973d02",
     "packages": [
         {
             "name": "filp/whoops",
@@ -420,6 +420,61 @@
                 "time"
             ],
             "time": "2018-09-20T19:36:25+00:00"
+        },
+        {
+            "name": "noahheck/e_pdostatement",
+            "version": "2.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/noahheck/E_PDOStatement.git",
+                "reference": "11c8d4bb536893b190d6c6269fa53369144d156f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/noahheck/E_PDOStatement/zipball/11c8d4bb536893b190d6c6269fa53369144d156f",
+                "reference": "11c8d4bb536893b190d6c6269fa53369144d156f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.1.0",
+                "psr/log": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/dbunit": "*",
+                "phpunit/php-invoker": "*",
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EPDOStatement\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Noah Heck",
+                    "email": "myesain84@gmail.com",
+                    "homepage": "https://github.com/noahheck",
+                    "role": "Developer/Project Manager"
+                }
+            ],
+            "description": "Drop in replacement for default PDOStatement class allowing devs to view an interpolated version of a parameterized query",
+            "homepage": "https://github.com/noahheck/E_PDOStatement",
+            "keywords": [
+                "PDOStatement",
+                "debug",
+                "debugger",
+                "drop-in",
+                "pdo",
+                "query",
+                "replacement",
+                "sql"
+            ],
+            "time": "2018-04-12T03:45:34+00:00"
         },
         {
             "name": "paragonie/random_compat",

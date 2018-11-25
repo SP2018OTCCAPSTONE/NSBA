@@ -40,6 +40,8 @@ include('../../includes/header.php');
 <p><a href="/NSBA/admin/users">&laquo; Back To List Of Users</a></p>
 
 <dl>
+  <dt>Image</dt>
+  <dd><img src="../../images/<?php echo htmlspecialchars($user->image) ?>" alt="user image"></dd>
   <dt>Name</dt>
   <dd><?php echo htmlspecialchars($user->first_name.' '.$user->last_name); ?></dd>
   <dt>Email Address</dt>

@@ -27,7 +27,7 @@ include('../../includes/header.php');
 
 <h1>Members and Permissioned Users</h1>
 
-<p><a href="/NSBA/admin/users/new_first.php">Add A New User</a></p>
+<p><a href="/NSBA/admin/users/new_first.php" class="btn btn-light">Add A New User</a></p>
 
 <?php include('../../includes/sidebar.php'); ?>
 

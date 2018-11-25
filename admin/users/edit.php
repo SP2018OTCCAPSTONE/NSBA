@@ -21,9 +21,9 @@ $user = User::getByIDor404($_GET);
 
 // Process the submitted form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+  echo "<script>console.log('made it this far!')</script>";
   if ($user->save($_POST)) {
-
+    echo "<script>console.log('made it!')</script>";
     // Redirect to show page
     Util::redirect('/NSBA/admin/users/show.php?user_id=' . $user->user_id);
   }

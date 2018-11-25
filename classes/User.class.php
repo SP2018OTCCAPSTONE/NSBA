@@ -29,7 +29,7 @@ class User
   public static function paginate($page)
   {
     $data = [];
-    $users_per_page = 50;
+    $users_per_page = 40;
 
     // Calculate the total number of pages
     $total_users = static::_getTotalUsers();
@@ -580,7 +580,7 @@ class User
             first_name = :firstName, 
             last_name = :lastName,';
             // only update password if set
-            if (isset($this->password) && $this->password !== '') { 
+            if (isset($this->password) && (string) $this->password !== '') { 
             $sql .= '
             password = :password';
             }
@@ -739,11 +739,11 @@ class User
         $stmt->bindParam(':firstName', $this->firstName);
         $stmt->bindParam(':lastName', $this->lastName);
 
-        // if(isset($data['email1']) &&  (string) $data['email1'] !== '') {
-        //   $stmt->bindParam(':email1', $this->email1);
-        // }
+        if(isset($data['email1']) &&  (string) $data['email1'] !== '') {
+          $stmt->bindParam(':email1', $this->email1);
+        }
 
-        $stmt->bindParam(':email1', $this->email1);
+        //$stmt->bindParam(':email1', $this->email1);
         $stmt->bindParam(':email2', $this->email2);
         $stmt->bindParam(':line1', $this->line1);
         $stmt->bindParam(':line2', $this->line2);
@@ -778,6 +778,7 @@ class User
         $stmt->bindParam(':hasPermissions', $this->hasPermissions);
         $stmt->bindParam(':boardMember', $this->boardMember);
         $stmt->bindParam(':isListed', $this->isListed);
+
         //If EDITING an existing user
         if (isset($this->user_id)) {
             // only update password if set
@@ -798,6 +799,8 @@ class User
       
         $stmt->execute();
 
+        echo "<script>console.log(".json_encode($stmt->fullQuery).")</script>";
+        
         // Set the ID if a new record
         if ( ! isset($this->user_id)) {
             $this->user_id = $db->lastInsertId();

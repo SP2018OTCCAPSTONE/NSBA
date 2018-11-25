@@ -18,7 +18,7 @@ Auth::getInstance()->requireAdmin();
 
 $user = new User();
 $type = $_GET['type'];
-$id = $_GET['id'];
+$id = $_GET['id'];// This is the paying corporate member user id
 
 // Process the submitted form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
         Util::redirect('/NSBA/admin/users/new_third.php?id=' . $id);
     }
-    Util::redirect('/NSBA/admin/users/show.php?userId=' . $id);
+    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $id);
   } 
 }
 
@@ -38,7 +38,7 @@ include('../../includes/header.php');
 
 ?>
 
-<h1>Create New User</h1>
+<h1>Create 2nd Corporate New User</h1>
 
 <?php include('form.php'); ?>
     

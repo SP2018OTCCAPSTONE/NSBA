@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $user->delete();
 
   // Redirect to index page
-  Util::redirect('/NSBA/admin/users');//**************************NSBA************************************************************* */
+  Util::redirect('/NSBA/admin/users');
 }
 
 
@@ -39,7 +39,7 @@ include('../../includes/header.php');
   <p>Are you sure?</p>
 
   <input type="submit" value="Delete" class = "btn btn-light"/>
-  <a class = "btn btn-light" href="/NSBA/admin/users/delete.php?userId=<?php echo $user->userId; ?>">Cancel</a><!--*************************NSBA-->
+  <a class = "btn btn-light" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>">Cancel</a>
 </form>
 
     

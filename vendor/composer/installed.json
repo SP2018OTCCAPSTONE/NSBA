@@ -429,6 +429,63 @@
         ]
     },
     {
+        "name": "noahheck/e_pdostatement",
+        "version": "2.3.1",
+        "version_normalized": "2.3.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/noahheck/E_PDOStatement.git",
+            "reference": "11c8d4bb536893b190d6c6269fa53369144d156f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/noahheck/E_PDOStatement/zipball/11c8d4bb536893b190d6c6269fa53369144d156f",
+            "reference": "11c8d4bb536893b190d6c6269fa53369144d156f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.1.0",
+            "psr/log": "^1.0"
+        },
+        "require-dev": {
+            "phpunit/dbunit": "*",
+            "phpunit/php-invoker": "*",
+            "phpunit/phpunit": "4.8.*"
+        },
+        "time": "2018-04-12T03:45:34+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "EPDOStatement\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Noah Heck",
+                "email": "myesain84@gmail.com",
+                "homepage": "https://github.com/noahheck",
+                "role": "Developer/Project Manager"
+            }
+        ],
+        "description": "Drop in replacement for default PDOStatement class allowing devs to view an interpolated version of a parameterized query",
+        "homepage": "https://github.com/noahheck/E_PDOStatement",
+        "keywords": [
+            "PDOStatement",
+            "debug",
+            "debugger",
+            "drop-in",
+            "pdo",
+            "query",
+            "replacement",
+            "sql"
+        ]
+    },
+    {
         "name": "paragonie/random_compat",
         "version": "v2.0.17",
         "version_normalized": "2.0.17.0",
