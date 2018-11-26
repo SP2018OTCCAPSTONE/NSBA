@@ -17,24 +17,27 @@ $current = "new_first";
 
 $user = new User();
 
+
 // Process the submitted form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // TODO: LOGIC CODE HERE TO GO TO 2ND/3RD FORMS FOR CORP2/CORP3 ASSOCIATE MEMBERS
   if ($user->save($_POST)) {
 
     $user->user_id = User::getParentId();
+    $parentMembershipId = User::getParentMembershipId();// Put this in a hidden <input>?
     // Redirect to new submember page if Corp2 or Corp3
     if (isset($_POST['memberType']) && $_POST['memberType'] == '6' || $_POST['memberType'] == '7') {
-      $data = array(
+      $raw = array(
         'id' => $user->user_id,
+        'parent' => $parentMembershipId,
         'type' => $_POST['memberType']
       );
-      $data = http_build_query($data);
-      // Util::redirect('/NSBA/admin/users/new_sub.php?memberType=' . $user->memberType);
-      Util::redirect('/NSBA/admin/users/new_second.php?$data');
+      $data = http_build_query(array('dataArray' => $raw));
+      $data = urlencode($data);
+      Util::redirect('/NSBA/admin/users/new_second.php?data='.$data.'');
     }
     // Else redirect to show page
-    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $user->user_id); //$_POST['user_id']
+    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $user->user_id);
   }
 }
 

@@ -573,15 +573,13 @@ class User
           
             // Prepare the SQL
             $sql = "BEGIN; 
-            UPDATE user SET first_name = :firstName, last_name = :lastName, password = :password, is_enabled = :isEnabled, is_admin = :isAdmin, has_permissions = :hasPermissions, board_member = :boardMember, referred_by = :referredBy, notes = :notes WHERE user_id = :user_id; 
+            UPDATE user SET first_name = :firstName, last_name = :lastName,"; if(isset($data['password']) && $data['password'] !== '') { $sql .= 'password = :password,';}; $sql .= " is_enabled = :isEnabled, is_admin = :isAdmin, has_permissions = :hasPermissions, board_member = :boardMember, referred_by = :referredBy, notes = :notes WHERE user_id = :user_id; 
             UPDATE user_data SET email_1 = :email1, email_2 = :email2, line_1 = :line1, line_2 = :line2, city = :city, state = :state, zip = :zip, company = :company, work_phone = :workPhone, cell_phone = :cellPhone, fax = :fax, website = :website, image = DEFAULT WHERE user_id = :user_id; 
             UPDATE annual_membership SET member_type_id = :memberType, is_listed = :isListed  WHERE user_id = :user_id AND annum = YEAR(CURDATE()); 
             SELECT @annual_id := annual_membership_id FROM annual_membership WHERE user_id = :user_id AND annum = YEAR(CURDATE()); 
             UPDATE invoice SET meals = :meals, amount_paid = :amountPaid WHERE annual_membership_id = @annual_id; 
             COMMIT;";
 
-            //echo "<script>console.log('I made it this far!');</script>";
-            
         // If not editing existing user, INSERT new user
         } else {
             $sql = 
@@ -748,15 +746,10 @@ class User
       
         $stmt->execute();
 
-        // // Set the ID if a new record
-        // if (! isset($this->user_id)) {
-        //   $this->user_id = User::getParentId();
-        // }
-        
-        // // Set the ID if a new record
-        // if ( ! isset($this->user_id)) {
-        //     $this->user_id = $id;
-        // }
+        $file = '../../debug_log/interpolated_queries.txt';
+        $qry = serialize($stmt->fullQuery);
+        file_put_contents($file, $qry);
+        //$qry = json_decode(file_get_contents($file), TRUE);
 
         return true;
 

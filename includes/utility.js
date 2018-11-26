@@ -1,11 +1,21 @@
 
+/**
+ * 
+ */
 $(function() {setMemberType(Number(membershipType))});
 $(function() {setMeals(mealAmt)});
 $(function() {calculateAmtDue(priceArray)});
 
+/**
+ * 
+ */
 document.getElementById("memberType").onchange = function(){calculateAmtDue(priceArray)};
 document.getElementById("meals").onchange = function(){calculateAmtDue(priceArray)};
 
+/**
+ * 
+ * @param {*} membershipType 
+ */
 function setMemberType(membershipType){
     var m = document.getElementById("memberType");
     var i;
@@ -16,6 +26,10 @@ function setMemberType(membershipType){
     }
 }
 
+/**
+ * 
+ * @param {*} mealAmt 
+ */
 function setMeals(mealAmt){
     var m = document.getElementById("meals");
     var i;
@@ -26,6 +40,10 @@ function setMeals(mealAmt){
     }
 }
 
+/**
+ * 
+ * @param {*} priceArray 
+ */
 function calculateAmtDue(priceArray) {
     var prices = JSON.parse(JSON.stringify(priceArray));
     var due = document.getElementById("renewalAmount");
@@ -43,3 +61,5 @@ function calculateAmtDue(priceArray) {
         due.readOnly = true;
     }
 }
+
+

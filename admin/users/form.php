@@ -13,8 +13,6 @@ $prices = User::getMemberTypeData();
 $json_array = json_encode($prices);
 $type = isset($user->member_type_id) ? $user->member_type_id : "0";
 $meal = isset($user->meals) ? $user->meals : "0";
-// echo($type);
-// echo($meal);
 ?>
 
 <script>
@@ -117,15 +115,19 @@ var mealAmt = <?php echo $meal; ?>;
   <div id="memberTypeDiv">
     <label for="memberType">Membership Type</label>
     <select id="memberType" name="memberType" required="required">
-      <option value="" selected disabled hidden>Select a Membership Type</option>
-      <option value="1">Non-Member User</option>
-      <option value="2">Gratis</option>
-      <option value="3">Individual</option>
-      <option value="4">Retired</option>
-      <option value="5">Neighborhood Association</option>
-      <option value="6">Corporate 2</option>
-      <option value="7">Corporate 3</option>
-      <option value="8">Corporate Associate (Sub-Membership)</option>
+      <?php if ($current == 'new_second' || $current == 'new_second'): ?>
+        <option value="8" selected>Corporate Associate (Sub-Membership)</option>
+      <?php else: ?>
+        <option value="" selected disabled hidden>Select a Membership Type</option>
+        <option value="1">Non-Member User</option>
+        <option value="2">Gratis</option>
+        <option value="3">Individual</option>
+        <option value="4">Retired</option>
+        <option value="5">Neighborhood Association</option>
+        <option value="6">Corporate 2</option>
+        <option value="7">Corporate 3</option>
+        <option value="8">Corporate Associate (Sub-Membership)</option>
+      <?php endif ?>
     </select>
   </div>
 

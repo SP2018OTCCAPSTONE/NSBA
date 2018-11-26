@@ -17,14 +17,22 @@ Auth::getInstance()->requireAdmin();
 
 
 $user = new User();
-$type = $_GET['type'];
-$id = $_GET['id'];// This is the paying corporate member user id
+// $type = $_GET['type'];
+// $id = $_GET['id'];// This is the paying corporate member user id
+parse_str($_GET['data']);
+$type = $dataArray['type'];
+$id = $dataArray['id'];
+$parent = $dataArray['parent'];
+echo $type;
+echo $id;
+echo $parent;// Put this in a hidden <input>?
+
 
 // Process the submitted form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // LOGIC CODE HERE TO GO TO 2ND/3RD FORMS FOR CORP2/CORP3 ASSOCIATE MEMBERS
   if ($user->save($_POST)) {
-    if (isset($_POST['memberType']) && $_POST['memberType'] == '7') { 
+    if ($type == '7') { //isset($_POST['memberType']) && $_POST['memberType'] == '7'
     
         Util::redirect('/NSBA/admin/users/new_third.php?id=' . $id);
     }
