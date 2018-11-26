@@ -21,10 +21,12 @@ $user = new User();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // TODO: LOGIC CODE HERE TO GO TO 2ND/3RD FORMS FOR CORP2/CORP3 ASSOCIATE MEMBERS
   if ($user->save($_POST)) {
+
+    $user->user_id = User::getParentId();
     // Redirect to new submember page if Corp2 or Corp3
     if (isset($_POST['memberType']) && $_POST['memberType'] == '6' || $_POST['memberType'] == '7') {
       $data = array(
-        'id' => $user->userId,
+        'id' => $user->user_id,
         'type' => $_POST['memberType']
       );
       $data = http_build_query($data);
@@ -32,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       Util::redirect('/NSBA/admin/users/new_second.php?$data');
     }
     // Else redirect to show page
-    Util::redirect('/NSBA/admin/users/show.php?userId=' . $user->userId);
+    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $user->user_id); //$_POST['user_id']
   }
 }
 

@@ -22,7 +22,6 @@ class Database
   {
     if (static::$_db === NULL) {
 
-        // EXPERIMENTS
         $host = getenv('DB_HOST');
         $port = getenv('DB_PORT');
         $database = getenv('DB_DATABASE');
@@ -33,7 +32,7 @@ class Database
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES   => false,
+            //PDO::ATTR_EMULATE_PREPARES   => false,
         ];
         static::$_db = new PDO($dsn, $username, $password, $options);
 

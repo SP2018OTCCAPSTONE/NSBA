@@ -567,68 +567,18 @@ class User
 
         // if (isset($this->user_id)) {
         if ($this->currentPage == 'edit') {
-          // $user_id = $this->user_id;
+          $user_id = $this->user_id;
           // echo($user_id);
           //TODO: Add logic for editing parent_id
           
             // Prepare the SQL
-            $sql = '
-            BEGIN;
-
-            UPDATE user 
-            SET 
-            first_name = :firstName, 
-            last_name = :lastName,';
-            // only update password if set
-            if (isset($this->password) && (string) $this->password !== '') { 
-            $sql .= '
-            password = :password';
-            }
-            $sql .= '
-            is_enabled = :isEnabled, 
-            is_admin = :isAdmin,
-            has_permissions = :hasPermissions
-            board_member = :boardMember,
-            referred_by = :referredBy,
-            notes = :notes
-            WHERE user_id = :user_id;
-
-            UPDATE user_data
-            SET
-            email_1 = '; $sql .= isset($this->email1) && (string) $this->email1 !== '' ? ':email1' : 'DEFAULT';
-            $sql .= '
-            email_2 = :email2,
-            line_1 = :line1,
-            line_2 = :line2,
-            city = :city,
-            state = :state,
-            zip = :zip,
-            company = :company,
-            work_phone = :workPhone,
-            cell_phone = :cellPhone,
-            fax = :fax,
-            website = :website,
-            image = DEFAULT'; // Temporary fix
-            $sql .= '
-            WHERE user_id = :user_id;
-
-            UPDATE annual_membership
-            SET
-            member_type_id = :memberType,
-            is_listed = :isListed 
-            WHERE user_id = :user_id AND annum = YEAR(CURDATE());
-            
-            SELECT @annual_id := annual_membership_id 
-            FROM annual_membership 
-            WHERE user_id = :user_id AND annum = YEAR(CURDATE());
-
-            UPDATE invoice
-            SET
-            meals = :meals,
-            amount_paid = :amountPaid
-            WHERE annual_membership_id = @annual_id;
-
-            COMMIT;';
+            $sql = "BEGIN; 
+            UPDATE user SET first_name = :firstName, last_name = :lastName, password = :password, is_enabled = :isEnabled, is_admin = :isAdmin, has_permissions = :hasPermissions, board_member = :boardMember, referred_by = :referredBy, notes = :notes WHERE user_id = :user_id; 
+            UPDATE user_data SET email_1 = :email1, email_2 = :email2, line_1 = :line1, line_2 = :line2, city = :city, state = :state, zip = :zip, company = :company, work_phone = :workPhone, cell_phone = :cellPhone, fax = :fax, website = :website, image = DEFAULT WHERE user_id = :user_id; 
+            UPDATE annual_membership SET member_type_id = :memberType, is_listed = :isListed  WHERE user_id = :user_id AND annum = YEAR(CURDATE()); 
+            SELECT @annual_id := annual_membership_id FROM annual_membership WHERE user_id = :user_id AND annum = YEAR(CURDATE()); 
+            UPDATE invoice SET meals = :meals, amount_paid = :amountPaid WHERE annual_membership_id = @annual_id; 
+            COMMIT;";
 
             //echo "<script>console.log('I made it this far!');</script>";
             
@@ -662,7 +612,7 @@ class User
             );
 
             SELECT LAST_INSERT_ID() INTO @id;
-
+           
             INSERT INTO user_data (
               user_id,
               email_1,
@@ -717,7 +667,7 @@ class User
             );
 
             SELECT LAST_INSERT_ID() INTO @annual_id;
-
+            
             INSERT INTO invoice (
               annual_membership_id,
               meals,
@@ -729,7 +679,6 @@ class User
               $sql .= isset($data['amountPaid']) && (string) $data['amountPaid'] !== '' ? ':amountPaid' : 'DEFAULT';// Need date_paid logic
               $sql .= 
             ');';
-          //}
           $sql .=
           'COMMIT;';
           }
@@ -779,11 +728,11 @@ class User
         $stmt->bindParam(':boardMember', $this->boardMember);
         $stmt->bindParam(':isListed', $this->isListed);
 
-        //If EDITING an existing user
+        // If EDITING an existing user
         if (isset($this->user_id)) {
             // only update password if set
             if (isset($this->password)) {  
-            $stmt->bindParam(':password', Hash::make($this->password));
+            $stmt->bindValue(':password', Hash::make($this->password));//***************************************** */
             }
             //
             $stmt->bindParam(':user_id', $this->user_id, PDO::PARAM_INT);//************** LOOK AT THIS MORE  */
@@ -799,12 +748,15 @@ class User
       
         $stmt->execute();
 
-        echo "<script>console.log(".json_encode($stmt->fullQuery).")</script>";
+        // // Set the ID if a new record
+        // if (! isset($this->user_id)) {
+        //   $this->user_id = User::getParentId();
+        // }
         
-        // Set the ID if a new record
-        if ( ! isset($this->user_id)) {
-            $this->user_id = $db->lastInsertId();
-        }
+        // // Set the ID if a new record
+        // if ( ! isset($this->user_id)) {
+        //     $this->user_id = $id;
+        // }
 
         return true;
 
@@ -818,18 +770,6 @@ class User
 
     return false;
   }
-
- 
-  /******************************************************************************************************
-   * Determines if the supplied string is an empty string. 
-   * 
-   * 
-   * 
-   ******************************************************************************************************/                                                                                                          
-  public function isEmptyString($str) {
-    return !isset($str) && (string) $str !== ''; //(strlen(trim($str)) > 0)
-  }
-
 
   /***************************************************************************************************** 
   * Retrieves the last parent_membership_id inserted from DB
@@ -845,6 +785,32 @@ class User
         'SELECT annual_membership_id
         FROM annual_membership
         ORDER BY annual_membership_id DESC
+        LIMIT 1;'
+      )->fetchColumn(); 
+      
+    } catch(PDOException $exception) {
+
+      error_log($exception->getMessage());
+      $parent = 0;//NULL?
+    }
+
+    return $parent;
+  }
+
+  /***************************************************************************************************** 
+  * Retrieves the last user_id inserted from DB
+  *
+  *
+  ******************************************************************************************************/
+  public function getParentId() {
+    try {
+
+      $db = Database::getInstance();
+      //$parent = (int) $db->query('SELECT COUNT(*) FROM user')->fetchColumn();
+      $parent = (int) $db->query(
+        'SELECT user_id
+        FROM user
+        ORDER BY user_id DESC
         LIMIT 1;'
       )->fetchColumn(); 
       
