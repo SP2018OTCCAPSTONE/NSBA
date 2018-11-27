@@ -535,12 +535,15 @@ class User
     $this->referredBy = $data['referredBy'];
     $this->currentPage = $data['currentPage'];
 
+    $this->first = "Member";
+    $this->last = "Associate";
+
     $is_non = isset($data['memberType']) && $data['memberType'] == '0';
     $is_sub = isset($data['memberType']) && $data['memberType'] == '8';
     
     //If user is a sub-member get the last parent_membership_id inserted in DB
     if ($is_sub) {
-      $this->parentMembershipId = getParentMembershipId();
+      $this->parentMembershipId = User::getParentMembershipId();
     }
 
     // If EDITING an existing user, only validate and update the password if a value provided
@@ -596,9 +599,9 @@ class User
               referred_by,
               notes
             )
-            VALUES (
-              :firstName, 
-              :lastName,';
+            VALUES (';
+              $sql .= isset($data['firstName']) && (string) $data['firstName'] !== '' ? ':firstName,' : 'DEFAULT,';
+              $sql .= isset($data['lastName']) && (string) $data['lastName'] !== '' ? ':lastName,' : 'DEFAULT,';
               $sql .= isset($data['password']) && (string) $data['password'] !== '' ? ':password,' : 'DEFAULT,';
               $sql .= 
               ':isEnabled, 
@@ -630,7 +633,6 @@ class User
             VALUES (
               @id,';
               $sql .= isset($data['email1']) && (string) $data['email1'] !== '' ? ':email1,' : 'DEFAULT,';
-              //$sql .= isEmptyString($data['email1']) ? ' DEFAULT, ' : ' :email1, ';
               $sql .=  
               ':email2, 
               :line1,
@@ -683,8 +685,14 @@ class User
 
         // Bind the parameters
         $stmt = $db->prepare($sql);
-        $stmt->bindParam(':firstName', $this->firstName);
-        $stmt->bindParam(':lastName', $this->lastName);
+        if(isset($data['firstName']) &&  (string) $data['firstName'] !== '') {
+          $stmt->bindParam(':firstName', $this->firstName);
+        }
+        if(isset($data['lastName']) &&  (string) $data['lastName'] !== '') {
+          $stmt->bindParam(':lastName', $this->lastName);
+        }
+        // $stmt->bindParam(':firstName', $this->firstName);
+        // $stmt->bindParam(':lastName', $this->lastName);
 
         if(isset($data['email1']) &&  (string) $data['email1'] !== '') {
           $stmt->bindParam(':email1', $this->email1);
@@ -965,7 +973,7 @@ class User
   public function isValid()// TODO: ADD PARAMS FOR VARIABLES TO MAKE VALIDATION EXCEPTIONS FOR SUBMEMBERS ETC
   {
     $this->errors = [];
-    var_dump($this->currentPage);
+    //var_dump($this->currentPage);
     
 
     if($this->currentPage == 'edit') {
@@ -974,13 +982,13 @@ class User
 
     elseif($this->currentPage == 'new_first') {
 
-      if ($this->firstName == '') {
-        $this->errors['firstName'] = 'Please enter a valid first name';
-      }
+      // if ($this->firstName == '') {
+      //   $this->errors['firstName'] = 'Please enter a valid first name';
+      // }
 
-      if ($this->lastName == '') {
-        $this->errors['lastName'] = 'Please enter a valid last name';
-      }
+      // if ($this->lastName == '') {
+      //   $this->errors['lastName'] = 'Please enter a valid last name';
+      // }
 
       if (isset($this->email1) && (string) $this->email1 !== '') {
         if (filter_var($this->email1, FILTER_VALIDATE_EMAIL) === false) {

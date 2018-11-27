@@ -1,7 +1,76 @@
-s:870:"BEGIN; 
-            UPDATE user SET first_name = 'Test13', last_name = 'AAccount', is_enabled = '', is_admin = '', has_permissions = '', board_member = '', referred_by = '', notes = '' WHERE user_id = 140; 
-            UPDATE user_data SET email_1 = 'test13@account.com', email_2 = '', line_1 = '', line_2 = '', city = 'Spfld', state = '', zip = '', company = 'Company', work_phone = '', cell_phone = '', fax = '', website = '', image = DEFAULT WHERE user_id = :user_id; 
-            UPDATE annual_membership SET member_type_id = '1', is_listed = ''  WHERE user_id = :user_id AND annum = YEAR(CURDATE()); 
-            SELECT @annual_id := annual_membership_id FROM annual_membership WHERE user_id = :user_id AND annum = YEAR(CURDATE()); 
-            UPDATE invoice SET meals = '0', amount_paid = '0.00' WHERE annual_membership_id = @annual_id; 
-            COMMIT;";
+s:1774:"BEGIN;
+
+            INSERT INTO user (
+              first_name, 
+              last_name,
+              password,
+              is_enabled, 
+              is_admin,
+              has_permissions,
+              board_member,
+              referred_by,
+              notes
+            )
+            VALUES (DEFAULT,DEFAULT,DEFAULT,'', 
+              '',
+              '',
+              '',
+              '',
+              ''
+            );
+
+            SELECT LAST_INSERT_ID() INTO @id;
+           
+            INSERT INTO user_data (
+              user_id,
+              email_1,
+              email_2,
+              line_1,
+              line_2,
+              city,
+              state,
+              zip,
+              company,
+              work_phone,
+              cell_phone,
+              fax,
+              website,
+              image
+            )
+            VALUES (
+              @id,DEFAULT,'', 
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              DEFAULT);
+
+            INSERT INTO annual_membership (
+              user_id,
+              parent_membership_id,
+              member_type_id,
+              is_listed,
+              annum
+            )
+            VALUES (
+              @id,'136','8',
+              '',
+              YEAR(CURDATE())
+            );
+
+            SELECT LAST_INSERT_ID() INTO @annual_id;
+            
+            INSERT INTO invoice (
+              annual_membership_id,
+              meals,
+              amount_paid
+            )
+            VALUES (
+              @annual_id,
+              '0',DEFAULT);COMMIT;";

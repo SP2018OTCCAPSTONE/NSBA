@@ -13,19 +13,19 @@ Auth::getInstance()->requireLogin();
 // Require the user to be an administrator before they can see this page.
 Auth::getInstance()->requireAdmin();
 
+$current = "admin";
+
+$yr = date('Y');
 
 // Get the paginated data
 $data = User::paginate(isset($_GET['page']) ? $_GET['page'] : 1);
 
-
-
 // Show the page header, then the rest of the HTML
 include('../../includes/header.php');
 
-
 ?>
 
-<h1>Current Members and Permissioned Users</h1>
+<h1>Current Membership <?php echo date('Y') ?></h1>
 
 <p><a href="/NSBA/admin/users/new_first.php" class="btn btn-light">Add A New User</a></p>
 

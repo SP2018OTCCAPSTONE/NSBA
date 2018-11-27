@@ -5,10 +5,14 @@
                 Search By Membership Type
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Corporate</a>
+                <a class="dropdown-item" href="#">Non-Member</a>
+                <a class="dropdown-item" href="#">Gratis</a>
                 <a class="dropdown-item" href="#">Individual</a>
                 <a class="dropdown-item" href="#">Neighborhood</a>
                 <a class="dropdown-item" href="#">Retired</a>
+                <a class="dropdown-item" href="#">Corporate 2</a>
+                <a class="dropdown-item" href="#">Corporate 3</a>
+                <a class="dropdown-item" href="#">Associate</a>
             </div>
         </div>
 
@@ -28,21 +32,24 @@
                 Search By Year
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "SearchByYear">
-                <a class="dropdown-item" href="#">2016</a>
-                <a class="dropdown-item" href="#">2017</a>
-                <a class="dropdown-item" href="#">2018</a>
-                <a class="dropdown-item" href="#">2019</a>
-                <a class="dropdown-item" href="#">2020</a>
+                <a class="dropdown-item" href="#"><?php echo $yr - 6 ?></a>
+                <a class="dropdown-item" href="#"><?php echo $yr - 5 ?></a>
+                <a class="dropdown-item" href="#"><?php echo $yr - 4 ?></a>
+                <a class="dropdown-item" href="#"><?php echo $yr - 3 ?></a>
+                <a class="dropdown-item" href="#"><?php echo $yr - 2 ?></a>
+                <a class="dropdown-item" href="#"><?php echo $yr - 1 ?></a>
+                <a class="dropdown-item" href="#"><?php echo $yr ?></a>
+                <a class="dropdown-item" href="#"><?php echo $yr + 1 ?></a>
             </div>
         </div>
 
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="SearchByPaid" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Search By Paid / Unpaid
+                Search By Current/Inactive
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "SearchByPaid">
-                <a class="dropdown-item" href="#">Paid</a>
-                <a class="dropdown-item" href="#">Unpaid</a>
+                <a class="dropdown-item" href="#">Current Membership</a>
+                <a class="dropdown-item" href="#">Inactive Membership</a>
             </div>
         </div>
     </div>
