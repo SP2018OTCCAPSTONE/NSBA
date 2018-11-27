@@ -1,7 +1,8 @@
 
     <div id = "searchByForm">
+        <h1>Reports & Utilities</h1>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="SearchByMemType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-light dropdown-toggle" type="button" id="SearchByMemType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Search By Membership Type
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -17,7 +18,7 @@
         </div>
 
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="SearchByName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-light dropdown-toggle" type="button" id="SearchByName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Search By Name
             </button>
             <div class= "dropdown-menu p-5" aria-labelledby="dropdownMenuButton">
@@ -28,7 +29,7 @@
         </div>
 
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="SearchByYear" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-light dropdown-toggle" type="button" id="SearchByYear" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Search By Year
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "SearchByYear">
@@ -44,7 +45,7 @@
         </div>
 
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="SearchByPaid" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-light dropdown-toggle" type="button" id="SearchByPaid" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Search By Current/Inactive
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "SearchByPaid">
@@ -52,4 +53,17 @@
                 <a class="dropdown-item" href="#">Inactive Membership</a>
             </div>
         </div>
+        
+        <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle" type="button" id="SearchByPaid" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Utilities
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "SearchByPaid">
+                <a class="dropdown-item" href="#">Utility</a>
+                <a class="dropdown-item" href="#">Utility</a>
+            </div>
+        </div>
+        
     </div>
+    
+    

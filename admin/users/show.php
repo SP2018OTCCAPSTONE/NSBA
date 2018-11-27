@@ -83,12 +83,12 @@ $bullet = mb_convert_encoding('&#8226;', 'UTF-8', 'HTML-ENTITIES');
 
 <ul>
     
-  <li><a class = "btn btn-light" href="/NSBA/admin/users/edit.php?user_id=<?php echo $user->user_id; ?>">Edit</a></li>
+  <li><a class = "btn btn-warning" href="/NSBA/admin/users/edit.php?user_id=<?php echo $user->user_id; ?>">Edit</a></li>
   <li>
     <?php if ($user->user_id == Auth::getInstance()->getCurrentUser()->user_id): ?>
-      <a class = "btn btn-light disabled" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>">Delete</a>
+      <a class = "btn btn-danger disabled" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>">Delete</a>
     <?php else: ?>
-      <a class = "btn btn-light" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>">Delete</a>
+      <a class = "btn btn-danger" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>">Delete</a>
     <?php endif; ?>
   </li>
 </ul>

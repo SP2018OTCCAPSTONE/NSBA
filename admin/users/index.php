@@ -27,7 +27,7 @@ include('../../includes/header.php');
 
 <h1>Current Membership <?php echo date('Y') ?></h1>
 
-<p><a href="/NSBA/admin/users/new_first.php" class="btn btn-light">Add A New User</a></p>
+<p><a href="/NSBA/admin/users/new_first.php" class="btn btn-warning">Add A New User</a></p>
 
 <?php include('../../includes/sidebar.php'); ?>
 
@@ -54,16 +54,16 @@ include('../../includes/header.php');
   <li>
     <?php if ($data['previous'] === null): ?>
       <!--Previous-->
-      <a class = "btn btn-light disabled" href="#">Previous</a>
+      <a class = "btn btn-success disabled" href="#">Previous</a>
     <?php else: ?>
-      <a class = "btn btn-light" href="/NSBA/admin/users/?page=<?php echo $data['previous']; ?>">Previous</a>
+      <a class = "btn btn-success" href="/NSBA/admin/users/?page=<?php echo $data['previous']; ?>">Previous</a>
     <?php endif; ?>
   </li>
   <li>
     <?php if ($data['next'] === null): ?>
-      <a id = "nextBtn" class = "btn btn-light disabled" href="#">Next</a>
+      <a id = "nextBtn" class = "btn btn-success disabled" href="#">Next</a>
     <?php else: ?>
-      <a class = "btn btn-light" href="/NSBA/admin/users/?page=<?php echo $data['next']; ?>">Next</a>
+      <a class = "btn btn-success" href="/NSBA/admin/users/?page=<?php echo $data['next']; ?>">Next</a>
     <?php endif; ?>
   </li>
 </ul>

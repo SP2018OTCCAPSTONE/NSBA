@@ -214,8 +214,8 @@ var mealAmt = <?php echo $meal; ?>;
   </div>
 
   <div>
-    <input type="submit" value="Save" class = "btn btn-light" />
-    <a class = "btn btn-light" id="cancelBtn" href="/NSBA/admin/users<?php if (isset($user->user_id)) { echo '/show.php?user_id=' . $user->user_id; } ?>">Cancel</a>
+    <input type="submit" value="Save" class = "btn btn-success" />
+    <a class = "btn btn-warning" id="cancelBtn" href="/NSBA/admin/users<?php if (isset($user->user_id)) { echo '/show.php?user_id=' . $user->user_id; } ?>">Cancel</a>
   </div>
 </form>
 <script src="../../includes/utility.js"></script>

@@ -212,10 +212,9 @@ class User
     }
   }
 
-  
 
   /****************************************************************************************************
-   * See if an user record already exists with the specified email address ****WHERE DOES THIS GO??
+   * See if an user record already exists with the specified email address 
    *
    * @param string $email  email address
    * @return boolean
@@ -238,9 +237,10 @@ class User
     }
   }
 
+
   /*******************************************************************************************************        
-   * Signup a new user //                                                                                         
-   * ************CREATE A FUNCTION FOR ADMIN TO ADD ADDITIONAL DATA TO OTHER TABLES AND "UNFLAG" USER*******      
+   * Signup a new user                                                                                        
+   *    
    *                                                                                                              
    *
    * @param array $data  POST data
@@ -291,7 +291,6 @@ class User
     }
     return $user;
   }
-
 
 
   /*******************************************************************************************************
@@ -373,6 +372,7 @@ class User
     }
   }
 
+
   /*****************************************************************************************************
    * Deleted expired remember me tokens
    *
@@ -397,6 +397,7 @@ class User
 
     return 0;
   }
+
 
   /*********************************************************************************************************
    * Find the user for password reset, by the specified token and check the token hasn't expired
@@ -433,6 +434,7 @@ class User
       error_log($exception->getMessage());
     }
   }
+
 
    /*****************************************************************************************************
    * Activate the user account, nullifying the activation token and setting the is_active flag
@@ -481,6 +483,7 @@ class User
     }
   }
 
+
   /***************************************************************************
    * Retrieve the member type data to calculate renewal rate/amount due.
    *
@@ -502,6 +505,7 @@ class User
     }
     return $data;
   }
+
 
 /**********************************************************************************************************
    * Update the existing users details based on the data. Data is validated and $this->errors is set if
@@ -567,13 +571,12 @@ class User
         $db = Database::getInstance();
 
         // Prepare the SQL: Update the existing record if editing, or insert new if adding
-
         // if (isset($this->user_id)) {
         if ($this->currentPage == 'edit') {
           $user_id = $this->user_id;
-          // echo($user_id);
+        
           //TODO: Add logic for editing parent_id
-          
+      
             // Prepare the SQL
             $sql = "BEGIN; 
             UPDATE user SET first_name = :firstName, last_name = :lastName,"; if(isset($data['password']) && $data['password'] !== '') { $sql .= 'password = :password,';}; $sql .= " is_enabled = :isEnabled, is_admin = :isAdmin, has_permissions = :hasPermissions, board_member = :boardMember, referred_by = :referredBy, notes = :notes WHERE user_id = :user_id; 
@@ -685,20 +688,19 @@ class User
 
         // Bind the parameters
         $stmt = $db->prepare($sql);
+
         if(isset($data['firstName']) &&  (string) $data['firstName'] !== '') {
           $stmt->bindParam(':firstName', $this->firstName);
         }
+
         if(isset($data['lastName']) &&  (string) $data['lastName'] !== '') {
           $stmt->bindParam(':lastName', $this->lastName);
         }
-        // $stmt->bindParam(':firstName', $this->firstName);
-        // $stmt->bindParam(':lastName', $this->lastName);
-
+        
         if(isset($data['email1']) &&  (string) $data['email1'] !== '') {
           $stmt->bindParam(':email1', $this->email1);
         }
 
-        //$stmt->bindParam(':email1', $this->email1);
         $stmt->bindParam(':email2', $this->email2);
         $stmt->bindParam(':line1', $this->line1);
         $stmt->bindParam(':line2', $this->line2);
@@ -738,10 +740,10 @@ class User
         if (isset($this->user_id)) {
             // only update password if set
             if (isset($this->password)) {  
-            $stmt->bindValue(':password', Hash::make($this->password));//***************************************** */
+            $stmt->bindValue(':password', Hash::make($this->password));
             }
             //
-            $stmt->bindParam(':user_id', $this->user_id, PDO::PARAM_INT);//************** LOOK AT THIS MORE  */
+            $stmt->bindParam(':user_id', $this->user_id, PDO::PARAM_INT);
 
         // If CREATING new user, and there is data in the field, INSERT password, else password will DEFAULT NULL
         } else { 
@@ -754,6 +756,7 @@ class User
       
         $stmt->execute();
 
+        // Write an interpolated version of the query to debug log
         $file = '../../debug_log/interpolated_queries.txt';
         $qry = serialize($stmt->fullQuery);
         file_put_contents($file, $qry);
@@ -771,6 +774,7 @@ class User
 
     return false;
   }
+
 
   /***************************************************************************************************** 
   * Retrieves the last parent_membership_id inserted from DB
@@ -797,6 +801,7 @@ class User
 
     return $parent;
   }
+
 
   /***************************************************************************************************** 
   * Retrieves the last user_id inserted from DB
@@ -860,6 +865,7 @@ class User
     return false;
   }
 
+
   /**********************************************************************************
    * Forget the login based on the token value
    *
@@ -885,6 +891,7 @@ class User
       }
     }
   }
+
 
   /**********************************************************************************************************
    * Start the password reset process by generating a unique token and expiry and saving them in the user model
@@ -965,54 +972,31 @@ class User
     return false;
   }
 
+
   /***********************************************************************************
    * Validate the properties and set $this->errors if any are invalid
    *
    * @return boolean  true if valid, false otherwise
    *********************************************************************************/
-  public function isValid()// TODO: ADD PARAMS FOR VARIABLES TO MAKE VALIDATION EXCEPTIONS FOR SUBMEMBERS ETC
-  {
+  public function isValid() {
+
     $this->errors = [];
     //var_dump($this->currentPage);
     
-
     if($this->currentPage == 'edit') {
 
     }
 
     elseif($this->currentPage == 'new_first') {
 
-      // if ($this->firstName == '') {
-      //   $this->errors['firstName'] = 'Please enter a valid first name';
-      // }
-
-      // if ($this->lastName == '') {
-      //   $this->errors['lastName'] = 'Please enter a valid last name';
-      // }
-
-      if (isset($this->email1) && (string) $this->email1 !== '') {
-        if (filter_var($this->email1, FILTER_VALIDATE_EMAIL) === false) {
-          $this->errors['email1'] = 'Please enter a valid email address';
-        }
+      if ($this->firstName == '') {
+        $this->errors['firstName'] = 'Please enter a valid first name';
       }
 
-      if (isset($this->email2) && (string) $this->email2 !== '') {
-        if (filter_var($this->email2, FILTER_VALIDATE_EMAIL) === false) {
-          $this->errors['email2'] = 'Please enter a valid email address';
-        }
+      if ($this->lastName == '') {
+        $this->errors['lastName'] = 'Please enter a valid last name';
       }
-
-      // TODO: Validation for phone #s and amount paid   
-
-      if (isset($this->password) && (string) $this->password !== '') {
-
-        $password_error = $this->_validatePassword();
-
-        if ($password_error !== null) {
-        $this->errors['password'] = $password_error;
-        }
-      }
-
+      
     }
 
     elseif($this->currentPage == 'new_second') {
@@ -1026,10 +1010,38 @@ class User
     else {
 
     }
+
+    if (isset($this->email1) && (string) $this->email1 !== '') {
+      if (filter_var($this->email1, FILTER_VALIDATE_EMAIL) === false) {
+        $this->errors['email1'] = 'Please enter a valid email address';
+      }
+    }
+
+    if (isset($this->email1) && (string) $this->email1 !== '') {
+      if ($this->_emailTaken($this->email1)) {
+        $this->errors['email1'] = 'That email address is already taken';
+      }
+    }
+
+    if (isset($this->email2) && (string) $this->email2 !== '') {
+      if (filter_var($this->email2, FILTER_VALIDATE_EMAIL) === false) {
+        $this->errors['email2'] = 'Please enter a valid email address';
+      }
+    }
+
+    // TODO: Validation for phone #s and amount paid   
+
+    if (isset($this->password) && (string) $this->password !== '') {
+
+      $password_error = $this->_validatePassword();
+
+      if ($password_error !== null) {
+      $this->errors['password'] = $password_error;
+      }
+    }
     
     return empty($this->errors);
   }
-
 
 
   /*********************************************************************************
@@ -1054,20 +1066,20 @@ class User
   }
 
 
-/**
+  /**
    * See if the email address is taken (already exists), ignoring the current user if already saved.
    *
    * @param string $email  Email address
    * @return boolean       True if the email is taken, false otherwise
    **********************************************************************************************************************************************/
-  private function _emailTaken($email)
+  private function _emailTaken($email1)
   {
     $isTaken = false;
-    $user = $this->findByEmail($email);
+    $user = $this->findByEmail($email1);
 
     if ($user !== null) {
 
-      if (isset($this->userId)) {  // existing user
+      if (isset($this->user_id)) {  // existing user
 
         if ($this->user_id != $user->user_id) {  // different user
           $isTaken = true;
@@ -1097,25 +1109,6 @@ class User
       return 'Please enter the same password';
     }
   }
-
-
-
-//   /**********************************************************************************
-//    * Validate the password
-//    *
-//    * @return mixed  The first error message if invalid, null otherwise
-//    ********************************************************************************/
-//   private function _validatePassword()
-//   {
-//     if (strlen($this->password) < 5) {
-//       return 'Please enter a longer password';
-//     }
-
-//     if (isset($this->password_confirmation) && ($this->password != $this->password_confirmation)) {
-//       return 'Please enter the same password';
-//     }
-//   }
-
 
 
 /*************************************************************************************

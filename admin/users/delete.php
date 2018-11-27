@@ -38,8 +38,8 @@ include('../../includes/header.php');
 
   <p>Are you sure?</p>
 
-  <input type="submit" value="Delete" class = "btn btn-light"/>
-  <a class = "btn btn-light" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>">Cancel</a>
+  <input type="submit" value="Delete" class = "btn btn-danger"/>
+  <a class = "btn btn-warning" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>">Cancel</a>
 </form>
 
     

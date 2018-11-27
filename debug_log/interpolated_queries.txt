@@ -1,4 +1,4 @@
-s:1774:"BEGIN;
+s:1783:"BEGIN;
 
             INSERT INTO user (
               first_name, 
@@ -11,7 +11,7 @@ s:1774:"BEGIN;
               referred_by,
               notes
             )
-            VALUES (DEFAULT,DEFAULT,DEFAULT,'', 
+            VALUES ('name','name',DEFAULT,'', 
               '',
               '',
               '',
@@ -38,7 +38,7 @@ s:1774:"BEGIN;
               image
             )
             VALUES (
-              @id,DEFAULT,'', 
+              @id,'user@email.com','', 
               '',
               '',
               '',
@@ -59,7 +59,7 @@ s:1774:"BEGIN;
               annum
             )
             VALUES (
-              @id,'136','8',
+              @id,DEFAULT,'1',
               '',
               YEAR(CURDATE())
             );
