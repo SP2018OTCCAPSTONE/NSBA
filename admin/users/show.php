@@ -19,16 +19,18 @@ if (isset($_GET['user_id'])) {
   $user = User::findByID($_GET['user_id']);
 }
 
+// Get Associate Members if user is Corp2 or Corp3
+if ($user->member_type_id == '6' || $user->member_type_id == '7') {
+  $data = User::getAssociates($user->user_id);
+}
+
+// Get Parent Member if user is Associate
+if ($user->member_type_id == '8') {
+  $data = User::getParent($user->user_id);
+}
+
 // Find the user or show a 404 page.
 $user = User::getByIDor404($_GET);
-
-// // Show 404 if user not found
-// if ( ! isset($user)) {
-//   header('HTTP/1.0 404 Not Found');
-//   echo '404 Not Found';
-//   exit;
-// }
-
 
 // Show the page header, then the rest of the HTML
 include('../../includes/header.php');
@@ -61,6 +63,20 @@ $bullet = mb_convert_encoding('&#8226;', 'UTF-8', 'HTML-ENTITIES');
   <dd><?php echo htmlspecialchars($user->first_name.' '.$user->last_name); ?></dd>
   <dt>Membership Type</dt>
   <dd><?php echo htmlspecialchars($user->type_name); ?></dd>
+  <?php if($user->member_type_id == '6' || $user->member_type_id == '7'): ?>
+    <dt>Associate Members</dt>
+    <?php foreach ($data['associates'] as $associate): ?>
+    <?php $associateName = $associate['last_name'].', '.$associate['first_name']; ?>
+    <dd><a href="/NSBA/admin/users/show.php?user_id=<?php echo $associate['user_id']; ?>"><?php echo htmlspecialchars($associateName); ?></a></dd>
+    <?php endforeach; ?>
+  <?php endif; ?>
+  <?php if($user->member_type_id == '8'): ?>
+    <dt>Parent Member</dt>
+    <?php foreach ($data['parents'] as $parent): ?>
+    <?php $parentName = $parent['last_name'].', '.$parent['first_name']; ?>
+    <dd><a href="/NSBA/admin/users/show.php?user_id=<?php echo $parent['user_id']; ?>"><?php echo htmlspecialchars($parentName); ?></a></dd>
+    <?php endforeach; ?>
+  <?php endif; ?>
   <dt>Company/Organization</dt>
   <dd><?php echo htmlspecialchars($user->company); ?></dd>
   <dt>Address</dt> 

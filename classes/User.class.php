@@ -82,6 +82,74 @@ class User
   }
 
 
+  /**
+   * 
+   */
+  public function getParent($user_id) {
+
+    $data = [];
+    
+    // Get the associate users
+    try {
+
+      $db = Database::getInstance();
+
+      $stmt = $db->prepare('SELECT u.user_id, first_name, last_name FROM user u
+      JOIN annual_membership m
+      ON u.user_id = m.user_id
+      WHERE m.annual_membership_id = (SELECT mm.parent_membership_id FROM user uu
+        JOIN annual_membership mm
+        ON uu.user_id = mm.user_id
+        WHERE uu.user_id = :user_id AND mm.annum = YEAR(CURDATE()))
+      ORDER BY last_name;');
+
+      $stmt->execute([':user_id' => $user_id]);
+      $data['parents'] = $stmt->fetchAll();
+
+    } catch(PDOException $exception) {
+
+      error_log($exception->getMessage());
+
+      $data['parents'] = [];
+    }
+
+    return $data;
+  }
+
+
+  /**
+   * 
+   */
+  public function getAssociates($user_id) {
+
+    $data = [];
+    
+    // Get the associate users
+    try {
+
+      $db = Database::getInstance();
+
+      $stmt = $db->prepare('SELECT u.user_id, first_name, last_name FROM user u
+      JOIN annual_membership m
+      ON u.user_id = m.user_id
+      WHERE m.parent_membership_id = (SELECT mm.annual_membership_id FROM user uu
+        JOIN annual_membership mm
+        ON uu.user_id = mm.user_id
+        WHERE uu.user_id = :user_id AND mm.annum = YEAR(CURDATE()))
+      ORDER BY last_name;');
+
+      $stmt->execute([':user_id' => $user_id]);
+      $data['associates'] = $stmt->fetchAll();
+
+    } catch(PDOException $exception) {
+
+      error_log($exception->getMessage());
+
+      $data['associates'] = [];
+    }
+
+    return $data;
+  }
 
 
     /********************************************************************************************
@@ -996,7 +1064,7 @@ class User
       if ($this->lastName == '') {
         $this->errors['lastName'] = 'Please enter a valid last name';
       }
-      
+
     }
 
     elseif($this->currentPage == 'new_second') {

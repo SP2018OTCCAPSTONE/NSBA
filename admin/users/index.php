@@ -35,7 +35,7 @@ include('../../includes/header.php');
   <thead>
     <tr>
       <th>Name</th>
-      <th>Email</th>
+      <!--<th>Email</th>-->
     </tr>
   </thead>
   <tbody>
@@ -43,7 +43,7 @@ include('../../includes/header.php');
     <?php $name = $user['last_name'].', '.$user['first_name']; ?>
     <tr>
         <td><a href="/NSBA/admin/users/show.php?user_id=<?php echo $user['user_id']; ?>"><?php echo htmlspecialchars($name); ?></a></td>
-        <td><?php echo isset($user['email_1']) ? htmlspecialchars($user['email_1']) : '-'; ?></td>
+        
       </tr>
     <?php endforeach; ?>
   </tbody>

@@ -1,6 +1,6 @@
 
     <div id = "searchByForm">
-        <h1>Reports & Utilities</h1>
+        <h1> Utilities & Reports</h1>
         <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" id="SearchByMemType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Search By Membership Type
@@ -56,11 +56,12 @@
         
         <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" id="SearchByPaid" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Utilities
+                Reports
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "SearchByPaid">
-                <a class="dropdown-item" href="#">Utility</a>
-                <a class="dropdown-item" href="#">Utility</a>
+                <a class="dropdown-item" href="#">Generate Annual Renewal Invoices</a>
+                <a class="dropdown-item" href="#">Generate Mailing List</a>
+                <a class="dropdown-item" href="#">Another Utility</a>
             </div>
         </div>
         
