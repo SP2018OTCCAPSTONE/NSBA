@@ -25,7 +25,7 @@ include('../../includes/header.php');
 
 ?>
 
-<h1>Current Membership <?php echo date('Y') ?></h1>
+<h1>All Membership <?php echo date('Y') ?></h1>
 
 <p><a href="/NSBA/admin/users/new_first.php" class="btn btn-warning">Add A New User</a></p>
 
@@ -67,6 +67,24 @@ include('../../includes/header.php');
     <?php endif; ?>
   </li>
 </ul>
-
+</div> 
+<!-- Reports Modal -->
+<div class="modal fade" id="reportModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+        </div>
+      </div>
+      
+    </div>
+  
+<script src="../../includes/reports.js"></script>
     
 <?php include('../../includes/footer.php'); ?>

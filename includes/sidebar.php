@@ -1,19 +1,19 @@
 
     <div id = "searchByForm">
-        <h1> Utilities & Reports</h1>
+        <h1> Reports & Utilities</h1>
         <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" id="SearchByMemType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Search By Membership Type
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Non-Member</a>
+                <a class="dropdown-item" href="#">Non-Member User</a>
                 <a class="dropdown-item" href="#">Gratis</a>
                 <a class="dropdown-item" href="#">Individual</a>
-                <a class="dropdown-item" href="#">Neighborhood</a>
+                <a class="dropdown-item" href="#">Neighborhood Association</a>
                 <a class="dropdown-item" href="#">Retired</a>
                 <a class="dropdown-item" href="#">Corporate 2</a>
                 <a class="dropdown-item" href="#">Corporate 3</a>
-                <a class="dropdown-item" href="#">Associate</a>
+                <a class="dropdown-item" href="#">Corporate Associate</a>
             </div>
         </div>
 
@@ -45,23 +45,42 @@
         </div>
 
         <div class="dropdown">
-            <button class="btn btn-light dropdown-toggle" type="button" id="SearchByPaid" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Search By Current/Inactive
+            <button class="btn btn-light dropdown-toggle" type="button" id="SearchByActive" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Toggle Current/Inactive
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "SearchByPaid">
-                <a class="dropdown-item" href="#">Current Membership</a>
+                <a class="dropdown-item" href="#">All Membership</a>
+                <a class="dropdown-item" href="#">Active Membership</a>
                 <a class="dropdown-item" href="#">Inactive Membership</a>
             </div>
         </div>
         
         <div class="dropdown">
-            <button class="btn btn-light dropdown-toggle" type="button" id="SearchByPaid" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-light dropdown-toggle" type="button" id="Reports" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Reports
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "SearchByPaid">
                 <a class="dropdown-item" href="#">Generate Annual Renewal Invoices</a>
+                <a class="dropdown-item" href="#">Generate Paid Member List</a>
+                <a class="dropdown-item" href="#">Generate Unpaid Member List</a>
                 <a class="dropdown-item" href="#">Generate Mailing List</a>
-                <a class="dropdown-item" href="#">Another Utility</a>
+                <a class="dropdown-item" href="#">Annual Membership Aging Report</a>
+                <a class="dropdown-item" href="#">Member Roster Report</a>
+                <a class="dropdown-item" href="#">Member Record Aging Report</a>
+                <a class="dropdown-item" href="#">Member Record Missing Field Report</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle" type="button" id="Utilities" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Utilities
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "SearchByPaid">
+                <a class="dropdown-item" href="#">Change Membership Prices</a>
+                <a class="dropdown-item" href="#">Utility</a>
+                <a class="dropdown-item" href="#">Utility</a>
+                <a class="dropdown-item" href="#">Utility</a>
+                <a class="dropdown-item" href="#">Utility</a>
             </div>
         </div>
         

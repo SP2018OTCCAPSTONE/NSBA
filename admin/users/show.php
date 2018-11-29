@@ -52,9 +52,9 @@ $bullet = mb_convert_encoding('&#8226;', 'UTF-8', 'HTML-ENTITIES');
 
 ?>
 
-<h1>User</h1>
+<h1>Member</h1>
 
-<p><a href="/NSBA/admin/users">&laquo; Back To List Of Users</a></p>
+<p><a href="/NSBA/admin/users">&laquo; Back To List Of Members</a></p>
 
 <dl>
   <dt>Image</dt>
@@ -71,7 +71,7 @@ $bullet = mb_convert_encoding('&#8226;', 'UTF-8', 'HTML-ENTITIES');
     <?php endforeach; ?>
   <?php endif; ?>
   <?php if($user->member_type_id == '8'): ?>
-    <dt>Parent Member</dt>
+    <dt>Parent Membership</dt>
     <?php foreach ($data['parents'] as $parent): ?>
     <?php $parentName = $parent['last_name'].', '.$parent['first_name']; ?>
     <dd><a href="/NSBA/admin/users/show.php?user_id=<?php echo $parent['user_id']; ?>"><?php echo htmlspecialchars($parentName); ?></a></dd>
