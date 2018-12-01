@@ -12,7 +12,7 @@ body {text-align:center;margin:0;font-family:'Open Sans',arial, sans-serif;font-
 /* PAGE ELEMENTS */
 h1 {font-size:28px;line-height:32px; color:#009272; font-weight: bold; border-bottom:1px dotted #666;}
 h1 span {font-size:25px;color:#c9b193;display:block;}
-h2 {font-size:20px; margin: 1vw; padding:2vw; font-style: italic;}
+h2 {font-size:18px; margin: 1vw; color:#009272; font-weight: bold; text-decoration: underline;}
 h3 {margin:15px 0 5px 0;font-size:15px;}
 h4 {font-size:15px;}
 p{padding: 1vw; font-style: italic; font-size: 15px;}
@@ -21,10 +21,11 @@ dd{margin: 5px 0 10px 0; font-size: 15px; }
 dl{margin: 2vw;}
 th{margin: 5px 0 0 0; font-weight: bold; font-size: 15px;}
 td{margin: 5px 0 0 0; font-size: 15px; }
-table{margin-left: 37vw; margin-bottom: 2vw; padding: 3vw;}
+table{ margin-bottom: 2vw; padding: 3vw;}
 .btn-light{ font-weight:bold;color:#009272;font-size:15px;}
 a {text-decoration:none;font-weight:bold;color:#009272;font-size:15px;}
 a:hover {text-decoration:underline;}
+ul{list-style: none;}
 
 .shadow {-webkit-box-shadow:  0px 2px 5px 0px rgba(0, 0, 0, .3);box-shadow:  0px 2px 5px 0px rgba(0, 0, 0, .3);}
 #page {width:95vw; height: 145vw; padding:15px;margin:15px auto;background:#fff;border-radius:4px;}
@@ -70,6 +71,14 @@ form input[type="submit"] {margin:10px 0; float: left; width: auto; display:bloc
 #notes{margin-left: 1vw;}
 
 #nextBtn{margin-left: -5vw;}
+
+/* Index */
+#MembershipTable{margin-left:37vw; position: relative; margin-top:-20vw;}
+
+/* Sidebar */
+#reports{clear: left;}
+#Utilities{clear:left;}
+#searchByForm h2{clear:left;}
 
 /* Report modal  */
 #mail{width:100%;}

@@ -1,6 +1,6 @@
 
     <div id = "searchByForm">
-        <h1> Reports & Utilities</h1>
+        <h2>Search Options</h2>
         <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" id="SearchByMemType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Search By Membership Type
@@ -57,7 +57,7 @@
                 <a class="dropdown-item" href="#">Inactive Membership</a>   
             </div>
         </div>
-        <!-- <h1>TEST</h1> -->
+        <h2>Reports & Utilities</h2>
         <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" id="reports" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Reports

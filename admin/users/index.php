@@ -32,7 +32,7 @@ include('../../includes/header.php');
 
 <?php include('../../includes/sidebar.php'); ?>
 
-<table>
+<table id = "MembershipTable">
   <thead>
     <tr>
       <th>Name</th>
