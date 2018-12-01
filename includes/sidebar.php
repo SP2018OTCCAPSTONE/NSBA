@@ -95,7 +95,7 @@
             // 'this' is the clicked anchor
             var text = this.text;
             var id = this.id;
-            //alert(id);
+            //alert(id);// troubleshooter
             // Call Js function to retrieve report
             getReport(text, id);
         });

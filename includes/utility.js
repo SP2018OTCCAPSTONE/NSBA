@@ -51,6 +51,10 @@ function calculateAmtDue(priceArray) {
     }
 }
 
+function functionRouter(text, id) {
+
+}
+
 function getReport(text, id) {
 
     if(id == '4'){
