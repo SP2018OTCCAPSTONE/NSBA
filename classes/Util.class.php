@@ -43,15 +43,23 @@ class Util
     exit;
   }
 
+  /***************************************************************************
+   * Reports queries
+   * 
+   * 
+   ************************************************************************/
+
+  /**
+   * 
+   */
   public static function getMailingList() {
+    
     $data = [];
 
     try {
 
       $db = Database::getInstance();
 
-
-      //("SELECT * FROM user ORDER BY last_name LIMIT $users_per_page OFFSET $offset")->fetchAll();
       $data['users'] = $db->query("SELECT first_name, last_name, d.company, d.line_1, d.line_2, d.city, d.state, d.zip FROM user u
       JOIN user_data d
       ON u.user_id = d.user_id

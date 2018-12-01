@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/NSBA/newEditionStyle.css" rel ="stylesteet">
 </head>
     <body>
+
         <div class="container shadow" id ="page">
             <div id = "nav" class ="shadow" role="navigation">
                 <ul>

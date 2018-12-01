@@ -71,5 +71,7 @@ form input[type="submit"] {margin:10px 0; float: left; width: auto; display:bloc
 
 #nextBtn{margin-left: -5vw;}
 
-
-
+/* Report modal  */
+#mail{width:100%;}
+.address{font-size: 12px; margin:0 ;padding: 0;}
+#mailRow{ margin:0 ;padding: 0;}

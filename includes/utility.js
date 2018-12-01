@@ -1,16 +1,5 @@
 
-/**
- * 
- */
-// $(function() {setMemberType(Number(membershipType))});
-// $(function() {setMeals(mealAmt)});
-// $(function() {calculateAmtDue(priceArray)});
 
-/**
- * 
- */
-// document.getElementById("memberType").onchange = function(){calculateAmtDue(priceArray)};
-// document.getElementById("meals").onchange = function(){calculateAmtDue(priceArray)};
 
 /**
  * 
@@ -68,10 +57,26 @@ function getReport(text, id) {
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                // myObj = JSON.parse(this.responseText);
-                // for (x in myObj) {
-                //     txt += myObj[x].name + "<br>";
-                document.getElementById("test").innerHTML = this.responseText;//JSON.stringify(this.responseText);
+                var now = new Date().toDateString();
+                list = JSON.parse(this.responseText);
+                mailList = "<div><h1>NSBA Mailing List</h1></br>" +
+                "<p>" + now + "</p></br></div>" +
+                "<div class='table-responsive'><table class='table'><tbody><tr id='mailRow'>";
+                for(i in list.users) { 
+                    mailList += "<td class='address'>" + list.users[i].first_name + " " + list.users[i].last_name + "</br>" +
+                    list.users[i].company + "</br>" +
+                    list.users[i].line_1 + "</br>";
+                    if(list.users[i].line_2 != ''){
+                        mailList += list.users[i].line_2 + "</br>";
+                    }
+                    mailList += list.users[i].city + ", " + list.users[i].state + " " + list.users[i].zip + "</td>";
+
+                    if(i > 0 && (i + 1) % 3 == 0) {
+                        mailList += "</tr><tr>";
+                    }
+                }
+                mailList += "</tr></tbody></table></div>";
+                document.getElementById("mail").innerHTML = mailList;
                 $("#reportModal").modal();
             }
         };
