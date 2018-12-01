@@ -2,15 +2,15 @@
 /**
  * 
  */
-$(function() {setMemberType(Number(membershipType))});
-$(function() {setMeals(mealAmt)});
-$(function() {calculateAmtDue(priceArray)});
+// $(function() {setMemberType(Number(membershipType))});
+// $(function() {setMeals(mealAmt)});
+// $(function() {calculateAmtDue(priceArray)});
 
 /**
  * 
  */
-document.getElementById("memberType").onchange = function(){calculateAmtDue(priceArray)};
-document.getElementById("meals").onchange = function(){calculateAmtDue(priceArray)};
+// document.getElementById("memberType").onchange = function(){calculateAmtDue(priceArray)};
+// document.getElementById("meals").onchange = function(){calculateAmtDue(priceArray)};
 
 /**
  * 
@@ -59,6 +59,24 @@ function calculateAmtDue(priceArray) {
         due.readOnly = false;
         due.value = amountDue.toFixed(2);
         due.readOnly = true;
+    }
+}
+
+function getReport(text, id) {
+
+    if(id == '4'){
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // myObj = JSON.parse(this.responseText);
+                // for (x in myObj) {
+                //     txt += myObj[x].name + "<br>";
+                document.getElementById("test").innerHTML = this.responseText;//JSON.stringify(this.responseText);
+                $("#reportModal").modal();
+            }
+        };
+    xmlhttp.open("GET", "relay.php?report=" + id, true);
+    xmlhttp.send();
     }
 }
 

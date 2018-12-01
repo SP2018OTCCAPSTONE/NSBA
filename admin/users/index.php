@@ -67,6 +67,7 @@ include('../../includes/header.php');
     <?php endif; ?>
   </li>
 </ul>
+<!-- <div id="test"></div> -->
 </div> 
 <!-- Reports Modal -->
 <div class="modal fade" id="reportModal" role="dialog">
@@ -76,7 +77,7 @@ include('../../includes/header.php');
       <div class="modal-content">
         <div class="modal-header" style="padding:35px 50px;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          
+          <div id="test"></div>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
@@ -85,6 +86,6 @@ include('../../includes/header.php');
       
     </div>
   
-<script src="../../includes/reports.js"></script>
+    <script src="../../includes/utility.js">
     
 <?php include('../../includes/footer.php'); ?>

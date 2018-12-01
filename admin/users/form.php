@@ -197,7 +197,6 @@ var mealAmt = <?php echo $meal; ?>;
     </label>
   </div>
 
-  <!--To be calculated as membership price + (meals * meal price) in AJAX/Js call-->
   <div>
     <label for="renewalAmount">Total Due</label>
     <input id="renewalAmount" name="renewalAmount" readonly="readonly"/>
@@ -218,4 +217,12 @@ var mealAmt = <?php echo $meal; ?>;
     <a class = "btn btn-danger" id="cancelBtn" href="/NSBA/admin/users<?php if (isset($user->user_id)) { echo '/show.php?user_id=' . $user->user_id; } ?>">Cancel</a>
   </div>
 </form>
-<script src="../../includes/utility.js"></script>
+<script src="../../includes/utility.js">
+
+$(function() {setMemberType(Number(membershipType))});
+$(function() {setMeals(mealAmt)});
+$(function() {calculateAmtDue(priceArray)});
+
+document.getElementById("memberType").onchange = function(){calculateAmtDue(priceArray)};
+document.getElementById("meals").onchange = function(){calculateAmtDue(priceArray)};
+</script>
