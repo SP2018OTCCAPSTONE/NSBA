@@ -13,6 +13,12 @@ Auth::getInstance()->requireLogin();
 // Require the user to be an administrator before they can see this page.
 Auth::getInstance()->requireAdmin();
 
+if(isset($_GET['data'])) {
+  parse_str($_GET['data']);
+  $criteria = $dataArray['criteria'];
+  $title = $dataArray['title'];
+}
+
 $current = "new_first";
 
 $user = new User();

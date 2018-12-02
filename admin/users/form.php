@@ -149,6 +149,8 @@ var mealAmt = <?php echo $meal; ?>;
 
   <?php $is_same_user = $user->user_id == Auth::getInstance()->getCurrentUser()->user_id; ?>
 
+  <!-- <script>console.log(membershipType);</script> -->
+
   <div>
     <label for="isEnabled">
         <?php if ($is_same_user): ?>
@@ -157,7 +159,7 @@ var mealAmt = <?php echo $meal; ?>;
 
         <?php else: ?>
             <input id="isEnabled" name="isEnabled" type="checkbox" value="1"
-                <?php if ($user->isEnabled): ?>checked="checked"<?php endif; ?>/> Enabled
+                <?php if ($user->is_enabled): ?>checked="checked"<?php endif; ?>/> Enabled
         <?php endif; ?>
     </label>
   </div>
@@ -214,14 +216,25 @@ var mealAmt = <?php echo $meal; ?>;
 
   <div>
     <input type="submit" value="Save" class = "btn btn-success" />
-    <a class = "btn btn-danger" id="cancelBtn" href="/NSBA/admin/users<?php if (isset($user->user_id)) { echo '/show.php?user_id=' . $user->user_id; } ?>">Cancel</a>
+    <?php if($current == 'new_first' || $current == 'new_second' || $current == 'new_third'): ?>
+      <a class = "btn btn-danger" id="cancelBtn" href="/NSBA/admin/users/index.php?data=<?php echo urlencode($_GET['data']); ?>">Cancel</a>
+    <?php else: ?>
+      <a class = "btn btn-danger" id="cancelBtn" href="/NSBA/admin/users<?php if (isset($user->user_id)) { echo '/show.php?user_id=' . $user->user_id . '&data=' . urlencode($_GET['data']); } ?>">Cancel</a>
+    <?php endif ?>
   </div>
 </form>
-<script src="../../includes/utility.js">
 
-$(function() {setMemberType(Number(membershipType))});
-$(function() {setMeals(mealAmt)});
-$(function() {calculateAmtDue(priceArray)});
+<script>console.log(membershipType);</script><!-- troubleshooter -->
+
+<!-- Application Javascript -->
+<script type="text/javascript" src="../../includes/utility.js">
+console.log(membershipType);// troubleshooter
+window.addEventListener("load", setMemberType(Number(membershipType)));
+window.addEventListener("load", setMeals(mealAmt));
+window.addEventListener("load", calculateAmtDue(priceArray));
+// $(function() {setMemberType(Number(membershipType))});
+// $(function() {setMeals(mealAmt)});
+// $(function() {calculateAmtDue(priceArray)});
 
 document.getElementById("memberType").onchange = function(){calculateAmtDue(priceArray)};
 document.getElementById("meals").onchange = function(){calculateAmtDue(priceArray)};

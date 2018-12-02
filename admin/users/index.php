@@ -37,7 +37,7 @@ include('../../includes/header.php');
 
 <h1><?php echo $title ?></h1>
 
-<p><a href="/NSBA/admin/users/new_first.php" class="btn btn-warning">Add A New User</a></p>
+<p><a href="/NSBA/admin/users/new_first.php?data=<?php echo urlencode($_GET['data']); ?>" class="btn btn-warning">Add A New User</a></p>
 
 <?php include('../../includes/sidebar.php'); ?>
 <div id='listContainer'>

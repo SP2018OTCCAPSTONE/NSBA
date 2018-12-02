@@ -13,8 +13,13 @@ Auth::getInstance()->requireLogin();
 // Require the user to be an administrator before they can see this page.
 Auth::getInstance()->requireAdmin();
 
-parse_str($_GET['data']);
-$criteria = $dataArray['criteria'];
+if(isset($_GET['data'])) {
+  parse_str($_GET['data']);
+  $criteria = $dataArray['criteria'];
+  $title = $dataArray['title'];
+}
+// parse_str($_GET['data']);
+// $criteria = $dataArray['criteria'];
 
 // Get the user
 if (isset($_GET['user_id'])) {
@@ -56,7 +61,7 @@ $bullet = mb_convert_encoding('&#8226;', 'UTF-8', 'HTML-ENTITIES');
 
 <h1>Member</h1>
 
-<p><a href="/NSBA/admin/users/index.php?data=<?php echo $_GET['data']; ?>">&laquo; Back To List Of Members</a></p>
+<p><a href="/NSBA/admin/users/index.php?data=<?php echo urlencode($_GET['data']); ?>">&laquo; Back To List Of Members</a></p>
 
 <dl>
   <dt>Image</dt>
@@ -101,7 +106,7 @@ $bullet = mb_convert_encoding('&#8226;', 'UTF-8', 'HTML-ENTITIES');
 
 <ul>
     
-  <li><a class = "btn btn-warning" href="/NSBA/admin/users/edit.php?user_id=<?php echo $user->user_id; ?>">Edit</a></li>
+  <li><a class = "btn btn-warning" href="/NSBA/admin/users/edit.php?user_id=<?php echo $user->user_id; ?>&data=<?php echo urlencode($_GET['data']); ?>">Edit</a></li>
   <li>
     <?php if ($user->user_id == Auth::getInstance()->getCurrentUser()->user_id): ?>
       <a class = "btn btn-danger disabled" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>">Delete</a>
