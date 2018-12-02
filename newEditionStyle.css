@@ -41,7 +41,7 @@ ul{list-style: none;}
 /* SIDEBAR */
 #searchByForm{position:static;width: 30%;padding:1vw;margin-top: -3vw;left: 0vw;}
 .dropdown{padding-top: 1vw;padding-bottom: 1vw;position: relative;float: left;}
-input #firstNameDrop{padding-bottom: 1vw;margin: 1vw;}
+/* input #firstNameDrop{padding-bottom: 1vw;margin: 1vw;} */
 
 /* = FORM = */
 form {text-align:left;list-style-type:none; font-size: 15px;}
@@ -82,5 +82,5 @@ form input[type="submit"] {margin:10px 0; float: left; width: auto; display:bloc
 
 /* Report modal  */
 #mail{width:100%;}
-.address{font-size: 12px; margin:0 ;padding: 0;}
+.address{font-size: 10px; margin:0 ;padding: 0;}
 #mailRow{ margin:0 ;padding: 0;}

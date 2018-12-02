@@ -26,16 +26,23 @@ class User
    * @param string $page  Page number
    * @return array        Previous page, next page and user data. Page elements are null if there isn't a previous or next page.
    ****************************************************************************************************/
-  public static function paginate($page)
-  {
+  public static function paginate($page, $dataArray) {
+    
+    $criteria = $dataArray['criteria'];
+    // if(isset($dataArray['']) && (string) $dataArray[''] != '') {
+
+    // }
+    // if(isset($dataArray['']) && (string) $dataArray[''] != '') {
+      
+    // }
     $data = [];
     $users_per_page = 40;
-
+    
     // Calculate the total number of pages
-    $total_users = static::_getTotalUsers();
+    $total_users = static::_getTotalUsers($criteria);// NEED TO SOLVE FOR SMALLER RESULT SETS
+
     $total_pages = (int) ceil($total_users / $users_per_page);
       
-
     // Make sure the current page is valid
     $page = (int) $page;
 
@@ -45,11 +52,9 @@ class User
       $page = $total_pages;
     }
 
-
     // Calculate the next and previous pages
     $data['previous'] = $page == 1 ? null : $page - 1;
     $data['next'] = $page == $total_pages ? null : $page + 1;
-
 
     // Get the page of users
     try {
@@ -58,18 +63,184 @@ class User
 
       $offset = ($page - 1) * $users_per_page;
 
-      //("SELECT * FROM user ORDER BY last_name LIMIT $users_per_page OFFSET $offset")->fetchAll();
-      $data['users'] = $db->query("SELECT * FROM user u
-      JOIN user_data d
-      ON u.user_id = d.user_id
-      JOIN annual_membership m
-      ON d.user_id = m.user_id
-      JOIN member_type t
-      ON m.member_type_id = t.member_type_id
-      JOIN invoice i
-      ON i.annual_membership_id = m.annual_membership_id
-      ORDER BY last_name
-      LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      if($criteria == '0') {
+        $data['users'] = $db->query("SELECT * FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        ORDER BY last_name
+        LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      }
+
+      if($criteria == '1') {
+        $data['users'] = $db->query("SELECT * FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE u.is_admin = TRUE
+        ORDER BY last_name
+        LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      }
+
+      if($criteria == '2') {
+        $data['users'] = $db->query("SELECT * FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE u.has_permissions = TRUE
+        ORDER BY last_name
+        LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      }
+
+      if($criteria == '3') {
+        $data['users'] = $db->query("SELECT * FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE u.board_member = TRUE
+        ORDER BY last_name
+        LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      }
+
+      if($criteria == '4') {
+        $data['users'] = $db->query("SELECT * FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 1
+        ORDER BY last_name
+        LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      }
+
+      if($criteria == '5') {
+        $data['users'] = $db->query("SELECT * FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 2
+        ORDER BY last_name
+        LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      }
+
+      if($criteria == '6') {
+        $data['users'] = $db->query("SELECT * FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 3
+        ORDER BY last_name
+        LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      }
+
+      if($criteria == '7') {
+        $data['users'] = $db->query("SELECT * FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 4
+        ORDER BY last_name
+        LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      }
+
+      if($criteria == '8') {
+        $data['users'] = $db->query("SELECT * FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 5
+        ORDER BY last_name
+        LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      }
+
+      if($criteria == '9') {
+        $data['users'] = $db->query("SELECT * FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 6
+        ORDER BY last_name
+        LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      }
+
+      if($criteria == '10') {
+        $data['users'] = $db->query("SELECT * FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 7
+        ORDER BY last_name
+        LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      }
+
+      if($criteria == '11') {
+        $data['users'] = $db->query("SELECT * FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 8
+        ORDER BY last_name
+        LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      }
 
     } catch(PDOException $exception) {
 
@@ -78,6 +249,10 @@ class User
       $data['users'] = [];
     }
 
+    // Calculate the next and previous pages
+    $data['previous'] = $page == 1 ? null : $page - 1;
+    $data['next'] = $page == $total_pages ? null : $page + 1;
+    //var_dump($data);
     return $data;
   }
 
@@ -1117,19 +1292,165 @@ class User
    *
    * @return integer
    ********************************************************************************/
-  private static function _getTotalUsers()
+  private static function _getTotalUsers($criteria)
   {
     try {
 
       $db = Database::getInstance();
-      $count = (int) $db->query('SELECT COUNT(*) FROM user')->fetchColumn(); 
+
+      if($criteria == '0') {
+        $count = (int) $db->query('SELECT COUNT(*) FROM user')->fetchColumn(); 
+      }
+
+      if($criteria == '1') {
+        $count = (int) $db->query("SELECT COUNT(*) FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE u.is_admin = TRUE")->fetchColumn();
+      }
+
+      if($criteria == '2') {
+        $count = (int) $db->query("SELECT COUNT(*) FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE u.has_permissions = TRUE")->fetchColumn();
+      }
+
+      if($criteria == '3') {
+        $count = (int) $db->query("SELECT COUNT(*) FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE u.board_member = TRUE")->fetchColumn();
+      }
+
+      if($criteria == '4') {
+        $count = (int) $db->query("SELECT COUNT(*) FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 1")->fetchColumn();
+      }
+
+      if($criteria == '5') {
+        $count = (int) $db->query("SELECT COUNT(*) FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 2")->fetchColumn();
+      }
+
+      if($criteria == '6') {
+        $count = (int) $db->query("SELECT COUNT(*) FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 3")->fetchColumn();
+      }
+
+      if($criteria == '7') {
+        $count = (int) $db->query("SELECT COUNT(*) FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 4")->fetchColumn();
+      }
+
+      if($criteria == '8') {
+        $count = (int) $db->query("SELECT COUNT(*) FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 5")->fetchColumn();
+      }
+
+      if($criteria == '9') {
+        $count = (int) $db->query("SELECT COUNT(*) FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 6")->fetchColumn();
+      }
+
+      if($criteria == '10') {
+        $count = (int) $db->query("SELECT COUNT(*) FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 7")->fetchColumn();
+      }
+
+      if($criteria == '11') {
+        $count = (int) $db->query("SELECT COUNT(*) FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.member_type_id = 8")->fetchColumn();
+      }
 
     } catch(PDOException $exception) {
 
       error_log($exception->getMessage());
       $count = 0;
     }
-
+    // $count = (int) $db->query()->fetchColumn();
     return $count;
   }
 

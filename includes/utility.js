@@ -51,13 +51,63 @@ function calculateAmtDue(priceArray) {
     }
 }
 
-function functionRouter(text, id) {
+function functionRouter(parent, text, id) {
+    switch (parent) {
+        case 'types':
+        getMemberType(parent, text, id);
+        break;
+        case 'reports':
+        getReport(parent, text, id);
+        break;
+        default:
+        break;
+    }
 
 }
 
-function getReport(text, id) {
+function getMemberType(parent, text, id) {
+    
+    location.href = "relay.php?query=" + id;
+    // if(id == '0') {
+    //     location.href = "relay.php?query=" + id;
+    // }
 
-    if(id == '4'){
+    // if(id == '1') {
+    //     location.href = "relay.php?query=" + id;
+    // }
+
+    // if(id == '2') {
+    //     location.href = "relay.php?query=" + id;
+    // }
+
+    // if(id == '3') {
+    //     location.href = "relay.php?query=" + id;
+    // }
+
+    // if(id == '4') {
+    //     location.href = "relay.php?query=" + id;
+    // }
+
+    // if(id == '5') {
+    //     location.href = "relay.php?query=" + id;
+    // }
+}
+
+function getReport(parent, text, id) {
+      
+    if(id == '15') {
+
+    }
+
+    if(id == '16') {
+        
+    }
+
+    if(id == '17') {
+        
+    }
+
+    if(id == '18') {
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -84,8 +134,24 @@ function getReport(text, id) {
                 $("#reportModal").modal();
             }
         };
-    xmlhttp.open("GET", "relay.php?report=" + id, true);
+    xmlhttp.open("GET", "relay.php?query=" + id, true);
     xmlhttp.send();
+    }
+
+    if(id == '19') {
+        
+    }
+
+    if(id == '20') {
+        
+    }
+
+    if(id == '21') {
+        
+    }
+
+    if(id == '22') {
+        
     }
 }
 

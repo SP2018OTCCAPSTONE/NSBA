@@ -5,16 +5,19 @@
             <button class="btn btn-light dropdown-toggle" type="button" id="SearchByMemType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Search By Membership Type
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Administrators</a>
-                <a class="dropdown-item" href="#">Non-Member User</a>
-                <a class="dropdown-item" href="#">Gratis</a>
-                <a class="dropdown-item" href="#">Individual</a>
-                <a class="dropdown-item" href="#">Neighborhood Association</a>
-                <a class="dropdown-item" href="#">Retired</a>
-                <a class="dropdown-item" href="#">Corporate 2</a>
-                <a class="dropdown-item" href="#">Corporate 3</a>
-                <a class="dropdown-item" href="#">Corporate Associate</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="types">
+                <a class="dropdown-item" id="0" href="#">All Members</a>
+                <a class="dropdown-item" id="1" href="#">Administrators</a>
+                <a class="dropdown-item" id="2" href="#">Permissioned Users</a>
+                <a class="dropdown-item" id="3" href="#">Board Members</a>
+                <a class="dropdown-item" id="4" href="#">Non-Member User</a>
+                <a class="dropdown-item" id="5" href="#">Gratis</a>
+                <a class="dropdown-item" id="6" href="#">Individual</a>
+                <a class="dropdown-item" id="7" href="#">Retired</a>
+                <a class="dropdown-item" id="8" href="#">Neighborhood Association</a>
+                <a class="dropdown-item" id="9" href="#">Corporate 2</a>
+                <a class="dropdown-item" id="10" href="#">Corporate 3</a>
+                <a class="dropdown-item" id="11" href="#">Corporate Associate</a>
             </div>
         </div>
 
@@ -29,7 +32,7 @@
             </div>
         </div>
 
-        <!-- This might be better as a select element -->
+        <!-- This might be better as a select element or drop down checkboxes/radios with multi-select-->
         <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" id="SearchByYear" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Search By Year
@@ -52,9 +55,9 @@
                 Toggle Current/Inactive
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "searchByActive">
-                <a class="dropdown-item" href="#">All Membership</a> 
-                <a class="dropdown-item" href="#">Active Membership</a>
-                <a class="dropdown-item" href="#">Inactive Membership</a>   
+                <a class="dropdown-item" id="12" href="#">All Membership</a> 
+                <a class="dropdown-item" id="13" href="#">Active Membership</a>
+                <a class="dropdown-item" id="14" href="#">Inactive Membership</a>   
             </div>
         </div>
         <h2>Reports & Utilities</h2>
@@ -63,14 +66,14 @@
                 Reports
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="reports">
-                <a class="dropdown-item" id="1" href="#">Generate Annual Renewal Invoices</a>
-                <a class="dropdown-item" id="2" href="#">Generate Paid Member List</a>
-                <a class="dropdown-item" id="3" href="#">Generate Unpaid Member List</a>
-                <a class="dropdown-item" id="4" href="#">Generate Mailing List</a>
-                <a class="dropdown-item" id="5" href="#">Annual Membership Aging Report</a>
-                <a class="dropdown-item" id="6" href="#">Member Roster Report</a>
-                <a class="dropdown-item" id="7" href="#">Member Record Aging Report</a>
-                <a class="dropdown-item" id="8" href="#">Member Record Missing Field Report</a>
+                <a class="dropdown-item" id="15" href="#">Generate Annual Renewal Invoices</a>
+                <a class="dropdown-item" id="16" href="#">Generate Paid Member List</a>
+                <a class="dropdown-item" id="17" href="#">Generate Unpaid Member List</a>
+                <a class="dropdown-item" id="18" href="#">Generate Mailing List</a>
+                <a class="dropdown-item" id="19" href="#">Annual Membership Aging Report</a>
+                <a class="dropdown-item" id="20" href="#">Member Roster Report</a>
+                <a class="dropdown-item" id="21" href="#">Member Record Aging Report</a>
+                <a class="dropdown-item" id="22" href="#">Member Record Missing Field Report</a>
             </div>
         </div>
 
@@ -94,10 +97,11 @@
             e.preventDefault();// prevent the default anchor functionality
             // 'this' is the clicked anchor
             var text = this.text;
+            var parent = $(this).parent().attr('id');
             var id = this.id;
-            //alert(id);// troubleshooter
+            //alert(parent);// troubleshooter
             // Call Js function to retrieve report
-            getReport(text, id);
+            functionRouter(parent, text, id);
         });
     </script>
     

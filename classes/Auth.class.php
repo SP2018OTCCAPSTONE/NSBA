@@ -149,6 +149,16 @@ class Auth
   }
 
 
+  /****************************************************************************************
+   * Boolean indicator of whether the user is logged in and is a permissioned user
+   *
+   * @return boolean
+   ****************************************************************************************/
+  public function hasPermissions()
+  {
+    return $this->isLoggedIn() && $this->getCurrentUser()->has_permissions;
+  }
+
 
   /****************************************************************************************
    * Show a forbidden message if the current logged in user is not an administrator.
@@ -162,6 +172,18 @@ class Auth
     }
   }
 
+
+   /****************************************************************************************
+   * Show a forbidden message if the current logged in user is not a permissioned user.
+   *
+   * @return void
+   *****************************************************************************************/
+  public function requirePermissions()
+  {
+    if ( ! $this->hasPermissions()) {
+      Util::denyAccess();
+    }
+  }
 
 
   /***************************************************************************************
