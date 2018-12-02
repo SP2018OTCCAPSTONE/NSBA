@@ -1,11 +1,15 @@
 
     <div id = "searchByForm">
+    <?php //<?php if (Auth::getInstance()->isAdmin()): ?>
+    <?php if ($current !== 'reports'): ?>
+                    
         <h2>Search Options</h2>
+
         <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" id="SearchByMemType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Search By Membership Type
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="types">
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="types" >
                 <a class="dropdown-item" id="0" href="#">All Membership</a>
                 <a class="dropdown-item" id="1" href="#">Administrators</a>
                 <a class="dropdown-item" id="2" href="#">Permissioned Users</a>
@@ -60,6 +64,8 @@
                 <a class="dropdown-item" id="14" href="#">Inactive Membership</a>   
             </div>
         </div>
+    <?php endif; ?>
+
         <h2>Reports & Utilities</h2>
         <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" id="reports" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

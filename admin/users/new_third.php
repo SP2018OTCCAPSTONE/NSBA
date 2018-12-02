@@ -28,10 +28,9 @@ $id = $_GET['id'];// This is the paying corporate member user id
 // Process the submitted form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  // LOGIC CODE HERE TO GO TO 2ND/3RD FORMS FOR CORP2/CORP3 ASSOCIATE MEMBERS
   if ($user->save($_POST)) {
-    // Redirect to show page
-    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $id . '&data=' .$data. '');  
+    // Redirect to show page for parent member
+    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $id . '&data=' .urlencode($_GET['data']). '');  
   }
 }
 

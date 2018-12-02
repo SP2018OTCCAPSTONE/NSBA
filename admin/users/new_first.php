@@ -38,12 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'parent' => $parentMembershipId,
         'type' => $_POST['memberType']
       );
-      $data = http_build_query(array('dataArray' => $raw));
-      $data = urlencode($data);
-      Util::redirect('/NSBA/admin/users/new_second.php?data='.$data.'');
+      $member = http_build_query(array('memberArray' => $raw));
+      $member = urlencode($member);
+      Util::redirect('/NSBA/admin/users/new_second.php?member='.$member. '&data=' .urlencode($_GET['data']). '');
     }
     // Else redirect to show page
-    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $user->user_id . '&data=' .$data. '');
+    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $user->user_id . '&data=' .urlencode($_GET['data']). '');
   }
 }
 

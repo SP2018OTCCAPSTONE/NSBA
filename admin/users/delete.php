@@ -22,14 +22,13 @@ if(isset($_GET['data'])) {
 // Find the user or show a 404 page.
 $user = User::getByIDor404($_GET);
 
-
 // Process the submitted form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $user->delete();
 
   // Redirect to index page
-  Util::redirect('/NSBA/admin/users/index.php?data='.$data.'');
+  Util::redirect('/NSBA/admin/users/index.php?data=' .urlencode($_GET['data']). '');
 }
 
 // Show the page header, then the rest of the HTML
@@ -47,5 +46,4 @@ include('../../includes/header.php');
   <a class = "btn btn-warning" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>&data=<?php echo urlencode($_GET['data']); ?>">Cancel</a>
 </form>
 
-    
 <?php include('../../includes/footer.php'); ?>

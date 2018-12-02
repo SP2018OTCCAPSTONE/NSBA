@@ -224,7 +224,7 @@ var mealAmt = <?php echo $meal; ?>;
   </div>
 </form>
 
-<script>console.log(membershipType);</script><!-- troubleshooter -->
+<!-- <script>console.log(membershipType);</script>troubleshooter -->
 
 <!-- Application Javascript -->
 <script type="text/javascript" src="../../includes/utility.js">

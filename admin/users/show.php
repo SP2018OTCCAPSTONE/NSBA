@@ -74,14 +74,14 @@ $bullet = mb_convert_encoding('&#8226;', 'UTF-8', 'HTML-ENTITIES');
     <dt>Associate Members</dt>
     <?php foreach ($data['associates'] as $associate): ?>
     <?php $associateName = $associate['last_name'].', '.$associate['first_name']; ?>
-    <dd><a href="/NSBA/admin/users/show.php?user_id=<?php echo $associate['user_id']; ?>"><?php echo htmlspecialchars($associateName); ?></a></dd>
+    <dd><a href="/NSBA/admin/users/show.php?user_id=<?php echo $associate['user_id']; ?>&data=<?php echo urlencode($_GET['data']); ?>"><?php echo htmlspecialchars($associateName); ?></a></dd>
     <?php endforeach; ?>
   <?php endif; ?>
   <?php if($user->member_type_id == '8'): ?>
     <dt>Parent Membership</dt>
     <?php foreach ($data['parents'] as $parent): ?>
     <?php $parentName = $parent['last_name'].', '.$parent['first_name']; ?>
-    <dd><a href="/NSBA/admin/users/show.php?user_id=<?php echo $parent['user_id']; ?>"><?php echo htmlspecialchars($parentName); ?></a></dd>
+    <dd><a href="/NSBA/admin/users/show.php?user_id=<?php echo $parent['user_id']; ?>&data=<?php echo urlencode($_GET['data']); ?>"><?php echo htmlspecialchars($parentName); ?></a></dd>
     <?php endforeach; ?>
   <?php endif; ?>
   <dt>Company/Organization</dt>
@@ -111,7 +111,7 @@ $bullet = mb_convert_encoding('&#8226;', 'UTF-8', 'HTML-ENTITIES');
     <?php if ($user->user_id == Auth::getInstance()->getCurrentUser()->user_id): ?>
       <a class = "btn btn-danger disabled" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>">Delete</a>
     <?php else: ?>
-      <a class = "btn btn-danger" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>">Delete</a>
+      <a class = "btn btn-danger" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>&data=<?php echo urlencode($_GET['data']); ?>">Delete</a>
     <?php endif; ?>
   </li>
 </ul>

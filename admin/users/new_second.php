@@ -22,12 +22,11 @@ if(isset($_GET['data'])) {
 }
 
 $user = new User();
-// $type = $_GET['type'];
-// $id = $_GET['id'];// This is the paying corporate member user id
-parse_str($_GET['data']);
-$type = $dataArray['type'];
-$id = $dataArray['id'];
-$parent = $dataArray['parent'];
+
+parse_str($_GET['member']);
+$type = $memberArray['type'];
+$id = $memberArray['id'];
+$parent = $memberArray['parent'];
 echo $type;
 echo $id;
 echo $parent;// Put this in a hidden <input>?
@@ -35,13 +34,13 @@ echo $parent;// Put this in a hidden <input>?
 
 // Process the submitted form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // LOGIC CODE HERE TO GO TO 2ND/3RD FORMS FOR CORP2/CORP3 ASSOCIATE MEMBERS
   if ($user->save($_POST)) {
-    if ($type == '7') { //isset($_POST['memberType']) && $_POST['memberType'] == '7'
+    // Go to new_third if Corporate 2
+    if ($type == '7') { 
     
-        Util::redirect('/NSBA/admin/users/new_third.php?id=' . $id . '&data=' .$data. '');
+      Util::redirect('/NSBA/admin/users/new_third.php?id=' . $id . '&member=' .urlencode($_GET['member']). '&data=' . urlencode($_GET['data']) . '');
     }
-    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $id . '&data=' .$data. '');
+    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $id . '&data=' . urlencode($_GET['data']) . '');
   } 
 }
 
