@@ -66,8 +66,8 @@ function functionRouter(parent, text, id) {
 }
 
 function getMemberType(parent, text, id) {
-    
-    location.href = "relay.php?query=" + id;
+
+    location.href = "relay.php?query=" + id + "&title=" + text;
     // if(id == '0') {
     //     location.href = "relay.php?query=" + id;
     // }

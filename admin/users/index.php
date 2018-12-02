@@ -19,6 +19,10 @@ $yr = date('Y');
 
 parse_str($_GET['data']);
 $criteria = $dataArray['criteria'];
+if(isset($dataArray['title']) && (string) $dataArray['title'] !== '') {
+  $title = $dataArray['title'];
+}
+
 //$id = $dataArray['id'];
 
 //<?php var_dump($criteria);
@@ -31,7 +35,7 @@ include('../../includes/header.php');
 
 ?>
 
-<h1>All Membership <?php echo date('Y') ?></h1>
+<h1><?php echo $title ?></h1>
 
 <p><a href="/NSBA/admin/users/new_first.php" class="btn btn-warning">Add A New User</a></p>
 

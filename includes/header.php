@@ -23,9 +23,8 @@
                     <?php if (Auth::getInstance()->isAdmin()): ?>
                     <?php
                         $raw = array(
-                            'criteria' => '0'
-                            // 'parent' => $parentMembershipId,
-                            // 'type' => $_POST['memberType']
+                            'criteria' => '0',
+                            'title' => 'All Membership'
                           );
                           $search = http_build_query(array('dataArray' => $raw));
                           $search = urlencode($search);

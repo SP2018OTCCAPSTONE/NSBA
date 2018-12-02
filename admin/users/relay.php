@@ -5,16 +5,14 @@ require_once('../../includes/init.php');
 Auth::getInstance()->requireLogin();
 
 $id = $_GET['query'];
+$title = $_GET['title'];
 
-// Maybe a switch statement here for all reports
-//if($id == '4') {
 switch($id) {
 
     case '0':
     $raw = array(
-        'criteria' => '0'
-        // 'parent' => $parentMembershipId,
-        // 'type' => $_POST['memberType']
+        'criteria' => '0',
+        'title' => $title
     );
     $search = http_build_query(array('dataArray' => $raw));
     $search = urlencode($search);
@@ -23,9 +21,8 @@ switch($id) {
 
     case '1':
     $raw = array(
-        'criteria' => '1'
-        // 'parent' => $parentMembershipId,
-        // 'type' => $_POST['memberType']
+        'criteria' => '1',
+        'title' => $title
     );
     $search = http_build_query(array('dataArray' => $raw));
     $search = urlencode($search);
@@ -34,9 +31,8 @@ switch($id) {
 
     case '2':
     $raw = array(
-        'criteria' => '2'
-        // 'parent' => $parentMembershipId,
-        // 'type' => $_POST['memberType']
+        'criteria' => '2',
+        'title' => $title
     );
     $search = http_build_query(array('dataArray' => $raw));
     $search = urlencode($search);
@@ -45,9 +41,8 @@ switch($id) {
 
     case '3':
     $raw = array(
-        'criteria' => '3'
-        // 'parent' => $parentMembershipId,
-        // 'type' => $_POST['memberType']
+        'criteria' => '3',
+        'title' => $title
     );
     $search = http_build_query(array('dataArray' => $raw));
     $search = urlencode($search);
@@ -56,9 +51,8 @@ switch($id) {
 
     case '4':
     $raw = array(
-        'criteria' => '4'
-        // 'parent' => $parentMembershipId,
-        // 'type' => $_POST['memberType']
+        'criteria' => '4',
+        'title' => $title
     );
     $search = http_build_query(array('dataArray' => $raw));
     $search = urlencode($search);
@@ -67,9 +61,8 @@ switch($id) {
 
     case '5':
     $raw = array(
-        'criteria' => '5'
-        // 'parent' => $parentMembershipId,
-        // 'type' => $_POST['memberType']
+        'criteria' => '5',
+        'title' => $title
     );
     $search = http_build_query(array('dataArray' => $raw));
     $search = urlencode($search);
@@ -78,9 +71,8 @@ switch($id) {
 
     case '6':
     $raw = array(
-        'criteria' => '6'
-        // 'parent' => $parentMembershipId,
-        // 'type' => $_POST['memberType']
+        'criteria' => '6',
+        'title' => $title
     );
     $search = http_build_query(array('dataArray' => $raw));
     $search = urlencode($search);
@@ -89,9 +81,8 @@ switch($id) {
 
     case '7':
     $raw = array(
-        'criteria' => '7'
-        // 'parent' => $parentMembershipId,
-        // 'type' => $_POST['memberType']
+        'criteria' => '7',
+        'title' => $title
     );
     $search = http_build_query(array('dataArray' => $raw));
     $search = urlencode($search);
@@ -100,9 +91,8 @@ switch($id) {
 
     case '8':
     $raw = array(
-        'criteria' => '8'
-        // 'parent' => $parentMembershipId,
-        // 'type' => $_POST['memberType']
+        'criteria' => '8',
+        'title' => $title
     );
     $search = http_build_query(array('dataArray' => $raw));
     $search = urlencode($search);
@@ -111,9 +101,8 @@ switch($id) {
 
     case '9':
     $raw = array(
-        'criteria' => '9'
-        // 'parent' => $parentMembershipId,
-        // 'type' => $_POST['memberType']
+        'criteria' => '9',
+        'title' => $title
     );
     $search = http_build_query(array('dataArray' => $raw));
     $search = urlencode($search);
@@ -122,9 +111,8 @@ switch($id) {
 
     case '10':
     $raw = array(
-        'criteria' => '10'
-        // 'parent' => $parentMembershipId,
-        // 'type' => $_POST['memberType']
+        'criteria' => '10',
+        'title' => $title
     );
     $search = http_build_query(array('dataArray' => $raw));
     $search = urlencode($search);
@@ -133,9 +121,8 @@ switch($id) {
 
     case '11':
     $raw = array(
-        'criteria' => '11'
-        // 'parent' => $parentMembershipId,
-        // 'type' => $_POST['memberType']
+        'criteria' => '11',
+        'title' => $title
     );
     $search = http_build_query(array('dataArray' => $raw));
     $search = urlencode($search);
@@ -146,7 +133,7 @@ switch($id) {
     $mailingList = Util::getMailingList($id);
     echo json_encode($mailingList);
     break;
-    
+
     default:
     break;
 }
