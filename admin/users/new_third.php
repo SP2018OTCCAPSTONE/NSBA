@@ -15,6 +15,11 @@ Auth::getInstance()->requireLogin();
 // Require the user to be an administrator before they can see this page.
 Auth::getInstance()->requireAdmin();
 
+if(isset($_GET['data'])) {
+  parse_str($_GET['data']);
+  $criteria = $dataArray['criteria'];
+  $title = $dataArray['title'];
+}
 
 $user = new User();
 //$type = $_GET['type'];
@@ -26,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // LOGIC CODE HERE TO GO TO 2ND/3RD FORMS FOR CORP2/CORP3 ASSOCIATE MEMBERS
   if ($user->save($_POST)) {
     // Redirect to show page
-    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $id);  
+    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $id . '&data=' .$data. '');  
   }
 }
 

@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       Util::redirect('/NSBA/admin/users/new_second.php?data='.$data.'');
     }
     // Else redirect to show page
-    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $user->user_id);
+    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $user->user_id . '&data=' .$data. '');
   }
 }
 

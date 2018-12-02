@@ -15,6 +15,11 @@ Auth::getInstance()->requireLogin();
 // Require the user to be an administrator before they can see this page.
 Auth::getInstance()->requireAdmin();
 
+if(isset($_GET['data'])) {
+  parse_str($_GET['data']);
+  $criteria = $dataArray['criteria'];
+  $title = $dataArray['title'];
+}
 
 $user = new User();
 // $type = $_GET['type'];
@@ -34,9 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($user->save($_POST)) {
     if ($type == '7') { //isset($_POST['memberType']) && $_POST['memberType'] == '7'
     
-        Util::redirect('/NSBA/admin/users/new_third.php?id=' . $id);
+        Util::redirect('/NSBA/admin/users/new_third.php?id=' . $id . '&data=' .$data. '');
     }
-    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $id);
+    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $id . '&data=' .$data. '');
   } 
 }
 

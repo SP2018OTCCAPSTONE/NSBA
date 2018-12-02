@@ -13,6 +13,12 @@ Auth::getInstance()->requireLogin();
 // Require the user to be an administrator before they can see this page.
 Auth::getInstance()->requireAdmin();
 
+if(isset($_GET['data'])) {
+  parse_str($_GET['data']);
+  $criteria = $dataArray['criteria'];
+  $title = $dataArray['title'];
+}
+
 // Find the user or show a 404 page.
 $user = User::getByIDor404($_GET);
 
@@ -23,9 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $user->delete();
 
   // Redirect to index page
-  Util::redirect('/NSBA/admin/users');
+  Util::redirect('/NSBA/admin/users/index.php?data='.$data.'');
 }
-
 
 // Show the page header, then the rest of the HTML
 include('../../includes/header.php');
@@ -39,7 +44,7 @@ include('../../includes/header.php');
   <p>Are you sure?</p>
 
   <input type="submit" value="Delete" class = "btn btn-danger"/>
-  <a class = "btn btn-warning" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>">Cancel</a>
+  <a class = "btn btn-warning" href="/NSBA/admin/users/delete.php?user_id=<?php echo $user->user_id; ?>&data=<?php echo urlencode($_GET['data']); ?>">Cancel</a>
 </form>
 
     
