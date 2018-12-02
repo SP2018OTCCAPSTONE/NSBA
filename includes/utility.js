@@ -51,48 +51,50 @@ function calculateAmtDue(priceArray) {
     }
 }
 
+/**
+ * 
+ * @param {*} parent 
+ * @param {*} text 
+ * @param {*} id 
+ */
 function functionRouter(parent, text, id) {
     switch (parent) {
+
         case 'types':
         getMemberType(parent, text, id);
         break;
+
         case 'reports':
         getReport(parent, text, id);
         break;
+
+        case 'searchByActive':
+        getMemberType(parent, text, id);
+        break;
+
         default:
         break;
     }
 
 }
 
+/**
+ * 
+ * @param {*} parent 
+ * @param {*} text 
+ * @param {*} id 
+ */
 function getMemberType(parent, text, id) {
 
     location.href = "relay.php?query=" + id + "&title=" + text;
-    // if(id == '0') {
-    //     location.href = "relay.php?query=" + id;
-    // }
-
-    // if(id == '1') {
-    //     location.href = "relay.php?query=" + id;
-    // }
-
-    // if(id == '2') {
-    //     location.href = "relay.php?query=" + id;
-    // }
-
-    // if(id == '3') {
-    //     location.href = "relay.php?query=" + id;
-    // }
-
-    // if(id == '4') {
-    //     location.href = "relay.php?query=" + id;
-    // }
-
-    // if(id == '5') {
-    //     location.href = "relay.php?query=" + id;
-    // }
 }
 
+/**
+ * 
+ * @param {*} parent 
+ * @param {*} text 
+ * @param {*} id 
+ */
 function getReport(parent, text, id) {
       
     if(id == '15') {

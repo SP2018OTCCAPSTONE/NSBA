@@ -6,7 +6,7 @@
                 Search By Membership Type
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="types">
-                <a class="dropdown-item" id="0" href="#">All Members</a>
+                <a class="dropdown-item" id="0" href="#">All Membership</a>
                 <a class="dropdown-item" id="1" href="#">Administrators</a>
                 <a class="dropdown-item" id="2" href="#">Permissioned Users</a>
                 <a class="dropdown-item" id="3" href="#">Board Members</a>

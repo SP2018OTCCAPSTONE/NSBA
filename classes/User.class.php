@@ -242,6 +242,36 @@ class User
         LIMIT $users_per_page OFFSET $offset")->fetchAll();
       }
 
+      if($criteria == '13') {
+        $data['users'] = $db->query("SELECT * FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.annum = YEAR(CURDATE()) && i.date_paid IS NOT NULL
+        ORDER BY last_name
+        LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      }
+
+      if($criteria == '14') {
+        $data['users'] = $db->query("SELECT * FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.annum = YEAR(CURDATE()) && i.date_paid IS NULL
+        ORDER BY last_name
+        LIMIT $users_per_page OFFSET $offset")->fetchAll();
+      }
+
     } catch(PDOException $exception) {
 
       error_log($exception->getMessage());
@@ -1443,6 +1473,32 @@ class User
         JOIN invoice i
         ON i.annual_membership_id = m.annual_membership_id
         WHERE m.member_type_id = 8")->fetchColumn();
+      }
+
+      if($criteria == '13') {
+        $count = (int) $db->query("SELECT COUNT(*) FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.annum = YEAR(CURDATE()) && i.date_paid IS NOT NULL")->fetchColumn();
+      }
+
+      if($criteria == '14') {
+        $count = (int) $db->query("SELECT COUNT(*) FROM user u
+        JOIN user_data d
+        ON u.user_id = d.user_id
+        JOIN annual_membership m
+        ON d.user_id = m.user_id
+        JOIN member_type t
+        ON m.member_type_id = t.member_type_id
+        JOIN invoice i
+        ON i.annual_membership_id = m.annual_membership_id
+        WHERE m.annum = YEAR(CURDATE()) && i.date_paid IS NULL")->fetchColumn();
       }
 
     } catch(PDOException $exception) {

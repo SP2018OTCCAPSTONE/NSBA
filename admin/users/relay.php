@@ -129,6 +129,36 @@ switch($id) {
     Util::redirect('/NSBA/admin/users/index.php?data='.$search.'');
     break;
 
+    case '12':
+    $raw = array(
+        'criteria' => '0',
+        'title' => $title
+    );
+    $search = http_build_query(array('dataArray' => $raw));
+    $search = urlencode($search);
+    Util::redirect('/NSBA/admin/users/index.php?data='.$search.'');
+    break;
+
+    case '13':
+    $raw = array(
+        'criteria' => '13',
+        'title' => $title.' '.date('Y') 
+    );
+    $search = http_build_query(array('dataArray' => $raw));
+    $search = urlencode($search);
+    Util::redirect('/NSBA/admin/users/index.php?data='.$search.'');
+    break;
+
+    case '14':
+    $raw = array(
+        'criteria' => '14',
+        'title' => $title.' '.date('Y') 
+    );
+    $search = http_build_query(array('dataArray' => $raw));
+    $search = urlencode($search);
+    Util::redirect('/NSBA/admin/users/index.php?data='.$search.'');
+    break;
+
     case '18':
     $mailingList = Util::getMailingList($id);
     echo json_encode($mailingList);
