@@ -1,6 +1,4 @@
 
-
-
 # Capstone Project - NSBA Membership Management Application
 
 1. This project/repository should be in Windows(C:) > xampp > htdocs
@@ -28,15 +26,15 @@
 ### NSBA Project TODO:
 
 - [ ] Develop invoicing functionality
-- [ ] Fully develop Reports functionality
-- [ ] Implement Js validation to minimize page refreshes
-- [ ] Finish implementing Corporate 1 & 2 membership DB insert process
+- [ ] Fully develop reports functionality
+- [ ] Implement Js form validation to minimize page refreshes
+- [ ] Finish implementing corporate 1 & 2 membership DB insert process
 - [ ] Finish scaling the regular user-side functionality of the app -- edit profile/renewals/payments
-- [ ] Implement Export to Excel/Csv and Print functionality for reports
+- [ ] Implement export to Excel/Csv and print functionality for reports
 - [ ] Implement image file upload/processing
 - [ ] Further develop the mailer (PhpMailer) functionality
 - [ ] Implement PayPal portal
-- [ ] Launch Application on a production server
+- [ ] Launch application on a production server
 
 
 
