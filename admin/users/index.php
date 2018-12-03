@@ -30,7 +30,6 @@ if(isset($dataArray['title']) && (string) $dataArray['title'] !== '') {
 // Get the paginated data
 $data = User::paginate(isset($_GET['page']) ? $_GET['page'] : 1, $dataArray);
 
-// Show the page header, then the rest of the HTML
 include('../../includes/header.php');
 
 ?>
@@ -62,7 +61,6 @@ include('../../includes/header.php');
 <ul>
   <li>
     <?php if ($data['previous'] === null): ?>
-      <!--Previous-->
       <a class = "btn btn-success disabled" href="#">Previous</a>
     <?php else: ?>
       <a class = "btn btn-success" href="/NSBA/admin/users/?page=<?php echo $data['previous']; ?>&data=<?php echo urlencode($_GET['data']); ?>">Previous</a>

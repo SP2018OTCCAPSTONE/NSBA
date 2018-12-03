@@ -1,13 +1,9 @@
 
-console.log(membershipType);// troubleshooter
+//console.log(membershipType);// troubleshooter
 
   document.addEventListener("load", setMemberType(Number(membershipType)));
   document.addEventListener("load", setMeals(mealAmt));
   document.addEventListener("load", calculateAmtDue(priceArray));
-
-  // window.addEventListener("load", setMemberType(Number(membershipType)));
-  // window.addEventListener("load", setMeals(mealAmt));
-  // window.addEventListener("load", calculateAmtDue(priceArray)); 
 
   // // JQuery versions of the on load listeners
   // $(function() {setMemberType(Number(membershipType))});
@@ -27,7 +23,7 @@ function setMemberType(membershipType){
     for(i = 0; i < m.length; i++){
         if(m.options[i].value == membershipType){
             m.options[i].selected=true;
-            //alert(m.options[i].value + " " + m.options[i].selected);
+            //alert(m.options[i].value + " " + m.options[i].selected);// troubleshooter
         }
     }
 }
