@@ -71,14 +71,13 @@
                 Reports
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="reports">
-                <a class="dropdown-item" id="15" href="#">Generate Annual Renewal Invoices</a>
-                <a class="dropdown-item" id="16" href="#">Generate Paid Member List</a>
-                <a class="dropdown-item" id="17" href="#">Generate Unpaid Member List</a>
-                <a class="dropdown-item" id="18" href="#">Generate Mailing List</a>
+                <a class="dropdown-item" id="15" href="#">Member Roster Report</a>
+                <a class="dropdown-item" id="16" href="#">Paid Member List</a>
+                <a class="dropdown-item" id="17" href="#">Unpaid Member List</a>
+                <a class="dropdown-item" id="18" href="#">Mailing List</a>
                 <a class="dropdown-item" id="19" href="#">Annual Membership Aging Report</a>
-                <a class="dropdown-item" id="20" href="#">Member Roster Report</a>
-                <a class="dropdown-item" id="21" href="#">Member Record Aging Report</a>
-                <a class="dropdown-item" id="22" href="#">Member Record Missing Field Report</a>
+                <a class="dropdown-item" id="20" href="#">Member Record Aging Report</a>
+                <a class="dropdown-item" id="21" href="#">Member Record Missing Field Report</a>
             </div>
         </div>
 
@@ -88,8 +87,9 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "utilities">
                 <a class="dropdown-item" href="#">New Member Requests</a>
+                <a class="dropdown-item" id="" href="#">Generate Annual Renewal Invoices</a>
                 <a class="dropdown-item" href="#">Edit Membership Prices</a>
-                <a class="dropdown-item" href="#">Generate Random Password</a>
+                <!-- <a class="dropdown-item" href="#">Generate Random Password</a> -->
                 <a class="dropdown-item" href="#">Utility</a>
                 <a class="dropdown-item" href="#">Utility</a>
             </div>
