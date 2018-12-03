@@ -78,7 +78,6 @@ class Util
     }
 
     return $data;
-    
   }
 
 }

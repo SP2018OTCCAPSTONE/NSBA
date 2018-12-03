@@ -1,6 +1,5 @@
 
     <div id = "searchByForm">
-    <?php //<?php if (Auth::getInstance()->isAdmin()): ?>
     <?php if ($current !== 'reports'): ?>
                     
         <h2>Search Options</h2>
@@ -64,7 +63,7 @@
                 <a class="dropdown-item" id="14" href="#">Inactive Membership</a>   
             </div>
         </div>
-    <?php endif; ?>
+    <?php endif ?>
 
         <h2>Reports & Utilities</h2>
         <div class="dropdown">

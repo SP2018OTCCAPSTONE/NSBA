@@ -5,7 +5,10 @@ require_once('../../includes/init.php');
 Auth::getInstance()->requireLogin();
 
 $id = $_GET['query'];
-$title = $_GET['title'];
+if(isset($_GET['title']) && (string) $_GET['title'] !== '') {
+    $title = $_GET['title'];
+}
+// $title = $_GET['title'];
 
 switch($id) {
 
