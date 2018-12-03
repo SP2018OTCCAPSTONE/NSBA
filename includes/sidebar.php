@@ -13,7 +13,7 @@
                 <a class="dropdown-item" id="1" href="#">Administrators</a>
                 <a class="dropdown-item" id="2" href="#">Permissioned Users</a>
                 <a class="dropdown-item" id="3" href="#">Board Members</a>
-                <a class="dropdown-item" id="4" href="#">Non-Member User</a>
+                <a class="dropdown-item" id="4" href="#">Non-Member Users</a>
                 <a class="dropdown-item" id="5" href="#">Gratis</a>
                 <a class="dropdown-item" id="6" href="#">Individual</a>
                 <a class="dropdown-item" id="7" href="#">Retired</a>
