@@ -21,7 +21,7 @@
         <div class="container shadow" id ="page">
             <div id = "nav" class ="shadow" role="navigation">
                 <ul>
-                <li><a href="/NSBA">Home</a></li> <!-- this needs fixed -->
+                <li><a href="/NSBA">Home</a></li> 
 
                 <?php if (Auth::getInstance()->isLoggedIn()): ?>
 

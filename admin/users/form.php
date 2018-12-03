@@ -19,7 +19,6 @@ $meal = isset($user->meals) ? $user->meals : "0";
 var priceArray = <?php echo $json_array; ?>;
 var membershipType = <?php echo $type; ?>;
 var mealAmt = <?php echo $meal; ?>;
-
 </script>
 
 <form method="POST" enctype="multipart/form-data">
@@ -106,7 +105,7 @@ var mealAmt = <?php echo $meal; ?>;
 
   <!-- DISABLED - WIP -->
   <!--<form action="" method="POST" enctype="multipart/form-data">-->
-    <div id=imgDiv>
+    <div id="imgDiv">
       <label for="image">Image Upload</label>
       <input id="image" name="sub" type="file" disabled="disabled" value="<?php echo htmlspecialchars($user->image); ?>" />
       <input type="submit" value="Upload File" name="image" disabled="disabled">
@@ -116,7 +115,7 @@ var mealAmt = <?php echo $meal; ?>;
   <div id="memberTypeDiv">
     <label for="memberType">Membership Type</label>
     <select id="memberType" name="memberType" required="required">
-      <?php if ($current == 'new_second' || $current == 'new_second'): ?>
+      <?php if ($current == 'new_second' || $current == 'new_third'): ?>
         <option value="8" selected>Corporate Associate (Sub-Membership)</option>
       <?php else: ?>
         <option value="" selected disabled hidden>Select a Membership Type</option>
@@ -149,8 +148,6 @@ var mealAmt = <?php echo $meal; ?>;
   </div>
 
   <?php $is_same_user = $user->user_id == Auth::getInstance()->getCurrentUser()->user_id; ?>
-
-  <!-- <script>console.log(membershipType);</script> -->
 
   <div>
     <label for="isEnabled">
@@ -225,27 +222,5 @@ var mealAmt = <?php echo $meal; ?>;
   </div>
 </form>
 
-<script>console.log(membershipType);</script>troubleshooter
-
 <!-- Application Javascript -->
-<script type="text/javascript" src="../../includes/utility.js">
-
-console.log(membershipType);// troubleshooter
-<<<<<<< HEAD
-document.addEventListener("load", setMemberType(Number(membershipType)));
-document.addEventListener("load", setMeals(mealAmt));
-document.addEventListener("load", calculateAmtDue(priceArray));
-
-//// JQuery versions of the on load listeners
-=======
-window.addEventListener("load", setMemberType(Number(membershipType)));
-window.addEventListener("load", setMeals(mealAmt));
-window.addEventListener("load", calculateAmtDue(priceArray)); 
->>>>>>> master
-// $(function() {setMemberType(Number(membershipType))});
-// $(function() {setMeals(mealAmt)});
-// $(function() {calculateAmtDue(priceArray)});
-
-document.getElementById("memberType").onchange = function(){calculateAmtDue(priceArray)}; ;
-document.getElementById("meals").onchange = function(){calculateAmtDue(priceArray)};
-</script>
+<script type="text/javascript" src="../../includes/form.js"></script>

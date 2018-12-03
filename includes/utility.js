@@ -10,7 +10,7 @@ function setMemberType(membershipType){
     for(i = 0; i < m.length; i++){
         if(m.options[i].value == membershipType){
             m.options[i].selected=true;
-            alert(m.options[i].value + " " + m.options[i].selected);
+            //alert(m.options[i].value + " " + m.options[i].selected);
         }
     }
 }

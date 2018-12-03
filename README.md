@@ -1,3 +1,6 @@
+
+
+
 # Capstone Project - NSBA Membership Management Application
 
 1. This project/repository should be in Windows(C:) > xampp > htdocs
@@ -14,15 +17,11 @@
 
 7. Select the empty database and select import from the menu bar 
 
-8. Choose the nsba1.sql database file included in the root directory of this project
+8. Choose the database file and import it into empty database
 
-9. Type localhost/NSBA in the address bar and the project should hopefully launch
+9. Type localhost/NSBA in the address bar and the project should launch
 
 10. To create an admin account you will need 2 gmail accounts with which you have enabled less secure apps to login. This google help page has a link to follow: https://support.google.com/accounts/answer/6010255?hl=en
-
-
-
-
 
 
 
