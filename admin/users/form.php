@@ -19,6 +19,7 @@ $meal = isset($user->meals) ? $user->meals : "0";
 var priceArray = <?php echo $json_array; ?>;
 var membershipType = <?php echo $type; ?>;
 var mealAmt = <?php echo $meal; ?>;
+
 </script>
 
 <form method="POST" enctype="multipart/form-data">
@@ -228,14 +229,15 @@ var mealAmt = <?php echo $meal; ?>;
 
 <!-- Application Javascript -->
 <script type="text/javascript" src="../../includes/utility.js">
+
 console.log(membershipType);// troubleshooter
 window.addEventListener("load", setMemberType(Number(membershipType)));
 window.addEventListener("load", setMeals(mealAmt));
-window.addEventListener("load", calculateAmtDue(priceArray));
+window.addEventListener("load", calculateAmtDue(priceArray)); 
 // $(function() {setMemberType(Number(membershipType))});
 // $(function() {setMeals(mealAmt)});
 // $(function() {calculateAmtDue(priceArray)});
 
-document.getElementById("memberType").onchange = function(){calculateAmtDue(priceArray)};
+document.getElementById("memberType").onchange = function(){calculateAmtDue(priceArray)}; ;
 document.getElementById("meals").onchange = function(){calculateAmtDue(priceArray)};
 </script>
