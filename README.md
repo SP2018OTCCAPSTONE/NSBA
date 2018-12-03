@@ -26,13 +26,14 @@
 ### NSBA Project TODO:
 
 - [ ] Develop invoicing functionality
-- [ ] Fully develop reports functionality
+- [ ] Further develop reports functionality
 - [ ] Implement Js form validation to minimize page refreshes
 - [ ] Finish implementing corporate 1 & 2 membership DB insert process
-- [ ] Finish scaling the regular user-side functionality of the app -- edit profile/renewals/payments
 - [ ] Implement export to Excel/Csv and print functionality for reports
-- [ ] Implement image file upload/processing
 - [ ] Further develop the mailer (PhpMailer) functionality
+- [ ] Implement image file upload/processing
+- [ ] Implement the regular user edit profile functionality 
+- [ ] Implement regular user-side renewals/payments functionality
 - [ ] Implement PayPal portal
 - [ ] Launch application on a production server
 
