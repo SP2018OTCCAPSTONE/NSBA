@@ -17,20 +17,15 @@ $current = "reports";
 
 $yr = date('Y');
 
-
-// Get the paginated data
-//$data = User::paginate(isset($_GET['page']) ? $_GET['page'] : 1);
-
 // Show the page header, then the rest of the HTML
 include('includes/header.php');
 
 ?>
 
-<h1>Reports</h1>
+<h1 id='reportsTitle'>Reports</h1>
 
 
 <?php include('includes/sidebar.php'); ?>
-
 
 <!-- Reports Modal -->
 <div class="modal fade" id="reportModal" role="dialog">

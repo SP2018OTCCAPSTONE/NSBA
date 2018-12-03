@@ -84,3 +84,6 @@ form input[type="submit"] {margin:10px 0; float: left; width: auto; display:bloc
 #mail{width:100%;}
 .address{font-size: 10px; margin:0 ;padding: 0;}
 #mailRow{ margin:0 ;padding: 0;}
+
+/* reports.php */
+#reportsTitle{margin-bottom: 5vw;}
