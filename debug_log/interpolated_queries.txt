@@ -1,7 +1,7 @@
-s:854:"BEGIN; 
-            UPDATE user SET first_name = 'Landon', last_name = 'Rice', is_enabled = '', is_admin = '1', has_permissions = '', board_member = '', referred_by = '', notes = '' WHERE user_id = 141; 
-            UPDATE user_data SET email_1 = 'lr0596126@otc.edu', email_2 = '', line_1 = '', line_2 = '', city = '', state = '', zip = '', company = '', work_phone = '', cell_phone = '', fax = '', website = '', image = DEFAULT WHERE user_id = :user_id; 
-            UPDATE annual_membership SET member_type_id = '1', is_listed = ''  WHERE user_id = :user_id AND annum = YEAR(CURDATE()); 
+s:850:"BEGIN; 
+            UPDATE user SET first_name = 'Test5', last_name = 'AAccount', is_enabled = '', is_admin = '', has_permissions = '', board_member = '', referred_by = '', notes = '' WHERE user_id = 126; 
+            UPDATE user_data SET email_1 = 'test5@account.com', email_2 = '', line_1 = '', line_2 = '', city = '', state = '', zip = '', company = '', work_phone = '', cell_phone = '', fax = '', website = '', image = DEFAULT WHERE user_id = :user_id; 
+            UPDATE annual_membership SET member_type_id = '2', is_listed = ''  WHERE user_id = :user_id AND annum = YEAR(CURDATE()); 
             SELECT @annual_id := annual_membership_id FROM annual_membership WHERE user_id = :user_id AND annum = YEAR(CURDATE()); 
-            UPDATE invoice SET meals = '0', amount_paid = '0.00' WHERE annual_membership_id = @annual_id; 
+            UPDATE invoice SET meals = '1', amount_paid = '0.00' WHERE annual_membership_id = @annual_id; 
             COMMIT;";
