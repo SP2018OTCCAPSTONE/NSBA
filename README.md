@@ -21,6 +21,26 @@
 10. To create an admin account you will need 2 gmail accounts with which you have enabled less secure apps to login. This google help page has a link to follow: https://support.google.com/accounts/answer/6010255?hl=en
 
 
+
+
+
+
+
+### NSBA Project TODO:
+
+- [ ] Develop invoicing functionality
+- [ ] Fully develop Reports functionality
+- [ ] Implement Js validation to minimize page refreshes
+- [ ] Finish implementing Corporate 1 & 2 membership DB insert process
+- [ ] Finish scaling the regular user-side functionality of the app -- edit profile/renewals/payments
+- [ ] Implement Export to Excel/Csv and Print functionality for reports
+- [ ] Implement image file upload/processing
+- [ ] Further develop the mailer (PhpMailer) functionality
+- [ ] Implement PayPal portal
+- [ ] Launch Application on a production server
+
+
+
 ## License
 
 This project is published under the MIT License.

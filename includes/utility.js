@@ -44,8 +44,8 @@ function setMeals(mealAmt){
 function calculateAmtDue(priceArray) {
     var prices = JSON.parse(JSON.stringify(priceArray));
     var due = document.getElementById("renewalAmount");
-    due.readOnly = false;
-    due.readOnly = true;
+    // due.readOnly = false;
+    // due.readOnly = true;
     var type = document.getElementById("memberType").value;
     var meals = document.getElementById("meals").value;
     var amountDue;
@@ -58,6 +58,7 @@ function calculateAmtDue(priceArray) {
         due.readOnly = true;
     }
 }
+
 
 /***************************************************************************************
  * Reports and Queries

@@ -88,9 +88,9 @@
                 Utilities
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "utilities">
-                <a class="dropdown-item" href="#">Change Membership Prices</a>
-                <a class="dropdown-item" href="#">Utility</a>
-                <a class="dropdown-item" href="#">Utility</a>
+                <a class="dropdown-item" href="#">New Member Requests</a>
+                <a class="dropdown-item" href="#">Edit Membership Prices</a>
+                <a class="dropdown-item" href="#">Generate Random Password</a>
                 <a class="dropdown-item" href="#">Utility</a>
                 <a class="dropdown-item" href="#">Utility</a>
             </div>

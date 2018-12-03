@@ -9,7 +9,7 @@
 
 <?php
 $prices = User::getMemberTypeData();
-//var_dump($prices);
+//var_dump($prices);// troubleshooter
 $json_array = json_encode($prices);
 $type = isset($user->member_type_id) ? $user->member_type_id : "0";
 $meal = isset($user->meals) ? $user->meals : "0";
@@ -224,14 +224,16 @@ var mealAmt = <?php echo $meal; ?>;
   </div>
 </form>
 
-<!-- <script>console.log(membershipType);</script>troubleshooter -->
+<script>console.log(membershipType);</script>troubleshooter
 
 <!-- Application Javascript -->
 <script type="text/javascript" src="../../includes/utility.js">
 console.log(membershipType);// troubleshooter
-window.addEventListener("load", setMemberType(Number(membershipType)));
-window.addEventListener("load", setMeals(mealAmt));
-window.addEventListener("load", calculateAmtDue(priceArray));
+document.addEventListener("load", setMemberType(Number(membershipType)));
+document.addEventListener("load", setMeals(mealAmt));
+document.addEventListener("load", calculateAmtDue(priceArray));
+
+//// JQuery versions of the on load listeners
 // $(function() {setMemberType(Number(membershipType))});
 // $(function() {setMeals(mealAmt)});
 // $(function() {calculateAmtDue(priceArray)});
