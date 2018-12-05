@@ -1,4 +1,5 @@
 <!--*** Header ****************************** -->
+<?php  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,11 +17,7 @@
 
         <div class="container shadow" id ="page">
             <div #id = "logo" >
-            <?php if(isset($_GET['data'])): ?>
-                <img  src = "../../images/nsba-logo.png" width ="200" alt. ="NSBA Logo">
-            <?php else: ?>
-                <img  src = "images/nsba-logo.png" width ="200" alt. ="NSBA Logo">
-            <?php endif ?>
+            <img  src = "/NSBA/images/nsba-logo.png" width ="200" alt. ="NSBA Logo">
             <h3 >Member Portal</h3>
             </div>
 
