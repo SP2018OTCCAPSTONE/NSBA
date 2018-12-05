@@ -28,7 +28,7 @@
 - [ ] Develop invoicing functionality
 - [ ] Further develop reports functionality
 - [ ] Implement Js form validation to minimize page refreshes
-- [ ] Finish implementing Corporate 2 & 3 membership DB insert process
+- [X] Finish implementing Corporate 2 & 3 membership DB insert process
 - [ ] Implement export to Excel/Csv and print functionality for reports
 - [ ] Further develop the mailer (PhpMailer) functionality
 - [ ] Implement image file upload/processing

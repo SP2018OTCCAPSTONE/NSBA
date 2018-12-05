@@ -65,7 +65,7 @@ $bullet = mb_convert_encoding('&#8226;', 'UTF-8', 'HTML-ENTITIES');
 
 <dl>
   <dt>Image</dt>
-  <dd><img src="../../images/<?php echo htmlspecialchars($user->image) ?>" alt="user image"></dd>
+  <dd><img src="/NSBA/images/<?php echo htmlspecialchars($user->image) ?>" alt="user image"></dd>
   <dt>Name</dt>
   <dd><?php echo htmlspecialchars($user->first_name.' '.$user->last_name); ?></dd>
   <dt>Membership Type</dt>
