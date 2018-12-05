@@ -15,6 +15,11 @@
     <body>
 
         <div class="container shadow" id ="page">
+            <div #id = "logo" >
+                <img  src = "images/nsba-logo.png" width ="200" alt. ="NSBA Logo">
+                <h3 >Member Portal</h3>      
+            </div>
+
             <div id = "nav" class ="shadow" role="navigation">
                 <ul>
                 <li><a href="/NSBA">Home</a></li> 
