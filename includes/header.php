@@ -16,8 +16,12 @@
 
         <div class="container shadow" id ="page">
             <div #id = "logo" >
+            <?php if(isset($_GET['data'])): ?>
+                <img  src = "../../images/nsba-logo.png" width ="200" alt. ="NSBA Logo">
+            <?php else: ?>
                 <img  src = "images/nsba-logo.png" width ="200" alt. ="NSBA Logo">
-                <h3 >Member Portal</h3>      
+            <?php endif ?>
+            <h3 >Member Portal</h3>
             </div>
 
             <div id = "nav" class ="shadow" role="navigation">

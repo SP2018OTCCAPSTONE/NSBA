@@ -23,8 +23,6 @@ if(isset($dataArray['title']) && (string) $dataArray['title'] !== '') {
   $title = $dataArray['title'];
 }
 
-//$id = $dataArray['id'];
-
 //<?php var_dump($criteria);
 
 // Get the paginated data

@@ -86,9 +86,11 @@
                 Utilities
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "utilities">
+            <?php if(Auth::getInstance()->isAdmin()): ?>
                 <a class="dropdown-item" href="#">New Member Requests</a>
                 <a class="dropdown-item" id="" href="#">Generate Annual Renewal Invoices</a>
                 <a class="dropdown-item" href="#">Edit Membership Prices</a>
+            <?php endif; ?>
                 <!-- <a class="dropdown-item" href="#">Generate Random Password</a> -->
                 <a class="dropdown-item" href="#">Utility</a>
                 <a class="dropdown-item" href="#">Utility</a>
