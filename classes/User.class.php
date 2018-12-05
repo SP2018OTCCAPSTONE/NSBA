@@ -15,7 +15,7 @@ class User
    * @param string $firstName  Property firstName
    * @return mixed
    */
-  public function __get($firstName)
+  public function __get($any)
   {
   }
 
@@ -811,6 +811,7 @@ class User
     $this->notes = $data['notes'];
     $this->referredBy = $data['referredBy'];
     $this->currentPage = $data['currentPage'];
+    $this->parent = $data['parent'];
 
     $this->first = "Member";
     $this->last = "Associate";
@@ -818,9 +819,14 @@ class User
     $is_non = isset($data['memberType']) && $data['memberType'] == '0';
     $is_sub = isset($data['memberType']) && $data['memberType'] == '8';
     
-    //If user is a sub-member get the last parent_membership_id inserted in DB
-    if ($is_sub) {
+    // If user is sub-member #2 get the last parent_membership_id inserted in DB
+    if ($is_sub && $this->currentPage == 'new_second') {
       $this->parentMembershipId = User::getParentMembershipId();
+    }
+
+    // If user is sub-member #3 use hidden form value from $data
+    if ($is_sub && $this->currentPage == 'new_third') {
+      $this->parentMembershipId = $this->parent;
     }
 
     // If EDITING an existing user, only validate and update the password if a value provided

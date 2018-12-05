@@ -28,7 +28,7 @@ $user = User::getByIDor404($_GET);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($user->save($_POST)) {
     // Redirect to show page
-    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $user->user_id);
+    Util::redirect('/NSBA/admin/users/show.php?user_id=' . $user->user_id . '&data=' .urlencode($_GET['data']). '');
   }
 }
 

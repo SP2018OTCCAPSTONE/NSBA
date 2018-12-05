@@ -27,9 +27,10 @@ parse_str($_GET['member']);
 $type = $memberArray['type'];
 $id = $memberArray['id'];
 $parent = $memberArray['parent'];
-echo $type;
-echo $id;
-echo $parent;// Put this in a hidden <input>?
+////troubleshooters
+// echo $type;
+// echo $id;
+// echo $parent;
 
 
 // Process the submitted form
@@ -50,7 +51,7 @@ include('../../includes/header.php');
 
 ?>
 
-<h1>Create 2nd Corporate New User</h1>
+<h1>Create 2nd Corporate Associate Member</h1>
 
 <?php include('form.php'); ?>
     

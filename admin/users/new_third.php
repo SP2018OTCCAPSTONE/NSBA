@@ -21,6 +21,17 @@ if(isset($_GET['data'])) {
   $title = $dataArray['title'];
 }
 
+if(isset($_GET['member'])) {
+  parse_str($_GET['member']);
+  $type = $memberArray['type'];
+  $id = $memberArray['id'];
+  $parent = $memberArray['parent'];// this is parent membership id
+}
+// // troubleshooters
+// echo $type;
+// echo $id;
+// echo $parent;
+
 $user = new User();
 //$type = $_GET['type'];
 $id = $_GET['id'];// This is the paying corporate member user id
@@ -40,7 +51,7 @@ include('../../includes/header.php');
 
 ?>
 
-<h1>Create 3rd Corporate New User</h1>
+<h1>Create 3rd Corporate Associate Member</h1>
 
 <?php include('form.php'); ?>
     

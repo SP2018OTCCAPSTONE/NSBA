@@ -28,6 +28,10 @@ var mealAmt = <?php echo $meal; ?>;
   </div>
 
   <div>
+    <input id="parent" name="parent" type="hidden" value="<?php echo $parent; ?>" />
+  </div>
+
+  <div>
     <label for="firstName">First Name</label>
     <input id="firstName" name="firstName" value="<?php echo htmlspecialchars($user->first_name); ?>" />
   </div>
